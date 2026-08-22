@@ -1,10 +1,18 @@
 # Image assets
 
-The site currently loads all photography and icons directly from the original
-Wix CDN (`static.wixstatic.com`) using the URLs recorded in
-`asset_manifest.csv` — the manifest of the 35 image assets from agartha.in,
-including source URLs, page usage (home/gallery), dimensions, hashes, and
-responsive variant URLs.
+Images are being migrated from Wix CDN hotlinks to self-hosted files as the
+originals are provided:
+
+- `web/` — self-hosted 1920px WebP derivatives (14 of 35 so far). Pages
+  reference these directly where available.
+- Everything else still loads from the original Wix CDN
+  (`static.wixstatic.com`) using the URLs in `asset_manifest.csv` — the
+  manifest of all 35 image assets from agartha.in, including source URLs,
+  page usage (home/gallery), dimensions, hashes, and responsive variants.
+
+To finish the migration, add the remaining `web/` files here with their
+original filenames and swap the leftover `static.wixstatic.com` URLs in the
+HTML (match by the 8-hex filename stem).
 
 ## Self-hosting the images later
 

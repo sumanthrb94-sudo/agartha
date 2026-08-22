@@ -740,11 +740,9 @@ table.data tfoot td {
   grid-auto-rows: 190px;
 }
 .gallery-grid.bento .img-frame { min-height: 0; height: 100%; }
+/* Eight cells tile a clean 4x3 rectangle: 2x2 feature + one wide + six singles */
 .gallery-grid.bento .img-frame:nth-child(1) { grid-column: span 2; grid-row: span 2; }
 .gallery-grid.bento .img-frame:nth-child(4) { grid-column: span 2; }
-/* Cells 5 and 6 span 2 as well so six items tile a clean 4x3 rectangle */
-.gallery-grid.bento .img-frame:nth-child(5),
-.gallery-grid.bento .img-frame:nth-child(6) { grid-column: span 2; }
 
 /* ---------- Marquee ---------- */
 
