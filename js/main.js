@@ -208,7 +208,7 @@
       if (!ctx.conditions.motionOK) return;
 
       // --- Hero entrance (light hero on home, overlay hero on inner pages) ---
-      var heroTitle = document.querySelector(".hero-lite h1, .hero h1");
+      var heroTitle = document.querySelector(".hero h1");
       var intro = gsap.timeline({ defaults: { ease: "expo.out" } });
 
       if (heroTitle && hasSplitText) {
