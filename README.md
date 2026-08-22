@@ -19,6 +19,20 @@ wired up later.
 Shared assets: `css/styles.css` (design system + all components) and
 `js/main.js` (sticky header, mobile nav, scroll-reveal, demo form handling).
 
+## Deploying to Vercel
+
+The site is zero-build static hosting — `vercel.json` provides the config
+(clean URLs, so `/contact` serves `contact.html`, plus security headers).
+Deploy either way:
+
+- **Dashboard**: [vercel.com/new](https://vercel.com/new) → import this
+  GitHub repo → framework preset "Other", no build command, output directory
+  left as the root → Deploy.
+- **CLI**: `npx vercel` from the repo root (add `--prod` for production).
+
+Internal links use `.html` paths so the site also works when served locally;
+on Vercel, `cleanUrls` redirects them to the extensionless URLs.
+
 ## Running locally
 
 No build step — it's plain HTML/CSS/JS. Open `index.html` directly, or serve
