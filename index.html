@@ -61,6 +61,28 @@
     </div>
   </div>
 
+  <!-- ================= Marquee ================= -->
+  <div class="marquee-band" aria-hidden="true">
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>Earthen Retreats</span><span class="sep">✦</span>
+        <span>Natural Swimming Pool</span><span class="sep">✦</span>
+        <span>Food Forest Backyards</span><span class="sep">✦</span>
+        <span>Farm to Table</span><span class="sep">✦</span>
+        <span>Yoga &amp; Wellness</span><span class="sep">✦</span>
+        <span>By Narsapur Forest</span><span class="sep">✦</span>
+      </div>
+      <div class="marquee-track">
+        <span>Earthen Retreats</span><span class="sep">✦</span>
+        <span>Natural Swimming Pool</span><span class="sep">✦</span>
+        <span>Food Forest Backyards</span><span class="sep">✦</span>
+        <span>Farm to Table</span><span class="sep">✦</span>
+        <span>Yoga &amp; Wellness</span><span class="sep">✦</span>
+        <span>By Narsapur Forest</span><span class="sep">✦</span>
+      </div>
+    </div>
+  </div>
+
   <!-- ================= Why Agartha ================= -->
   <section id="why-agartha">
     <div class="container">
@@ -70,22 +92,22 @@
       </div>
       <div class="card-grid grid-4">
         <div class="feature-card reveal">
-          <div class="icon">🌿</div>
+          <div class="icon"><svg aria-hidden="true"><use href="assets/icons.svg#leaf"></use></svg></div>
           <h3>Farmhouses built with natural materials</h3>
           <p>Bamboo, mud, and lime for a sustainable, healthy lifestyle.</p>
         </div>
         <div class="feature-card reveal">
-          <div class="icon">🍃</div>
+          <div class="icon"><svg aria-hidden="true"><use href="assets/icons.svg#sprout"></use></svg></div>
           <h3>Edible landscaped backyards</h3>
           <p>Enjoy your own food forest with fruits, vegetables, and herbs.</p>
         </div>
         <div class="feature-card reveal">
-          <div class="icon">🏛️</div>
+          <div class="icon"><svg aria-hidden="true"><use href="assets/icons.svg#pavilion"></use></svg></div>
           <h3>Premium resort &amp; clubhouse</h3>
           <p>World-class amenities for leisure and celebrations.</p>
         </div>
         <div class="feature-card reveal">
-          <div class="icon">📍</div>
+          <div class="icon"><svg aria-hidden="true"><use href="assets/icons.svg#pin"></use></svg></div>
           <h3>Strategic location</h3>
           <p>At Narsapur, adjacent to the upcoming Regional Ring Road, Hyderabad.</p>
         </div>
@@ -177,7 +199,7 @@
         <span class="eyebrow">Moments at Agartha</span>
         <h2 class="section-title">Glimpses of Agartha</h2>
       </div>
-      <div class="gallery-grid">
+      <div class="gallery-grid bento">
         <img class="img-frame reveal" loading="lazy" alt="Resort pavilion beside the natural pond" src="https://static.wixstatic.com/media/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2.jpg" />
         <img class="img-frame reveal" loading="lazy" alt="Clubhouse lounge with fire pit and bar" src="https://static.wixstatic.com/media/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.jpg" />
         <img class="img-frame reveal" loading="lazy" alt="Aerial view of the natural swimming pools" src="https://static.wixstatic.com/media/142b26_89a3906d085c4518a1ce49864ebda77a~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_89a3906d085c4518a1ce49864ebda77a~mv2.jpg" />
@@ -296,6 +318,10 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script defer src="js/main.js"></script>
 </body>
 </html>
