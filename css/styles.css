@@ -152,13 +152,13 @@ a:focus-visible {
 
 .brand-name {
   font-family: var(--font-brand);
-  font-size: 26px;
+  font-size: 24px;
   color: #f1eee4;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
-.main-nav { display: flex; align-items: center; gap: 30px; }
+.main-nav { display: flex; align-items: center; gap: 24px; }
 
 .main-nav a {
   font-size: 13.5px;
@@ -490,6 +490,12 @@ img.img-frame { object-fit: cover; width: 100%; }
   text-align: center;
 }
 
+.stat-row.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1020px) {
+  .stat-row.cols-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
 .stat .value { font-family: var(--font-display); font-size: 26px; color: var(--gold); }
 .stat .label { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 8px; opacity: 0.8; }
 
@@ -810,9 +816,9 @@ table.data tfoot td {
   .gallery-grid.bento .img-frame:nth-child(1) { grid-column: span 2; }
 }
 
-@media (max-width: 820px) {
-  section { padding: 72px 0; }
-
+/* The full nav row (7 items + wordmark + phone pill) needs ~1100px of
+   container — collapse to the overlay menu below 1240px so it never wraps. */
+@media (max-width: 1240px) {
   .nav-toggle { display: block; }
 
   .main-nav {
@@ -841,6 +847,10 @@ table.data tfoot td {
   .nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
   .nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
   .nav-open .nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+
+@media (max-width: 820px) {
+  section { padding: 72px 0; }
 
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .stat-row { grid-template-columns: 1fr; }

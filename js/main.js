@@ -86,6 +86,10 @@
 
   if (!motionOK || !hasScrollTrigger) return;
 
+  // SplitText measures line breaks at init — splitting before the webfonts
+  // arrive leaves masked lines sized for the fallback font, so the real font
+  // reflows into overlapping, clipped text. Wait for fonts (2s cap).
+  var startMotion = function () {
   var mm = gsap.matchMedia();
 
   mm.add(
@@ -250,4 +254,14 @@
   window.addEventListener("load", function () {
     ScrollTrigger.refresh();
   });
+  };
+
+  if (document.fonts && document.fonts.ready) {
+    Promise.race([
+      document.fonts.ready,
+      new Promise(function (resolve) { setTimeout(resolve, 2000); }),
+    ]).then(startMotion);
+  } else {
+    startMotion();
+  }
 })();
