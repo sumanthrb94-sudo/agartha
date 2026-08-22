@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Visit to Agartha | Contact Our Team</title>
+  <meta name="description" content="Whether you’re curious, ready to visit, or want to know more — the Agartha team is here to guide you. Call +91 95348 69999 or schedule a visit." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">A</span>
+        <span class="brand-name">Agartha<span class="brand-tag">Roots of Earth</span></span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="investment.html">Investments</a>
+        <a href="membership.html">Membership</a>
+        <a href="holiday-homes.html">Holiday Homes</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="tel:+919534869999" class="btn btn-light nav-cta">+91 95348 69999</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="hero hero-inner-page">
+    <div class="container">
+      <div class="hero-content">
+        <p class="hero-kicker">Contact Our Team</p>
+        <h1>Let’s Begin the Conversation</h1>
+        <p class="lead">Whether you’re curious, ready to visit, or want to know more — the Agartha team is here to guide you.</p>
+        <div class="hero-actions">
+          <a href="investment.html" class="btn btn-light">Have you checked the investments in Agartha?</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact info + form -->
+  <section>
+    <div class="container">
+      <div class="split" style="align-items: start;">
+        <div class="reveal">
+          <span class="eyebrow">Reach Us</span>
+          <h2 class="section-title">Talk to the Front Office</h2>
+          <div class="card-grid" style="grid-template-columns: 1fr; margin-top: 30px; gap: 18px;">
+            <div class="amenity">
+              <div class="icon">🏢</div>
+              <div>
+                <h3>Department</h3>
+                <p style="color: var(--ink-soft);">Front Office</p>
+              </div>
+            </div>
+            <div class="amenity">
+              <div class="icon">📞</div>
+              <div>
+                <h3>Contact</h3>
+                <p style="color: var(--ink-soft);"><a href="tel:+919534869999">+91 95348 69999</a></p>
+              </div>
+            </div>
+            <div class="amenity">
+              <div class="icon">✉️</div>
+              <div>
+                <h3>Email</h3>
+                <p style="color: var(--ink-soft);">Write to us using the form</p>
+              </div>
+            </div>
+          </div>
+          <div class="address-card">
+            <strong style="display:block; margin-bottom: 8px; color: var(--forest-deep);">Get Directions</strong>
+            Agartha: Roots of Earth by Modcon,<br />
+            Moosapet Village, Narsapur Mandalam,<br />
+            Hyderabad, Telangana 534275
+          </div>
+        </div>
+
+        <form class="form-card reveal" data-demo>
+          <h3 style="margin-bottom: 24px;">Send us a message</h3>
+          <div class="form-grid">
+            <div class="field">
+              <label for="c-first-name">First name</label>
+              <input id="c-first-name" type="text" name="firstName" required />
+            </div>
+            <div class="field">
+              <label for="c-last-name">Last name</label>
+              <input id="c-last-name" type="text" name="lastName" required />
+            </div>
+            <div class="field full">
+              <label for="c-email">Email</label>
+              <input id="c-email" type="email" name="email" required />
+            </div>
+            <div class="field full">
+              <label for="c-message">Message</label>
+              <textarea id="c-message" name="message"></textarea>
+            </div>
+            <div class="full">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <p class="form-note" style="display:none; margin-top: 14px; color: var(--moss);"></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule a visit -->
+  <section class="amenities">
+    <div class="container" style="max-width: 760px;">
+      <div class="center reveal">
+        <span class="eyebrow">See Agartha In Person</span>
+        <h2 class="section-title">Schedule A Visit</h2>
+      </div>
+      <form class="form-card reveal" data-demo style="margin-top: 40px;">
+        <div class="form-grid">
+          <div class="field">
+            <label for="v-first-name">First name</label>
+            <input id="v-first-name" type="text" name="firstName" required />
+          </div>
+          <div class="field">
+            <label for="v-phone">Phone</label>
+            <input id="v-phone" type="tel" name="phone" required />
+          </div>
+          <div class="field full">
+            <label for="v-date">Preferred date</label>
+            <input id="v-date" type="date" name="date" required />
+          </div>
+          <div class="full">
+            <button type="submit" class="btn btn-primary">Schedule A Visit</button>
+            <p class="form-note" style="display:none; margin-top: 14px; color: var(--moss);"></p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section style="padding-top: 0;">
+    <div class="container reveal">
+      <iframe class="map-embed" title="Agartha location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Moosapet%20Village%2C%20Narsapur%20Mandal%2C%20Telangana&output=embed"></iframe>
+    </div>
+  </section>
+
+  <!-- Offers -->
+  <section class="offers">
+    <div class="container">
+      <div class="card-grid grid-4" style="margin-top: 0;">
+        <a class="offer-card reveal" href="investment.html">
+          <h3>Make Investment</h3>
+          <p>Grow your wealth where the forest grows.</p>
+          <span class="link">Explore →</span>
+        </a>
+        <a class="offer-card reveal" href="membership.html">
+          <h3>Get Membership</h3>
+          <p>One-time fee. Lifetime access to nature, luxury, and peace.</p>
+          <span class="link">Explore →</span>
+        </a>
+        <a class="offer-card reveal" href="holiday-homes.html">
+          <h3>Explore Holiday Home</h3>
+          <p>Own a retreat that pays you back — in rent and stillness.</p>
+          <span class="link">Explore →</span>
+        </a>
+        <a class="offer-card reveal" href="contact.html">
+          <h3>Book Venue</h3>
+          <p>Discover the possibility of hosting private events, corporate gatherings or social happenings at Agartha.</p>
+          <span class="link">Explore →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>Agartha</h3>
+          <p>Step beyond the noise — discover your roots at Agartha.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="investment.html">Investments</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="holiday-homes.html">Holiday Homes</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+919534869999">+91 95348 69999</a></li>
+            <li>Moosapet Village, Narsapur Mandalam,<br />Hyderabad, Telangana 534275</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Agartha: Roots of Earth by Modcon. All rights reserved.</span>
+        <span>Luxury Eco Farm Estates &amp; Resort</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
