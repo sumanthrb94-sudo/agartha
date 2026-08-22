@@ -362,6 +362,8 @@ section { padding: 96px 0; }
 
 .img-frame .ph-label .ph-icon { font-size: 40px; margin-bottom: 12px; }
 
+img.img-frame { object-fit: cover; width: 100%; }
+
 .img-frame .ph-label p {
   font-size: 13px;
   letter-spacing: 0.2em;
@@ -397,12 +399,15 @@ section { padding: 96px 0; }
   flex: 0 0 52px;
   width: 52px; height: 52px;
   border-radius: 14px;
-  background: var(--forest);
-  color: var(--sand);
+  background: var(--sand);
+  color: var(--forest);
   display: grid;
   place-items: center;
   font-size: 24px;
 }
+
+.amenity .icon img,
+.amenity .icon svg { width: 30px; height: 30px; object-fit: contain; }
 
 .amenity h3 { font-size: 18px; font-family: var(--font-body); font-weight: 500; }
 
@@ -677,6 +682,17 @@ table.data tfoot td {
 .tier .price span { font-size: 15px; font-family: var(--font-body); color: var(--clay); display: block; letter-spacing: 0.14em; text-transform: uppercase; }
 
 .tier .checklist { flex: 1; }
+
+.tier-img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.photo-band { padding: 0; line-height: 0; }
+.photo-band img { width: 100%; display: block; }
 
 /* ---------- Gallery ---------- */
 

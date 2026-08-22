@@ -1,12 +1,22 @@
 # Image assets
 
-The pages reference styled placeholder frames wherever the live site shows
-photography. Drop the real images in here with these names and swap the
-placeholder `<div class="img-frame">` blocks for `<img>` tags:
+The site currently loads all photography and icons directly from the original
+Wix CDN (`static.wixstatic.com`) using the URLs recorded in
+`asset_manifest.csv` — the manifest of the 35 image assets from agartha.in,
+including source URLs, page usage (home/gallery), dimensions, hashes, and
+responsive variant URLs.
 
-- `masterplan.jpg` — master plan render (home page, "Master Plan" section)
-- `earthen-home.jpg` — farmhouse photo (home page, "Earthen Homes" section)
-- `gallery/01.jpg` … `gallery/09.jpg` — gallery grid images
-- `logo.png` — brand logo, if you want to replace the CSS monogram in the header
+## Self-hosting the images later
 
-Recommended: landscape images ≥1600px wide, compressed (WebP or ~80% JPEG).
+Hotlinking works, but the images will break if the Wix site is ever taken
+down. To move them into the repo:
+
+1. Run `bash scripts/download-assets.sh` on a machine with normal internet
+   access — it downloads every manifest entry into `assets/originals/`
+   (~215 MB at full resolution).
+2. Optionally resize/compress (e.g. 1920px WebP) before committing.
+3. Find-and-replace the `https://static.wixstatic.com/media/...` URLs in the
+   HTML files with the local paths.
+
+`logo.png` — drop a brand logo here if you want to replace the CSS monogram
+in the header.

@@ -29,15 +29,15 @@ python3 -m http.server 8080
 # then visit http://localhost:8080
 ```
 
-## Replacing image placeholders
+## Images
 
-Photography could not be pulled from the live site in this environment, so
-image slots are rendered as styled placeholder frames. To use real photos:
-
-1. Drop images into `assets/` (see `assets/README.md` for the expected names).
-2. Replace the corresponding `<div class="img-frame">…</div>` block with
-   `<img class="img-frame" src="assets/<name>.jpg" alt="…" />`, or set the
-   image as a CSS background on the frame.
+All photography and icons load directly from the original Wix CDN
+(`static.wixstatic.com`), using the URLs recorded in
+`assets/asset_manifest.csv` — hero backgrounds, the master plan, amenity
+icons, the gallery grid, holiday-home cards, and the footer panorama are all
+the real site assets. To self-host them instead of hotlinking, run
+`bash scripts/download-assets.sh` on a machine with normal internet access
+and swap the URLs (details in `assets/README.md`).
 
 ## Wiring up functionality later
 

@@ -35,7 +35,7 @@
   </header>
 
   <!-- ================= Hero ================= -->
-  <section class="hero">
+  <section class="hero" style="background: linear-gradient(180deg, rgba(15,26,20,0.72) 0%, rgba(22,40,31,0.45) 45%, rgba(15,26,20,0.85) 100%), url('https://static.wixstatic.com/media/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2.jpg') center/cover no-repeat;">
     <div class="container">
       <div class="hero-content">
         <p class="hero-kicker">25-Acre Bespoke Farmhouse Community Near Hyderabad</p>
@@ -100,12 +100,9 @@
         <span class="eyebrow">25 Acres, Thoughtfully Planned</span>
         <h2 class="section-title">Master Plan</h2>
       </div>
-      <div class="img-frame tall reveal" id="masterplan-image">
-        <div class="ph-label">
-          <div class="ph-icon">🗺️</div>
-          <p>Master plan image — place at assets/masterplan.jpg</p>
-        </div>
-      </div>
+      <img class="img-frame tall reveal" id="masterplan-image" loading="lazy"
+        alt="Agartha 25-acre master plan layout"
+        src="https://static.wixstatic.com/media/142b26_8ddd02a733d04a139fdd19e058e72d94~mv2.jpg/v1/fit/w_1920,h_1600,q_90,enc_avif,quality_auto/142b26_8ddd02a733d04a139fdd19e058e72d94~mv2.jpg" />
     </div>
   </section>
 
@@ -118,13 +115,18 @@
         <p class="section-sub">Thoughtfully woven comforts that honor the land — luxury that feels natural, not manufactured.</p>
       </div>
       <div class="amenity-grid">
-        <div class="amenity reveal"><div class="icon">🏡</div><h3>Earthen Retreats</h3></div>
-        <div class="amenity reveal"><div class="icon">💪</div><h3>Tulum-style Gym</h3></div>
-        <div class="amenity reveal"><div class="icon">🧘</div><h3>Yoga &amp; Wellness Center</h3></div>
-        <div class="amenity reveal"><div class="icon">🏊</div><h3>Natural Swimming Pool</h3></div>
-        <div class="amenity reveal"><div class="icon">🎉</div><h3>Banquet Hall for Celebrations</h3></div>
-        <div class="amenity reveal"><div class="icon">🍽️</div><h3>Farm to Table Restaurant</h3></div>
-        <div class="amenity reveal"><div class="icon">🌱</div><h3>Sustainable Living Spaces</h3></div>
+        <div class="amenity reveal">
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#6d6b52" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 12 4l9 7" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>
+          </div>
+          <h3>Earthen Retreats</h3>
+        </div>
+        <div class="amenity reveal"><div class="icon"><img src="https://static.wixstatic.com/media/142b26_2235b92732644760a1cb0e9f8324f090~mv2.png" alt="" loading="lazy" /></div><h3>Tulum-style Gym</h3></div>
+        <div class="amenity reveal"><div class="icon"><img src="https://static.wixstatic.com/media/142b26_6d9404833faf412a9db0b9f126feac43~mv2.png" alt="" loading="lazy" /></div><h3>Yoga &amp; Wellness Center</h3></div>
+        <div class="amenity reveal"><div class="icon"><img src="https://static.wixstatic.com/media/142b26_8d44293194ed48e097a3922533df8e23~mv2.png" alt="" loading="lazy" /></div><h3>Natural Swimming Pool</h3></div>
+        <div class="amenity reveal"><div class="icon"><img src="https://static.wixstatic.com/media/142b26_23939c28cc8644418fb4edd76ddc1ab2~mv2.png" alt="" loading="lazy" /></div><h3>Banquet Hall for Celebrations</h3></div>
+        <div class="amenity reveal"><div class="icon"><img src="https://static.wixstatic.com/media/142b26_98457ab978a1424ea9cda2583fe1def9~mv2.png" alt="" loading="lazy" /></div><h3>Farm to Table Restaurant</h3></div>
+        <div class="amenity reveal"><div class="icon"><img src="https://static.wixstatic.com/media/142b26_cd563b0ece6c49289d86579ecbc7c6bb~mv2.png" alt="" loading="lazy" /></div><h3>Sustainable Living Spaces</h3></div>
       </div>
     </div>
   </section>
@@ -146,12 +148,9 @@
           </ul>
         </div>
         <div class="reveal">
-          <div class="img-frame" id="earthen-homes-image">
-            <div class="ph-label">
-              <div class="ph-icon">🏠</div>
-              <p>Earthen home photo — place at assets/earthen-home.jpg</p>
-            </div>
-          </div>
+          <img class="img-frame" id="earthen-homes-image" loading="lazy"
+            alt="Earthen farmhouse at Agartha"
+            src="https://static.wixstatic.com/media/142b26_3a60dc75703c4cc2a29c6d44f41b8e21~mv2.png/v1/fit/w_1920,h_927,q_90,enc_avif,quality_auto/142b26_3a60dc75703c4cc2a29c6d44f41b8e21~mv2.png" />
           <div class="stat-row">
             <div class="stat">
               <div class="value">₹78 Lakhs</div>
@@ -168,6 +167,27 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= Glimpses ================= -->
+  <section style="padding-top: 0;">
+    <div class="container">
+      <div class="center reveal">
+        <span class="eyebrow">Moments at Agartha</span>
+        <h2 class="section-title">Glimpses of Agartha</h2>
+      </div>
+      <div class="gallery-grid">
+        <img class="img-frame reveal" loading="lazy" alt="Resort pavilion beside the natural pond" src="https://static.wixstatic.com/media/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2.jpg" />
+        <img class="img-frame reveal" loading="lazy" alt="Clubhouse lounge with fire pit and bar" src="https://static.wixstatic.com/media/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.jpg" />
+        <img class="img-frame reveal" loading="lazy" alt="Aerial view of the natural swimming pools" src="https://static.wixstatic.com/media/142b26_89a3906d085c4518a1ce49864ebda77a~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_89a3906d085c4518a1ce49864ebda77a~mv2.jpg" />
+        <img class="img-frame reveal" loading="lazy" alt="Canoe on the water channel through the estate" src="https://static.wixstatic.com/media/142b26_a79caac8357141ef89993d2115817696~mv2.jpg/v1/fit/w_1920,h_1080,q_90,enc_avif,quality_auto/142b26_a79caac8357141ef89993d2115817696~mv2.jpg" />
+        <img class="img-frame reveal" loading="lazy" alt="Farmhouses along the walking path" src="https://static.wixstatic.com/media/142b26_567e195b978947c9b29be195842095af~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_567e195b978947c9b29be195842095af~mv2.jpg" />
+        <img class="img-frame reveal" loading="lazy" alt="Poolside open-air cinema and dining" src="https://static.wixstatic.com/media/142b26_34c58cd885c64ddebbae12791465bbe3~mv2.jpg/v1/fit/w_1920,h_3412,q_90,enc_avif,quality_auto/142b26_34c58cd885c64ddebbae12791465bbe3~mv2.jpg" />
+      </div>
+      <p class="center" style="margin-top: 36px;">
+        <a href="gallery.html" class="btn btn-outline">View Full Gallery</a>
+      </p>
     </div>
   </section>
 
@@ -236,6 +256,12 @@
       </div>
     </div>
   </section>
+
+  <!-- ================= Footer panorama ================= -->
+  <div class="photo-band">
+    <img loading="lazy" alt="Panoramic view of the Agartha estate"
+      src="https://static.wixstatic.com/media/a6cde1_0fba9e5e285949f28357eae29494b6a1~mv2.jpg/v1/crop/x_259,y_147,w_13424,h_7599/fill/w_1284,h_735,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Agratha%20Footer%20Page%201.jpg" />
+  </div>
 
   <!-- ================= Footer ================= -->
   <footer class="site-footer">
