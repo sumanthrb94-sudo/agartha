@@ -121,9 +121,12 @@
         { y: 26, autoAlpha: 0, duration: 0.7, stagger: 0.12 },
         heroTitle ? "-=0.55" : 0
       );
+      // clearProps: a leftover inline transform would make the fixed header
+      // the containing block for the fixed mobile-nav overlay, shrinking it
+      // to the header's box.
       intro.from(
         ".site-header",
-        { y: -24, autoAlpha: 0, duration: 0.6 },
+        { y: -24, autoAlpha: 0, duration: 0.6, clearProps: "all" },
         "-=0.6"
       );
 

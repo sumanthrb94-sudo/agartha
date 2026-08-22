@@ -124,7 +124,9 @@ a:focus-visible {
   inset: 0 0 auto 0;
   z-index: 100;
   padding: 18px 0;
-  transition: var(--transition);
+  /* Scoped (not `all`): GSAP animates this element's opacity/transform,
+     and a CSS transition on the same properties fights every tween frame. */
+  transition: background-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), padding 0.35s var(--ease-out);
 }
 
 .site-header .container {
@@ -202,7 +204,9 @@ a:focus-visible {
 .main-nav a:hover::after,
 .main-nav a.active::after { width: 100%; }
 
-.nav-cta { margin-left: 8px; }
+/* The phone pill keeps dark text in every header state — the sand-colored
+   link rules would otherwise render sand-on-sand. */
+.main-nav a.nav-cta { margin-left: 8px; color: var(--forest-deep); }
 
 .nav-toggle {
   display: none;
@@ -334,7 +338,7 @@ a:focus-visible {
   padding: 38px 30px;
   box-shadow: var(--shadow);
   border-top: 4px solid var(--moss);
-  transition: var(--transition);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-top-color 0.3s;
 }
 
 .feature-card:hover { transform: translateY(-8px); border-top-color: var(--clay); box-shadow: var(--shadow-hover); }
@@ -407,7 +411,7 @@ img.img-frame { object-fit: cover; width: 100%; }
   align-items: center;
   gap: 18px;
   box-shadow: 0 10px 30px rgba(22, 40, 31, 0.07);
-  transition: var(--transition);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
 }
 
 .amenity:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
@@ -529,13 +533,13 @@ img.img-frame { object-fit: cover; width: 100%; }
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transition: var(--transition);
+  /* transform intentionally excluded: the pointer-tilt effect drives it via
+     GSAP on desktop; a CSS transform transition would fight it. */
+  transition: box-shadow 0.3s var(--ease-out), border-bottom-color 0.3s;
   border-bottom: 4px solid transparent;
 }
 
-.offer-card:hover { transform: translateY(-8px); border-bottom-color: var(--gold); box-shadow: var(--shadow-hover); }
-.offer-card { will-change: auto; }
-.offer-card.tilting { transition: box-shadow var(--transition); }
+.offer-card:hover { border-bottom-color: var(--gold); box-shadow: var(--shadow-hover); }
 
 .offer-card h3 { font-size: 24px; }
 .offer-card p { color: var(--ink-soft); flex: 1; }
@@ -676,7 +680,7 @@ table.data tfoot td {
   padding: 42px 34px;
   display: flex;
   flex-direction: column;
-  transition: var(--transition);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
   border-top: 5px solid var(--moss);
 }
 
@@ -738,6 +742,9 @@ table.data tfoot td {
 .gallery-grid.bento .img-frame { min-height: 0; height: 100%; }
 .gallery-grid.bento .img-frame:nth-child(1) { grid-column: span 2; grid-row: span 2; }
 .gallery-grid.bento .img-frame:nth-child(4) { grid-column: span 2; }
+/* Cells 5 and 6 span 2 as well so six items tile a clean 4x3 rectangle */
+.gallery-grid.bento .img-frame:nth-child(5),
+.gallery-grid.bento .img-frame:nth-child(6) { grid-column: span 2; }
 
 /* ---------- Marquee ---------- */
 
@@ -793,7 +800,13 @@ table.data tfoot td {
 
   .main-nav {
     position: fixed;
-    inset: 0;
+    /* Viewport units instead of inset: 0 — if the header ever carries a
+       transform or backdrop-filter it becomes this overlay's containing
+       block, and inset: 0 would collapse the menu to the header's box. */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background: var(--forest-deep);
     flex-direction: column;
     justify-content: center;
@@ -805,6 +818,7 @@ table.data tfoot td {
   .main-nav.open { transform: translateX(0); }
 
   .main-nav a { color: var(--sand) !important; font-size: 18px; }
+  .main-nav a.nav-cta { color: var(--forest-deep) !important; }
 
   .nav-open .nav-toggle span { background: var(--sand); }
   .nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
