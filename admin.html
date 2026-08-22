@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agartha Admin | Leads</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#5e5945" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Julius+Sans+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body { padding-bottom: 0 !important; }
+    .admin-wrap { max-width: 1240px; margin: 0 auto; padding: 110px 24px 60px; }
+    .admin-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 28px; }
+    .admin-top h1 { font-size: 30px; }
+    .admin-badge { font-size: 13px; color: var(--ink-soft); }
+
+    .auth-card { max-width: 420px; margin: 40px auto 0; }
+    .auth-card .form-note { display: none; margin-top: 14px; }
+    .auth-toggle { margin-top: 18px; font-size: 14px; color: var(--ink-soft); text-align: center; }
+    .auth-toggle a { color: var(--clay); text-decoration: underline; cursor: pointer; }
+
+    .stat-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-bottom: 26px; }
+    .stat-tile { background: var(--white); border-radius: 14px; box-shadow: var(--shadow); padding: 18px 20px; }
+    .stat-tile .n { font-size: 28px; font-weight: 600; color: var(--forest); }
+    .stat-tile .l { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 20px; }
+    .toolbar select, .toolbar input[type="search"] {
+      border: 1px solid var(--sand-deep); background: var(--white); border-radius: 10px;
+      padding: 10px 14px; font-family: var(--font-body); font-size: 14px; color: var(--ink);
+    }
+    .toolbar .spacer { flex: 1; }
+    .toolbar .btn { padding: 10px 22px; font-size: 13px; }
+
+    .lead-list { display: grid; gap: 14px; }
+    .lead-card {
+      background: var(--white); border-radius: 14px; box-shadow: 0 8px 24px rgba(63,59,46,0.08);
+      padding: 18px 20px; display: grid; grid-template-columns: 1fr auto; gap: 8px 18px;
+      border-left: 5px solid var(--moss);
+    }
+    .lead-card.status-new { border-left-color: #b3a878; }
+    .lead-card.status-contacted { border-left-color: #6c6753; }
+    .lead-card.status-visit_scheduled { border-left-color: #4e7a4e; }
+    .lead-card.status-closed { border-left-color: #8a8570; }
+    .lead-card.status-spam { border-left-color: #a05252; opacity: 0.65; }
+    .lead-head { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; }
+    .lead-head .name { font-weight: 600; font-size: 17px; }
+    .lead-head .tag {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px;
+      border-radius: 999px; background: var(--sand); color: var(--ink-soft);
+    }
+    .lead-meta { font-size: 14px; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 4px 18px; }
+    .lead-meta a { color: var(--clay); }
+    .lead-msg { font-size: 14.5px; margin-top: 6px; white-space: pre-wrap; }
+    .lead-controls { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; min-width: 190px; }
+    .lead-controls select {
+      border: 1px solid var(--sand-deep); border-radius: 8px; padding: 8px 10px;
+      font-family: var(--font-body); font-size: 13px; background: var(--cream);
+    }
+    .lead-notes { width: 100%; }
+    .lead-notes textarea {
+      width: 100%; min-height: 42px; border: 1px dashed var(--sand-deep); border-radius: 8px;
+      padding: 8px 10px; font-family: var(--font-body); font-size: 13px; background: var(--cream); resize: vertical;
+    }
+    .lead-time { font-size: 12px; color: var(--ink-soft); }
+    .empty { text-align: center; color: var(--ink-soft); padding: 60px 0; }
+    .hidden { display: none !important; }
+    @media (max-width: 700px) {
+      .lead-card { grid-template-columns: 1fr; }
+      .lead-controls { align-items: stretch; min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <svg class="brand-spiral" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 20a2 2 0 0 1 2 2 4 4 0 0 1-4 4 6.5 6.5 0 0 1-6.5-6.5 9 9 0 0 1 9-9 11.5 11.5 0 0 1 11.5 11.5 14 14 0 0 1-14 14"/></svg>
+        <span class="brand-name">Agartha</span>
+      </a>
+      <span style="color:#f1eee4; font-size:13px; letter-spacing:0.2em; text-transform:uppercase;">Admin</span>
+    </div>
+  </header>
+
+  <div class="admin-wrap">
+
+    <!-- ===== Login ===== -->
+    <div id="authView">
+      <div class="center">
+        <h1 class="section-title">Lead Manager</h1>
+        <p class="section-sub" style="margin: 0 auto;">Sign in to view and manage enquiries from agartha.in</p>
+      </div>
+      <form class="form-card auth-card" id="authForm">
+        <div class="form-grid" style="grid-template-columns: 1fr;">
+          <div class="field">
+            <label for="authEmail">Email</label>
+            <input id="authEmail" type="email" autocomplete="username" required />
+          </div>
+          <div class="field">
+            <label for="authPass">Password</label>
+            <input id="authPass" type="password" autocomplete="current-password" minlength="8" required />
+          </div>
+          <button type="submit" class="btn btn-primary" id="authBtn" style="justify-content:center;">Sign In</button>
+          <p class="form-note" id="authNote"></p>
+        </div>
+      </form>
+      <p class="auth-toggle" id="authToggle">
+        First time here? <a id="authSwitch">Create the admin account</a>
+      </p>
+    </div>
+
+    <!-- ===== Leads ===== -->
+    <div id="leadsView" class="hidden">
+      <div class="admin-top">
+        <div>
+          <h1>Leads</h1>
+          <span class="admin-badge" id="whoami"></span>
+        </div>
+        <button class="btn btn-outline" id="signOut" style="padding: 10px 24px; font-size: 13px;">Sign Out</button>
+      </div>
+
+      <div class="stat-tiles" id="statTiles"></div>
+
+      <div class="toolbar">
+        <select id="filterStatus">
+          <option value="">All statuses</option>
+          <option value="new">New</option>
+          <option value="contacted">Contacted</option>
+          <option value="visit_scheduled">Visit scheduled</option>
+          <option value="closed">Closed</option>
+          <option value="spam">Spam</option>
+        </select>
+        <select id="filterType">
+          <option value="">All forms</option>
+          <option value="contact">Contact</option>
+          <option value="visit">Site visit</option>
+          <option value="investment">Investment</option>
+          <option value="membership">Membership</option>
+        </select>
+        <input type="search" id="filterQ" placeholder="Search name, phone, email…" />
+        <span class="spacer"></span>
+        <button class="btn btn-outline" id="refresh">Refresh</button>
+        <button class="btn btn-primary" id="exportCsv">Export CSV</button>
+      </div>
+
+      <div class="lead-list" id="leadList"></div>
+      <div class="empty hidden" id="emptyMsg">No leads match this view yet.</div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script>
+  (function () {
+    "use strict";
+    var cfg = window.AGARTHA_BACKEND;
+    var db = window.supabase.createClient(cfg.url, cfg.key);
+
+    var authView = document.getElementById("authView");
+    var leadsView = document.getElementById("leadsView");
+    var authForm = document.getElementById("authForm");
+    var authNote = document.getElementById("authNote");
+    var authBtn = document.getElementById("authBtn");
+    var authSwitch = document.getElementById("authSwitch");
+    var signupMode = false;
+    var leads = [];
+
+    function note(msg, ok) {
+      authNote.textContent = msg;
+      authNote.style.display = "block";
+      authNote.style.color = ok ? "var(--moss)" : "#a05252";
+    }
+
+    authSwitch.addEventListener("click", function () {
+      signupMode = !signupMode;
+      authBtn.textContent = signupMode ? "Create Account" : "Sign In";
+      document.getElementById("authToggle").firstChild.textContent = signupMode
+        ? "Already have an account? " : "First time here? ";
+      authSwitch.textContent = signupMode ? "Sign in instead" : "Create the admin account";
+    });
+
+    authForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var email = document.getElementById("authEmail").value.trim();
+      var password = document.getElementById("authPass").value;
+      authBtn.disabled = true;
+      var action = signupMode
+        ? db.auth.signUp({ email: email, password: password })
+        : db.auth.signInWithPassword({ email: email, password: password });
+      action.then(function (res) {
+        authBtn.disabled = false;
+        if (res.error) return note(res.error.message, false);
+        if (signupMode && !res.data.session) {
+          return note("Account created — check your email to confirm, then sign in.", true);
+        }
+        enter(res.data.session);
+      });
+    });
+
+    function enter(session) {
+      if (!session) return;
+      document.getElementById("whoami").textContent = session.user.email;
+      authView.classList.add("hidden");
+      leadsView.classList.remove("hidden");
+      load();
+    }
+
+    document.getElementById("signOut").addEventListener("click", function () {
+      db.auth.signOut().then(function () { location.reload(); });
+    });
+
+    db.auth.getSession().then(function (res) { enter(res.data.session); });
+
+    function load() {
+      db.from("agartha_leads").select("*").order("created_at", { ascending: false })
+        .then(function (res) {
+          if (res.error) {
+            document.getElementById("leadList").innerHTML =
+              '<div class="empty">Could not load leads: ' + esc(res.error.message) +
+              "<br/>If you just signed up, make sure this email is in the admin allowlist.</div>";
+            return;
+          }
+          leads = res.data || [];
+          render();
+        });
+    }
+
+    function esc(s) {
+      return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+      });
+    }
+
+    var STATUSES = ["new", "contacted", "visit_scheduled", "closed", "spam"];
+    var LABELS = { new: "New", contacted: "Contacted", visit_scheduled: "Visit scheduled", closed: "Closed", spam: "Spam" };
+
+    function filtered() {
+      var st = document.getElementById("filterStatus").value;
+      var ft = document.getElementById("filterType").value;
+      var q = document.getElementById("filterQ").value.trim().toLowerCase();
+      return leads.filter(function (l) {
+        if (st && l.status !== st) return false;
+        if (ft && l.form_type !== ft) return false;
+        if (q) {
+          var hay = [l.first_name, l.last_name, l.email, l.phone, l.message].join(" ").toLowerCase();
+          if (hay.indexOf(q) === -1) return false;
+        }
+        return true;
+      });
+    }
+
+    function render() {
+      var tiles = document.getElementById("statTiles");
+      var counts = { total: leads.length };
+      STATUSES.forEach(function (s) { counts[s] = leads.filter(function (l) { return l.status === s; }).length; });
+      tiles.innerHTML =
+        '<div class="stat-tile"><div class="n">' + counts.total + '</div><div class="l">Total</div></div>' +
+        STATUSES.slice(0, 4).map(function (s) {
+          return '<div class="stat-tile"><div class="n">' + counts[s] + '</div><div class="l">' + LABELS[s] + "</div></div>";
+        }).join("");
+
+      var list = document.getElementById("leadList");
+      var rows = filtered();
+      document.getElementById("emptyMsg").classList.toggle("hidden", rows.length > 0);
+      list.innerHTML = rows.map(function (l) {
+        var when = new Date(l.created_at).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" });
+        var name = esc((l.first_name + " " + (l.last_name || "")).trim() || "(no name)");
+        return (
+          '<div class="lead-card status-' + esc(l.status) + '" data-id="' + esc(l.id) + '">' +
+            '<div>' +
+              '<div class="lead-head"><span class="name">' + name + '</span>' +
+                '<span class="tag">' + esc(l.form_type) + "</span>" +
+                '<span class="lead-time">' + esc(when) + "</span></div>" +
+              '<div class="lead-meta">' +
+                (l.phone ? '<a href="tel:' + esc(l.phone) + '">' + esc(l.phone) + "</a>" : "") +
+                (l.phone ? '<a href="https://wa.me/' + esc(l.phone.replace(/[^0-9]/g, "")) + '" target="_blank" rel="noopener">WhatsApp</a>' : "") +
+                (l.email ? '<a href="mailto:' + esc(l.email) + '">' + esc(l.email) + "</a>" : "") +
+                (l.preferred_date ? "<span>Visit: " + esc(l.preferred_date) + "</span>" : "") +
+                (l.source_page ? "<span>" + esc(l.source_page) + "</span>" : "") +
+              "</div>" +
+              (l.message ? '<div class="lead-msg">' + esc(l.message) + "</div>" : "") +
+            "</div>" +
+            '<div class="lead-controls">' +
+              '<select class="status-sel">' +
+                STATUSES.map(function (s) {
+                  return '<option value="' + s + '"' + (l.status === s ? " selected" : "") + ">" + LABELS[s] + "</option>";
+                }).join("") +
+              "</select>" +
+              '<div class="lead-notes"><textarea class="notes-in" placeholder="Notes…">' + esc(l.notes || "") + "</textarea></div>" +
+            "</div>" +
+          "</div>"
+        );
+      }).join("");
+
+      list.querySelectorAll(".status-sel").forEach(function (sel) {
+        sel.addEventListener("change", function () {
+          var id = sel.closest(".lead-card").getAttribute("data-id");
+          update(id, { status: sel.value });
+        });
+      });
+      list.querySelectorAll(".notes-in").forEach(function (ta) {
+        ta.addEventListener("change", function () {
+          var id = ta.closest(".lead-card").getAttribute("data-id");
+          update(id, { notes: ta.value });
+        });
+      });
+    }
+
+    function update(id, patch) {
+      db.from("agartha_leads").update(patch).eq("id", id).then(function (res) {
+        if (res.error) { alert("Update failed: " + res.error.message); return; }
+        var l = leads.find(function (x) { return x.id === id; });
+        if (l) Object.assign(l, patch);
+        render();
+      });
+    }
+
+    ["filterStatus", "filterType", "filterQ"].forEach(function (id) {
+      document.getElementById(id).addEventListener("input", render);
+    });
+    document.getElementById("refresh").addEventListener("click", load);
+
+    document.getElementById("exportCsv").addEventListener("click", function () {
+      var cols = ["created_at", "form_type", "status", "first_name", "last_name", "phone", "email", "preferred_date", "message", "notes", "source_page"];
+      var csv = [cols.join(",")].concat(filtered().map(function (l) {
+        return cols.map(function (c) {
+          return '"' + String(l[c] == null ? "" : l[c]).replace(/"/g, '""') + '"';
+        }).join(",");
+      })).join("\n");
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+      a.download = "agartha-leads.csv";
+      a.click();
+    });
+  })();
+  </script>
+</body>
+</html>

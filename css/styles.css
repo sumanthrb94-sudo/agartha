@@ -660,6 +660,15 @@ img.img-frame { object-fit: cover; width: 100%; }
 
 .field textarea { min-height: 130px; resize: vertical; }
 
+/* Honeypot field: invisible to people, tempting to bots */
+.hp {
+  position: absolute !important;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* ---------- Tables (ROI / price breakdown) ---------- */
 
 .table-wrap { overflow-x: auto; margin-top: 30px; }

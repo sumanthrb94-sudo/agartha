@@ -34,17 +34,74 @@
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 
-  // Forms are front-end only for now — functionality to be wired later.
-  document.querySelectorAll("form[data-demo]").forEach(function (form) {
+  // Lead forms: submit to the backend (Supabase REST, insert-only public key).
+  var backend = window.AGARTHA_BACKEND || null;
+  document.querySelectorAll("form[data-lead]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var note = form.querySelector(".form-note");
-      if (note) {
-        note.textContent =
-          "Thank you! Form submission will be connected to the backend soon.";
-        note.style.display = "block";
+      var button = form.querySelector('button[type="submit"]');
+      var say = function (msg, ok) {
+        if (note) {
+          note.textContent = msg;
+          note.style.display = "block";
+          note.style.color = ok ? "var(--moss)" : "#a05252";
+        }
+      };
+
+      // Honeypot: bots fill the hidden field — pretend success, send nothing.
+      var hp = form.querySelector('input[name="website"]');
+      if (hp && hp.value) {
+        say("Thank you! Our team will reach out to you shortly.", true);
+        form.reset();
+        return;
       }
-      form.reset();
+
+      var f = function (name) {
+        var el = form.querySelector('[name="' + name + '"]');
+        return el && el.value ? el.value.trim() : null;
+      };
+      var payload = {
+        form_type: form.getAttribute("data-lead") || "contact",
+        source_page: location.pathname,
+        first_name: f("firstName") || "",
+        last_name: f("lastName"),
+        email: f("email"),
+        phone: f("phone"),
+        preferred_date: f("date"),
+        message: f("message"),
+      };
+
+      if (!backend) {
+        say("Something went wrong. Please call us at +91 95348 69999.", false);
+        return;
+      }
+      if (button) button.disabled = true;
+
+      fetch(backend.url + "/rest/v1/agartha_leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: backend.key,
+          Authorization: "Bearer " + backend.key,
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          say("Thank you! Our team will reach out to you shortly.", true);
+          form.reset();
+        })
+        .catch(function () {
+          say(
+            "Couldn’t send right now — please call or WhatsApp us at +91 95348 69999.",
+            false
+          );
+        })
+        .finally(function () {
+          if (button) button.disabled = false;
+        });
     });
   });
 

@@ -53,12 +53,31 @@ the real site assets. To self-host them instead of hotlinking, run
 `bash scripts/download-assets.sh` on a machine with normal internet access
 and swap the URLs (details in `assets/README.md`).
 
-## Wiring up functionality later
+## Backend (leads + admin)
 
-- All forms are marked with `data-demo` and currently just show a thank-you
-  note client-side (`js/main.js`). Point them at your backend or a form
-  service by removing `data-demo` and adding `action`/`method`, or replace the
-  submit handler with a `fetch()` call.
+The backend is Supabase (project `modcon-progress`, Mumbai region), used
+directly from the browser — no servers to run:
+
+- **Lead capture** — every form (`data-lead` attribute: contact / visit /
+  investment / membership) POSTs to the `agartha_leads` table via Supabase
+  REST (`js/main.js`, config in `js/config.js`). The key in `config.js` is a
+  *publishable* key, safe to commit: row-level security only lets it INSERT.
+  It cannot read, change, or delete anything. A hidden honeypot field
+  silently swallows bot submissions.
+- **Admin panel** — `/admin` (admin.html): email/password login via Supabase
+  Auth. Signed-in admins whose email is in the `agartha_admins` allowlist
+  can view, filter, search, status-track (new → contacted → visit scheduled
+  → closed / spam), annotate, delete, and CSV-export leads.
+- **Adding an admin**: insert their email into `agartha_admins` (Supabase
+  dashboard → Table Editor), then have them use "Create the admin account"
+  on `/admin`. Sign-ups from emails not in the allowlist can log in but see
+  no data.
+
+Tables and policies live in Supabase migrations `agartha_leads_backend` and
+`agartha_admin_delete_policy`.
+
+## Odds and ends
+
 - The map is a Google Maps embed pointed at Moosapet Village, Narsapur
   Mandal — swap the `src` for your exact plus-code/place link if desired.
 - The Instagram button on the membership page points at instagram.com —
