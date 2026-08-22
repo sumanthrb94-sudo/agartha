@@ -3,7 +3,7 @@
 Images are being migrated from Wix CDN hotlinks to self-hosted files as the
 originals are provided:
 
-- `web/` — self-hosted 1920px WebP derivatives (14 of 35 so far). Pages
+- `web/` — self-hosted 1920px WebP derivatives (21 of 35 so far). Pages
   reference these directly where available.
 - Everything else still loads from the original Wix CDN
   (`static.wixstatic.com`) using the URLs in `asset_manifest.csv` — the
