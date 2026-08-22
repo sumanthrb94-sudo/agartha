@@ -48,6 +48,55 @@
     });
   });
 
+  // ----- Gallery lightbox (no library needed) -----
+
+  var galleryImgs = Array.prototype.slice.call(
+    document.querySelectorAll(".gallery-grid img")
+  );
+  if (galleryImgs.length) {
+    var lb = document.createElement("div");
+    lb.className = "lightbox";
+    lb.innerHTML =
+      '<button class="lb-close" aria-label="Close">✕</button>' +
+      '<button class="lb-prev" aria-label="Previous">‹</button>' +
+      '<img alt="" />' +
+      '<div class="lb-caption"></div>' +
+      '<button class="lb-next" aria-label="Next">›</button>';
+    document.body.appendChild(lb);
+    var lbImg = lb.querySelector("img");
+    var lbCap = lb.querySelector(".lb-caption");
+    var current = 0;
+
+    var show = function (i) {
+      current = (i + galleryImgs.length) % galleryImgs.length;
+      lbImg.src = galleryImgs[current].src;
+      lbCap.textContent = galleryImgs[current].alt || "";
+    };
+    var open = function (i) {
+      show(i);
+      lb.classList.add("open");
+      document.body.style.overflow = "hidden";
+    };
+    var close = function () {
+      lb.classList.remove("open");
+      document.body.style.overflow = "";
+    };
+
+    galleryImgs.forEach(function (img, i) {
+      img.addEventListener("click", function () { open(i); });
+    });
+    lb.querySelector(".lb-close").addEventListener("click", close);
+    lb.querySelector(".lb-prev").addEventListener("click", function () { show(current - 1); });
+    lb.querySelector(".lb-next").addEventListener("click", function () { show(current + 1); });
+    lb.addEventListener("click", function (e) { if (e.target === lb) close(); });
+    document.addEventListener("keydown", function (e) {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") show(current - 1);
+      if (e.key === "ArrowRight") show(current + 1);
+    });
+  }
+
   // ----- Motion system (GSAP required beyond this point) -----
 
   if (typeof window.gsap === "undefined") return;
@@ -219,6 +268,20 @@
           }
         );
       }
+
+      // --- Stat count-ups ---
+      document.querySelectorAll("[data-count]").forEach(function (el) {
+        var end = parseFloat(el.getAttribute("data-count"));
+        var obj = { v: 0 };
+        gsap.to(obj, {
+          v: end,
+          duration: 1.4,
+          ease: "power2.out",
+          snap: { v: 1 },
+          onUpdate: function () { el.textContent = Math.round(obj.v); },
+          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+        });
+      });
 
       // --- Micro-interaction: pointer tilt on offer cards ---
       if (ctx.conditions.desktop && ctx.conditions.finePointer) {
