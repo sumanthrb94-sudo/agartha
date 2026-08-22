@@ -4,21 +4,20 @@
    ============================================================ */
 
 :root {
-  /* Palette sampled from the live agartha.in mobile screenshot:
-     header #5e5945, background #f4f1ea, text #5b5643, logo cream #f1eee4 */
-  --forest-deep: #3f3b2e;
-  --forest: #5e5945;
-  --forest-soft: #6c6753;
-  --moss: #8a8570;
-  --clay: #8a8264;
-  --clay-soft: #a29a7d;
-  --gold: #b3a878;
-  --sand: #eae6da;
-  --sand-deep: #ddd8c8;
-  --cream: #f4f1ea;
-  --ink: #55513f;
-  --ink-soft: #7d7862;
-  --white: #fdfcf8;
+  /* Official brand palette from the designer: olive #4F4A21, sage #CECBB4 */
+  --forest-deep: #403c1b;
+  --forest: #4f4a21;
+  --forest-soft: #6b6640;
+  --moss: #8a8768;
+  --clay: #8a8455;
+  --clay-soft: #a49f78;
+  --gold: #cecbb4;
+  --sand: #cecbb4;
+  --sand-deep: #bfbca3;
+  --cream: #f1efe6;
+  --ink: #4f4a21;
+  --ink-soft: #77734f;
+  --white: #fdfcf6;
 
   --font-display: "Poppins", "Segoe UI", sans-serif;
   --font-body: "Poppins", "Segoe UI", sans-serif;
@@ -114,7 +113,7 @@ section { padding: clamp(72px, 9vw, 128px) 0; }
 
 .btn:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--forest);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -146,16 +145,14 @@ a:focus-visible {
   padding: 12px 0;
 }
 
-.brand { display: flex; align-items: center; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 13px; }
 
-.brand-spiral { width: 40px; height: 40px; color: #f1eee4; }
+.brand-mark-img { height: 40px; width: auto; }
+.brand-word-img { height: 17px; width: auto; }
 
-.brand-name {
-  font-family: var(--font-brand);
-  font-size: 24px;
-  color: #f1eee4;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+@media (max-width: 560px) {
+  .brand-mark-img { height: 34px; }
+  .brand-word-img { height: 14px; }
 }
 
 .main-nav { display: flex; align-items: center; gap: 24px; }
@@ -748,7 +745,7 @@ table.data tfoot td {
   margin-bottom: 20px;
 }
 
-.photo-band { padding: 0; line-height: 0; }
+.photo-band { padding: 0; line-height: 0; overflow: hidden; }
 .photo-band img { width: 100%; display: block; }
 
 /* ---------- Gallery ---------- */
@@ -908,9 +905,7 @@ table.data tfoot td {
 
 /* ---------- Footer brand ---------- */
 
-.footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
-.footer-brand svg { width: 34px; height: 34px; color: #f1eee4; }
-.footer-brand .brand-name { font-size: 20px; }
+.footer-lockup { width: 190px; height: auto; margin-bottom: 18px; }
 
 /* Anchor targets clear the fixed header */
 [id] { scroll-margin-top: 96px; }
