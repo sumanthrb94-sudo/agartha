@@ -4,22 +4,25 @@
    ============================================================ */
 
 :root {
-  --forest-deep: #16281f;
-  --forest: #1f3a2d;
-  --forest-soft: #2c4d3b;
-  --moss: #6b8f71;
-  --clay: #b86a3f;
-  --clay-soft: #c98a5e;
-  --gold: #c9a227;
-  --sand: #f4efe6;
-  --sand-deep: #e9e0d0;
-  --cream: #fbf8f2;
-  --ink: #22271f;
-  --ink-soft: #55604f;
-  --white: #ffffff;
+  /* Palette sampled from the live agartha.in mobile screenshot:
+     header #5e5945, background #f4f1ea, text #5b5643, logo cream #f1eee4 */
+  --forest-deep: #3f3b2e;
+  --forest: #5e5945;
+  --forest-soft: #6c6753;
+  --moss: #8a8570;
+  --clay: #8a8264;
+  --clay-soft: #a29a7d;
+  --gold: #b3a878;
+  --sand: #eae6da;
+  --sand-deep: #ddd8c8;
+  --cream: #f4f1ea;
+  --ink: #55513f;
+  --ink-soft: #7d7862;
+  --white: #fdfcf8;
 
-  --font-display: "Fraunces", "Georgia", serif;
-  --font-body: "Jost", "Segoe UI", sans-serif;
+  --font-display: "Poppins", "Segoe UI", sans-serif;
+  --font-body: "Poppins", "Segoe UI", sans-serif;
+  --font-brand: "Julius Sans One", "Poppins", sans-serif;
 
   --container: 1160px;
   --radius: 18px;
@@ -55,7 +58,7 @@ ul { list-style: none; }
 
 /* ---------- Typography ---------- */
 
-h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.15; color: var(--forest-deep); }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.2; color: var(--ink); }
 
 .eyebrow {
   display: inline-block;
@@ -67,7 +70,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height
   font-weight: 500;
 }
 
-.section-title { font-size: clamp(34px, 4.8vw, 58px); margin-bottom: 18px; letter-spacing: -0.015em; }
+.section-title { font-size: clamp(30px, 4.2vw, 48px); margin-bottom: 18px; letter-spacing: -0.01em; }
 
 .section-sub {
   max-width: 640px;
@@ -124,6 +127,8 @@ a:focus-visible {
   inset: 0 0 auto 0;
   z-index: 100;
   padding: 18px 0;
+  /* Solid olive bar in every state, matching the live site's header */
+  background: var(--forest);
   /* Scoped (not `all`): GSAP animates this element's opacity/transform,
      and a CSS transition on the same properties fights every tween frame. */
   transition: background-color 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), padding 0.35s var(--ease-out);
@@ -137,60 +142,33 @@ a:focus-visible {
 }
 
 .site-header.scrolled {
-  background: rgba(251, 248, 242, 0.94);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 30px rgba(22, 40, 31, 0.08);
+  box-shadow: 0 8px 30px rgba(63, 59, 46, 0.25);
   padding: 12px 0;
 }
 
-.brand { display: flex; align-items: center; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 14px; }
 
-.brand-mark {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--forest);
-  color: var(--sand);
-  display: grid;
-  place-items: center;
-  font-family: var(--font-display);
-  font-size: 22px;
-}
+.brand-spiral { width: 40px; height: 40px; color: #f1eee4; }
 
 .brand-name {
-  font-family: var(--font-display);
-  font-size: 24px;
-  color: var(--sand);
-  letter-spacing: 0.04em;
-  transition: var(--transition);
-}
-
-.brand-tag {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 10px;
-  letter-spacing: 0.3em;
+  font-family: var(--font-brand);
+  font-size: 26px;
+  color: #f1eee4;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
 }
-
-.site-header.scrolled .brand-name,
-.site-header.solid .brand-name { color: var(--forest-deep); }
 
 .main-nav { display: flex; align-items: center; gap: 30px; }
 
 .main-nav a {
-  font-size: 14px;
+  font-size: 13.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--sand);
+  color: #f1eee4;
   position: relative;
   padding: 6px 0;
-  transition: var(--transition);
+  transition: color 0.3s;
 }
-
-.site-header.scrolled .main-nav a,
-.site-header.solid .main-nav a { color: var(--forest-deep); }
 
 .main-nav a::after {
   content: "";
@@ -226,8 +204,6 @@ a:focus-visible {
   transition: var(--transition);
 }
 
-.site-header.scrolled .nav-toggle span,
-.site-header.solid .nav-toggle span { background: var(--forest-deep); }
 
 /* ---------- Hero ---------- */
 
@@ -240,10 +216,9 @@ a:focus-visible {
   color: var(--sand);
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(15, 26, 20, 0.72) 0%, rgba(22, 40, 31, 0.55) 45%, rgba(15, 26, 20, 0.85) 100%),
-    radial-gradient(120% 90% at 80% 10%, #3c5a45 0%, transparent 55%),
-    radial-gradient(90% 80% at 15% 85%, #4a3424 0%, transparent 50%),
-    linear-gradient(160deg, #24402f 0%, #16281f 55%, #101c15 100%);
+    linear-gradient(180deg, rgba(50, 47, 37, 0.66) 0%, rgba(60, 56, 44, 0.5) 45%, rgba(45, 42, 33, 0.8) 100%),
+    radial-gradient(120% 90% at 80% 10%, #6c6753 0%, transparent 55%),
+    linear-gradient(160deg, #5e5945 0%, #4a4636 55%, #3f3b2e 100%);
 }
 
 .hero.hero-inner-page { min-height: 62vh; padding: 150px 0 90px; }
@@ -251,10 +226,10 @@ a:focus-visible {
 .hero-content { max-width: 780px; }
 
 .hero h1 {
-  color: var(--sand);
-  font-size: clamp(44px, 7.2vw, 92px);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  color: #f1eee4;
+  font-size: clamp(38px, 5.8vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   margin-bottom: 22px;
 }
 
@@ -311,7 +286,7 @@ a:focus-visible {
   padding: 84px 0;
 }
 
-.intro-band h2 { color: var(--sand); font-size: clamp(38px, 6.2vw, 76px); line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 12px; }
+.intro-band h2 { color: #f1eee4; font-size: clamp(32px, 5vw, 60px); line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 12px; }
 
 .intro-band .sub {
   color: var(--gold);
@@ -504,7 +479,7 @@ img.img-frame { object-fit: cover; width: 100%; }
 
 .contact-band {
   background:
-    radial-gradient(100% 140% at 90% 0%, rgba(201, 162, 39, 0.16) 0%, transparent 55%),
+    radial-gradient(100% 140% at 90% 0%, rgba(179, 168, 120, 0.18) 0%, transparent 55%),
     var(--forest-deep);
   color: var(--sand);
   text-align: center;
