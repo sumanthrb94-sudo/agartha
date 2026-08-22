@@ -223,6 +223,50 @@ a:focus-visible {
 
 .hero.hero-inner-page { min-height: 62vh; padding: 150px 0 90px; }
 
+/* Light opening section, mirroring the live site's mobile hero */
+.hero-lite {
+  padding: 150px 0 70px;
+  text-align: center;
+  background: var(--cream);
+}
+
+.hero-lite h1 {
+  font-size: clamp(28px, 4vw, 50px);
+  max-width: 820px;
+  margin: 0 auto 40px;
+}
+
+.hero-lite-img {
+  display: block;
+  width: min(900px, 100%);
+  margin: 0 auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.hero-lite-copy {
+  max-width: 720px;
+  margin: 40px auto 0;
+  color: var(--ink-soft);
+  font-size: clamp(17px, 1.8vw, 20px);
+}
+
+.scroll-hint-lite {
+  margin-top: 44px;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+
+.hero.welcome-band { min-height: 64vh; padding: 120px 0; }
+
+.hero .welcome-title {
+  color: #f1eee4;
+  font-size: clamp(36px, 5.4vw, 64px);
+  margin-bottom: 30px;
+}
+
 .hero-content { max-width: 780px; }
 
 .hero h1 {
@@ -810,6 +854,8 @@ table.data tfoot td {
   body { font-size: 16px; }
   .gallery-grid.bento { grid-template-columns: 1fr; }
   .gallery-grid.bento .img-frame:nth-child(1) { grid-column: auto; }
+  /* Full-bleed hero image on small screens, as on the live site */
+  .hero-lite-img { width: 100vw; margin-left: calc(50% - 50vw); border-radius: 0; }
 }
 
 /* ---------- Reduced motion ---------- */
