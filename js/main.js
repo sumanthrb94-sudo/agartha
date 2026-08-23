@@ -124,10 +124,25 @@
     var lbCap = lb.querySelector(".lb-caption");
     var current = 0;
 
+    // The grid only ever loads the ~900px variant; data-full points at the
+    // full-size file so the lightbox isn't an upscale of a thumbnail.
+    var fullSrc = function (img) {
+      return img.getAttribute("data-full") || img.currentSrc || img.src;
+    };
+    var preload = function (i) {
+      var img = galleryImgs[(i + galleryImgs.length) % galleryImgs.length];
+      if (img) new Image().src = fullSrc(img);
+    };
+
     var show = function (i) {
       current = (i + galleryImgs.length) % galleryImgs.length;
-      lbImg.src = galleryImgs[current].src;
-      lbCap.textContent = galleryImgs[current].alt || "";
+      lbImg.src = fullSrc(galleryImgs[current]);
+      lbImg.alt = galleryImgs[current].alt || "";
+      lbCap.textContent =
+        (galleryImgs[current].alt || "") +
+        "  ·  " + (current + 1) + " / " + galleryImgs.length;
+      preload(current + 1);
+      preload(current - 1);
     };
     var open = function (i) {
       show(i);
@@ -273,7 +288,9 @@
           autoAlpha: 0,
           duration: 0.7,
           ease: "power3.out",
-          stagger: 0.08,
+          // Cap the total stagger: the gallery's 26-tile grid would otherwise
+          // take two seconds to finish arriving at a flat 0.08 per child.
+          stagger: Math.min(0.08, 0.9 / children.length),
           clearProps: "transform",
           scrollTrigger: { trigger: group, start: "top 82%", once: true },
         });

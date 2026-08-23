@@ -29,6 +29,10 @@
   --shadow-hover: 0 28px 64px rgba(22, 40, 31, 0.2);
   --transition: 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Hero scrim — every photographic hero layers this over its image so the
+     sand-coloured headline keeps its contrast against a bright sky. */
+  --scrim: linear-gradient(180deg, rgba(58, 55, 26, 0.64) 0%, rgba(72, 67, 32, 0.36) 45%, rgba(48, 45, 20, 0.78) 100%);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -228,6 +232,36 @@ a:focus-visible {
 
 .hero.hero-inner-page { min-height: 62vh; padding: 150px 0 90px; }
 
+/* ---------- Photographic heroes ----------
+   One class per page rather than a url() passed through a custom property:
+   a relative url() inside a custom property is resolved against this
+   stylesheet, not the page, so `assets/…` became `css/assets/…` and 404'd.
+   Paths here are relative to css/, which also keeps file:// previews working.
+   Each hero declares a 900px variant below 900px wide so a phone never pulls
+   the 1920px file — that was close to a megabyte on the holiday-homes page. */
+
+.hero-photo {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero-home { background-image: var(--scrim), url("../assets/web/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2.webp"); }
+.hero-gallery { background-image: var(--scrim), url("../assets/web/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2.webp"); }
+.hero-investment { background-image: var(--scrim), url("../assets/web/142b26_e952e8d04d6546b5866e374206744e87~mv2.webp"); }
+.hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.webp"); }
+.hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2.webp"); }
+.hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2.webp"); }
+
+@media (max-width: 900px) {
+  .hero-home { background-image: var(--scrim), url("../assets/web/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2-900.webp"); }
+  .hero-gallery { background-image: var(--scrim), url("../assets/web/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2-900.webp"); }
+  .hero-investment { background-image: var(--scrim), url("../assets/web/142b26_e952e8d04d6546b5866e374206744e87~mv2-900.webp"); }
+  .hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2-900.webp"); }
+  .hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2-900.webp"); }
+  .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2-900.webp"); }
+}
+
 .hero-content { max-width: 780px; }
 
 .hero h1 {
@@ -410,10 +444,6 @@ img.img-frame { object-fit: cover; width: 100%; }
 }
 
 .amenity {
-  /* max-width pins the column count so the centred last row matches the rows
-     above; without it flex would stretch three cards across the full width. */
-  flex: 1 1 260px;
-  max-width: calc(25% - 15px);
   background: var(--white);
   border-radius: var(--radius);
   padding: 28px 26px;
@@ -439,9 +469,19 @@ img.img-frame { object-fit: cover; width: 100%; }
 
 .amenity .icon svg { width: 30px; height: 30px; }
 
-@media (max-width: 1100px) { .amenity { max-width: calc(33.333% - 14px); } }
-@media (max-width: 820px) { .amenity { max-width: calc(50% - 10px); } }
-@media (max-width: 560px) { .amenity { max-width: 100%; } }
+/* Sizing belongs to the flex row, not the card: contact.html drops the same
+   card into a one-column grid, where a 25% max-width crushed it to ~100px and
+   pushed the label out of the panel. */
+.amenity-grid .amenity {
+  /* max-width pins the column count so the centred last row matches the rows
+     above; without it flex would stretch three cards across the full width. */
+  flex: 1 1 260px;
+  max-width: calc(25% - 15px);
+}
+
+@media (max-width: 1100px) { .amenity-grid .amenity { max-width: calc(33.333% - 14px); } }
+@media (max-width: 820px) { .amenity-grid .amenity { max-width: calc(50% - 10px); } }
+@media (max-width: 560px) { .amenity-grid .amenity { max-width: 100%; } }
 
 .amenity h3 { font-size: 18px; font-family: var(--font-body); font-weight: 500; }
 

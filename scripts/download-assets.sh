@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Download all image assets listed in assets/asset_manifest.csv from the Wix CDN
-# into assets/originals/, so the site can be switched from CDN hotlinks to
-# self-hosted files later. Run from the repo root on a machine with normal
-# internet access:
+# Re-fetch the full-resolution originals listed in assets/asset_manifest.csv
+# from the Wix CDN into assets/originals/ (~215 MB, git-ignored).
+#
+# The site no longer needs this: every image it serves is already self-hosted
+# under assets/web/ and assets/site/. Reach for it only when you need a
+# print-quality source that the 1920px WebP derivative can't give you.
 #
 #   bash scripts/download-assets.sh
 #
@@ -24,6 +26,4 @@ tail -n +2 "$manifest" | while IFS=, read -r filename source_url _rest; do
   fi
 done
 
-echo "Done. Files are in $outdir/."
-echo "To self-host, replace https://static.wixstatic.com/media/<name>[/v1/...] URLs"
-echo "in the HTML with assets/originals/<name> (or resized copies)."
+echo "Done. Files are in $outdir/ (git-ignored — they are sources, not shipped)."
