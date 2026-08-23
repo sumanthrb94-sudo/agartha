@@ -43,16 +43,22 @@ also where to add a new photograph.
 
 ### Deliberately not shipped
 
-Some of the drop is in the repo's history but not in the deploy, on purpose:
+The drop is fully accounted for: 84 photos (57 visually unique) and 35
+agartha.in derivatives in, 40 photos and 28 derivatives shipped. What was left
+out, and why:
 
-- **Raster icons** for yoga, pool, dining, gym, celebration and sunrise — the
-  vector set in `icons.svg` is sharper at every size and themeable.
+- **Six raster icons** — yoga, pool, dining, gym, celebration, sunrise. The
+  vector set in `icons.svg` is sharper at every size and takes brand colour.
 - **A solid-black 1080×1920 file** from the source site, which has no content.
-- **Second crops** of shots already here: another angle on the terracotta
-  alcove, a fourth bamboo-dome frame, a second front-on thatch villa.
-- **The AGARTHA logo and palette images** from the client drop — already
-  vectorised into `brand/`.
+- **Extra frames of shots already here**: a second view of the terracotta
+  alcove, three more bamboo-dome angles on top of the six that ship, a second
+  front-on thatch villa, a second frame of the arched farm building.
+- **The AGARTHA logo files and the palette swatch** — the identity is already
+  vectorised into `brand/`, and the swatch is a reference card, not an asset.
 - **One phone screenshot** with the gallery app's own UI in frame.
+
+Re-run `python scripts/build-images.py --check` after adding anything to the
+drop to see what a rebuild would produce.
 
 ## Checking
 
