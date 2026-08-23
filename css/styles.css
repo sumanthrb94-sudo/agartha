@@ -262,6 +262,19 @@ a:focus-visible {
   .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2-900.webp"); }
 }
 
+/* A phone hero crops a 16:9 photo hard: `cover` on a 390x844 portrait box
+   scales the image by height, rendering it 1501px wide — 4504 device pixels at
+   dpr3. The 900px variant is a 5x upscale there and reads as visibly soft, so
+   any screen with real pixel density gets the full-size file instead. */
+@media (max-width: 900px) and (min-resolution: 1.5dppx) {
+  .hero-home { background-image: var(--scrim), url("../assets/web/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2.webp"); }
+  .hero-gallery { background-image: var(--scrim), url("../assets/web/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2.webp"); }
+  .hero-investment { background-image: var(--scrim), url("../assets/web/142b26_e952e8d04d6546b5866e374206744e87~mv2.webp"); }
+  .hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.webp"); }
+  .hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2.webp"); }
+  .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2.webp"); }
+}
+
 .hero-content { max-width: 780px; }
 
 .hero h1 {
