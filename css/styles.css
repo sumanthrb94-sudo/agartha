@@ -181,7 +181,17 @@ a:focus-visible {
 
 /* The phone pill keeps dark text in every header state — the sand-colored
    link rules would otherwise render sand-on-sand. */
-.main-nav a.nav-cta { margin-left: 8px; color: var(--forest-deep); }
+/* The phone pill keeps dark text in every header state — the sand-colored
+   link rules would otherwise render sand-on-sand. The padding is restated here
+   because `.main-nav a` outranks `.btn` and was flattening the pill to 6px 0.
+   text-indent offsets the trailing letter-space so the number sits centred. */
+.main-nav a.nav-cta {
+  margin-left: 8px;
+  color: var(--forest-deep);
+  padding: 13px 28px;
+  line-height: 1;
+  text-indent: 0.06em;
+}
 
 .nav-toggle {
   display: none;
@@ -469,6 +479,7 @@ img.img-frame { object-fit: cover; width: 100%; }
 }
 
 .stat {
+  min-width: 0; /* grid items default to min-width:auto and refuse to shrink */
   background: var(--forest-deep);
   color: var(--sand);
   border-radius: var(--radius);
@@ -689,7 +700,9 @@ img.img-frame { object-fit: cover; width: 100%; }
 
 /* ---------- Tables (ROI / price breakdown) ---------- */
 
-.table-wrap { overflow-x: auto; margin-top: 30px; }
+/* min-width:0 — without it this flex item keeps the table's min-content width,
+   which pushed .tier to 326px inside a 272px column at 320px wide. */
+.table-wrap { overflow-x: auto; min-width: 0; margin-top: 30px; }
 
 table.data {
   width: 100%;
@@ -726,6 +739,7 @@ table.data tfoot td {
 /* ---------- Pricing tiers ---------- */
 
 .tier {
+  min-width: 0; /* grid items default to min-width:auto and refuse to shrink */
   background: var(--white);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -972,6 +986,10 @@ table.data tfoot td {
   .main-nav.open { transform: translateX(0); }
 
   .main-nav a { color: var(--sand) !important; font-size: 18px; }
+
+  /* The 8px gutter is for the horizontal desktop nav; in the stacked
+     overlay it pushed the pill 4px right of the links centre line. */
+  .main-nav a.nav-cta { margin-left: 0; margin-top: 8px; }
   .main-nav a.nav-cta { color: var(--forest-deep) !important; }
 
   .nav-open .nav-toggle span { background: var(--sand); }
@@ -984,7 +1002,9 @@ table.data tfoot td {
   section { padding: 72px 0; }
 
   .grid-3, .grid-2 { grid-template-columns: 1fr; }
-  .stat-row { grid-template-columns: 1fr; }
+  /* .cols-4 must be named explicitly: it outranks a bare .stat-row rule and
+     otherwise stays two-up, overflowing a 320px screen. */
+  .stat-row, .stat-row.cols-4 { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
