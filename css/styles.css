@@ -724,7 +724,11 @@ img.img-frame { object-fit: cover; width: 100%; }
 
 table.data {
   width: 100%;
-  border-collapse: collapse;
+  /* `separate`, not `collapse`: the collapsed border model ignores both
+     border-radius and overflow:hidden, which left every row square-cornered.
+     No cell borders are defined, so nothing doubles up. */
+  border-collapse: separate;
+  border-spacing: 0;
   background: var(--white);
   border-radius: var(--radius);
   overflow: hidden;
@@ -747,9 +751,12 @@ table.data thead th {
 
 table.data tbody tr:nth-child(even) { background: var(--sand); }
 
+/* Olive bar, not --gold: the palette collapsed --gold and --sand to the same
+   #cecbb4, so the totals row was identical to the even body stripes and to the
+   sage section behind it. A dark bar bookends the header and reads as a total. */
 table.data tfoot td {
-  background: var(--gold);
-  color: var(--forest-deep);
+  background: var(--forest);
+  color: var(--sand);
   font-weight: 600;
   font-size: 17px;
 }
