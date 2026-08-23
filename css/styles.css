@@ -180,8 +180,6 @@ a:focus-visible {
 .main-nav a.active::after { width: 100%; }
 
 /* The phone pill keeps dark text in every header state — the sand-colored
-   link rules would otherwise render sand-on-sand. */
-/* The phone pill keeps dark text in every header state — the sand-colored
    link rules would otherwise render sand-on-sand. The padding is restated here
    because `.main-nav a` outranks `.btn` and was flattening the pill to 6px 0.
    text-indent offsets the trailing letter-space so the number sits centred. */
@@ -605,6 +603,26 @@ img.img-frame { object-fit: cover; width: 100%; }
   text-transform: uppercase;
   font-weight: 500;
 }
+
+/* ---------- Inline icon links (social, map) ---------- */
+
+.social-link,
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.social-link svg,
+.map-link svg { width: 18px; height: 18px; flex: none; }
+
+.address-card .map-link {
+  margin-top: 14px;
+  color: var(--forest);
+  font-weight: 500;
+}
+
+.address-card .map-link:hover { color: var(--clay); }
 
 /* ---------- Footer ---------- */
 
