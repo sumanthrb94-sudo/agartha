@@ -329,6 +329,9 @@ a:focus-visible {
   flex: 1 1 auto;
   min-height: 150px;
   object-fit: cover;
+  /* Sage stand-in while the photo streams in, so a slow connection shows a
+     brand-toned block rather than a stark white hole. */
+  background: var(--sand);
 }
 
 .feature-card.has-photo .feature-body { padding: 22px 24px 26px; }
@@ -555,6 +558,7 @@ img.img-frame { object-fit: cover; width: 100%; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background: var(--moss);
   transition: transform 0.7s var(--ease-out);
 }
 
