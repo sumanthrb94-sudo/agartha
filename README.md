@@ -9,11 +9,11 @@ wired up later.
 
 | File | Page |
 | --- | --- |
-| `index.html` | Home — hero, Why Agartha, master plan, resort amenities, earthen homes, location, contact |
-| `investment.html` | Investment plots — opportunity, 3-year ROI projection, who it's for, consultation form |
+| `index.html` | Home — hero, Why Agartha, master plan, resort amenities, earthen homes, how it's built, glimpses, location, contact |
+| `investment.html` | Investment plots — opportunity, master plan, 3-year ROI projection, who it's for, consultation form |
 | `membership.html` | Membership tiers — Standard / Premium / Founder perks and pricing |
 | `holiday-homes.html` | Holiday homes — 1 & 2 BHK price breakdowns, rental program, permaculture principles |
-| `gallery.html` | Gallery grid (placeholder frames) |
+| `gallery.html` | Gallery — 60 images in three groups (the resort, homes & gardens, the build on site) with a full-size lightbox |
 | `contact.html` | Contact info, message form, schedule-a-visit form, map |
 
 Shared assets: `css/styles.css` (design system + all components) and
@@ -45,13 +45,15 @@ python3 -m http.server 8080
 
 ## Images
 
-All photography and icons load directly from the original Wix CDN
-(`static.wixstatic.com`), using the URLs recorded in
-`assets/asset_manifest.csv` — hero backgrounds, the master plan, amenity
-icons, the gallery grid, holiday-home cards, and the footer panorama are all
-the real site assets. To self-host them instead of hotlinking, run
-`bash scripts/download-assets.sh` on a machine with normal internet access
-and swap the URLs (details in `assets/README.md`).
+Every image is self-hosted — heroes, the master plan, the gallery, the cards,
+the footer panorama. Nothing is hotlinked, so nothing breaks if the original
+Wix site goes away. Each one ships at up to three widths and pages pick
+between them with `srcset`. Icons are a single inline vector sprite
+(`assets/icons.svg`).
+
+`scripts/build-images.py` regenerates the whole set from the raw asset drop and
+holds the source-to-name mapping; see `assets/README.md` for the layout, the
+naming convention, and what was deliberately left out.
 
 ## Backend (leads + admin)
 
@@ -76,9 +78,26 @@ directly from the browser — no servers to run:
 Tables and policies live in Supabase migrations `agartha_leads_backend` and
 `agartha_admin_delete_policy`.
 
+## Checks
+
+Three scripts, no build step. Run them from the repo root; each exits non-zero
+on a real problem.
+
+```bash
+python scripts/check-assets.py   # every image resolves, nothing hotlinked, nothing dead
+python scripts/check-backend.py  # Supabase reachable, schema matches, RLS still insert-only
+python scripts/verify-site.py    # loads every page in Chromium at 5 widths
+```
+
+`verify-site.py` needs `pip install playwright && playwright install chromium`.
+It reports console errors, failed requests, broken images and horizontal
+overflow per page, then exercises the lightbox, the mobile nav and the lead
+forms, and drops screenshots in `scripts/screenshots/` (git-ignored).
+
+`scripts/build-gallery.py` regenerates the gallery page's markup from a
+captioned list — edit that list rather than the 60 `<img>` tags.
+
 ## Odds and ends
 
 - The map is a Google Maps embed pointed at Moosapet Village, Narsapur
   Mandal — swap the `src` for your exact plus-code/place link if desired.
-- The Instagram button on the membership page points at instagram.com —
-  update it with the real profile URL.
