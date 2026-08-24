@@ -59,6 +59,7 @@ GROUPS = [
          (S + "pergola-detail", "Bamboo pergola casting patterned shade"),
          (S + "earthen-home", "Earthen home with a living roof among the trees"),
          (S + "earthen-home-terraces", "Earthen home behind tiered planting beds"),
+         (S + "earthen-home-arched-door", "Finished earthen home with an arched timber door"),
          (S + "terraced-gardens", "Terraced planting beds curving through the lawn"),
          (S + "interior-terracotta", "Sculpted terracotta interior with built-in seating"),
          (A + "0fba9e5e285949f28357eae29494b6a1~mv2", "Panoramic view of the Agartha estate"),
@@ -81,7 +82,6 @@ GROUPS = [
          (S + "thatch-villa-day", "The finished villa — thatch roof and glass gable"),
          (S + "bamboo-tower", "Two-storey mud and bamboo tower"),
          (S + "bamboo-tower-close", "The tower's wrap-around bamboo balcony"),
-         (S + "earthen-home-arched-door", "Finished earthen home with an arched timber door"),
          (S + "farm-arches", "Arched farm structures along the track"),
          (S + "farm-shelter", "Livestock shelter at the working farm"),
          (S + "farm-view-from-eave", "The farm seen from under a thatch eave"),
@@ -142,8 +142,15 @@ def main():
     )
     assert hits == 1, "gallery block markers not found in gallery.html"
     open(path, "w", encoding="utf-8", newline="\n").write(new)
-    print(f"gallery.html rewritten: {sum(len(g[3]) for g in GROUPS)} images "
-          f"in {len(GROUPS)} sections")
+    counts = [len(g[3]) for g in GROUPS]
+    print(f"gallery.html rewritten: {sum(counts)} images in {len(GROUPS)} sections "
+          f"({', '.join(map(str, counts))})")
+    # Three columns above 1020px: a group that isn't a multiple of three ends on
+    # a part-empty row, which reads as a hole rather than a deliberate stop.
+    for (_, title, _, items) in GROUPS:
+        if len(items) % 3:
+            print(f"  note: '{title}' has {len(items)} images — "
+                  f"{3 - len(items) % 3} empty cell(s) in its last row at 3 columns")
 
 
 if __name__ == "__main__":
