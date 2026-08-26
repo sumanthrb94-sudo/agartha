@@ -870,8 +870,20 @@ table.data tfoot td {
   margin-top: 54px;
 }
 
-.gallery-grid .img-frame { min-height: 300px; }
-.gallery-grid .img-frame:nth-child(4n + 1) { min-height: 380px; }
+/* Uniform tiles on the gallery page. The photographs run from 16:9 landscape
+   to 9:16 portrait, and `align-items: normal` leaves a replaced element at its
+   own height instead of stretching it — so a row of mixed orientations left up
+   to 360px of white under the shorter tiles. A fixed ratio plus object-fit
+   makes every row even; the lightbox still opens the uncropped frame. */
+.gallery-grid:not(.bento) { align-items: stretch; }
+
+.gallery-grid:not(.bento) img.img-frame {
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
 
 .gallery-grid img.img-frame {
   transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
