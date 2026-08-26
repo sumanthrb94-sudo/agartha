@@ -20,6 +20,8 @@ const arg = (f, d) => {
 };
 const OUT = path.resolve(ROOT, arg("--out", "carousels"));
 const [W, H] = arg("--size", "1080x1350").split("x").map(Number);
+const SCALE = Number(arg("--scale", "2"));      // render at 2x, downsample later
+const GUIDES = process.argv.includes("--guides");
 
 const CHROME =
   process.env.CHROME_PATH ||
@@ -63,7 +65,7 @@ body{font-family:Poppins,sans-serif;background:${OLIVE};overflow:hidden}
 .scrim{position:absolute;inset:0;background:${SCRIM}}
 .field{position:absolute;inset:0;background:${OLIVE}}
 .field.deep{background:${OLIVE_DEEP}}
-.mark{position:absolute;top:72px;left:80px;height:34px;width:auto;opacity:.95}
+.mark{position:absolute;top:172px;left:80px;height:34px;width:auto;opacity:.95}
 .body-wrap{position:relative;padding:0 80px 152px}
 .eyebrow{font-size:21px;font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:${SAGE};margin-bottom:26px}
 .kicker{font-size:20px;font-weight:500;letter-spacing:.28em;color:${SAGE};opacity:.75;margin-bottom:22px}
@@ -84,6 +86,12 @@ p{margin-top:26px;font-size:31px;font-weight:300;line-height:1.5;color:rgba(253,
 .cta h1{font-size:66px}
 .cta .pill{margin-top:48px;display:inline-block;background:${SAGE};color:${OLIVE_DEEP};font-size:30px;font-weight:500;letter-spacing:.1em;padding:24px 52px;border-radius:999px}
 .cta .handle{margin-top:34px;font-size:26px;font-weight:400;letter-spacing:.16em;color:rgba(206,203,180,.85)}
+/* --guides only: Instagram crop boxes, so placement can be eyeballed */
+.guide{position:absolute;pointer-events:none}
+.guide.square{left:0;right:0;top:${(H-W)/2}px;height:${W}px;border:3px dashed rgba(255,120,120,.9)}
+.guide.sides{top:0;bottom:0;left:${Math.round((W-H*0.75)/2)}px;right:${Math.round((W-H*0.75)/2)}px;border-left:3px dashed rgba(120,180,255,.9);border-right:3px dashed rgba(120,180,255,.9)}
+.guide.safe{inset:80px;border:2px dotted rgba(255,255,255,.5)}
+.guide-key{position:absolute;bottom:${(H-W)/2 + 14}px;left:16px;font-size:19px;font-weight:500;color:#fff;background:rgba(0,0,0,.6);padding:6px 12px;border-radius:6px}
 .pager{position:absolute;bottom:52px;right:80px;font-size:20px;font-weight:400;letter-spacing:.22em;color:rgba(253,252,246,.6)}
 .swipe{position:absolute;bottom:52px;left:80px;font-size:20px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:rgba(253,252,246,.75)}
 `;
@@ -135,14 +143,18 @@ function slideHTML(s, i, total) {
   const css = cssFor();
   fs.rmSync(OUT, { recursive: true, force: true });
   const browser = await chromium.launch({ executablePath: CHROME });
-  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
+  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: SCALE });
   let n = 0;
 
   for (const c of spec.carousels) {
     const dir = path.join(OUT, c.slug);
     fs.mkdirSync(dir, { recursive: true });
     for (let i = 0; i < c.slides.length; i++) {
-      const html = `<!doctype html><meta charset="utf-8"><style>${css}</style>${slideHTML(c.slides[i], i, c.slides.length)}`;
+      const overlay = GUIDES
+        ? `<div class="guide square"></div><div class="guide sides"></div><div class="guide safe"></div>` +
+          `<div class="guide-key">— — 1:1 grid crop · | | 3:4 grid · ⋯ text-safe</div>`
+        : "";
+      const html = `<!doctype html><meta charset="utf-8"><style>${css}</style>${slideHTML(c.slides[i], i, c.slides.length).replace("</div>", overlay + "</div>")}`;
       CURRENT = html;
       await page.goto(`${ORIGIN}/__slide`, { waitUntil: "load" });
       await page.evaluate(() => document.fonts.ready);
@@ -172,5 +184,5 @@ function slideHTML(s, i, total) {
   }
   await browser.close();
   server.close();
-  console.log(`\n${n} slides written to ${path.relative(ROOT, OUT)}/ at ${W}x${H}`);
+  console.log(`\n${n} slides written to ${path.relative(ROOT, OUT)}/ at ${W * SCALE}x${H * SCALE}` + (GUIDES ? " (with guides)" : ""));
 })();

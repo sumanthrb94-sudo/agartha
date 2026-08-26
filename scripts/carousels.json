@@ -1,6 +1,5 @@
 {
   "_note": "Content spec for build-carousels.mjs. Every line here is either lifted from the live site or is plain description — no invented figures. Photos are filenames in assets/site/.",
-
   "carousels": [
     {
       "slug": "why-agartha",
@@ -9,8 +8,8 @@
         {
           "type": "cover",
           "photo": "thatch-villa-dusk",
-          "eyebrow": "25-Acre Bespoke Farmhouse Community Near Hyderabad",
-          "headline": "Welcome to Agartha"
+          "eyebrow": "Agartha · Narsapur, near Hyderabad",
+          "headline": "25 acres.\nThree of them,\na resort."
         },
         {
           "type": "statement",
@@ -45,10 +44,13 @@
           "headline": "Strategic location",
           "body": "Narsapur, adjacent to the upcoming Regional Ring Road."
         },
-        { "type": "cta", "photo": "earthen-home", "headline": "Come and walk it." }
+        {
+          "type": "cta",
+          "photo": "earthen-home",
+          "headline": "Come and walk it."
+        }
       ]
     },
-
     {
       "slug": "how-its-built",
       "title": "How it's built",
@@ -57,7 +59,7 @@
           "type": "cover",
           "photo": "masons-brickwork",
           "eyebrow": "Roots of Earth",
-          "headline": "Built by hand, from the earth up"
+          "headline": "Mud, bamboo, lime.\nThat's the whole list."
         },
         {
           "type": "beat",
@@ -85,11 +87,19 @@
           "headline": "Then it becomes a home.",
           "body": "Cool in the heat. Quiet in the rain. Made of the place it stands in."
         },
-        { "type": "beat", "photo": "interior-terracotta", "headline": "Inside", "body": "Earth plaster, shaped and burnished by hand." },
-        { "type": "cta", "photo": "thatch-villa-day", "headline": "See it being built." }
+        {
+          "type": "beat",
+          "photo": "interior-terracotta",
+          "headline": "Inside",
+          "body": "Earth plaster, shaped and burnished by hand."
+        },
+        {
+          "type": "cta",
+          "photo": "thatch-villa-day",
+          "headline": "See it being built."
+        }
       ]
     },
-
     {
       "slug": "holiday-homes",
       "title": "Holiday Homes",
@@ -105,9 +115,25 @@
           "headline": "A retreat that pays you back.",
           "body": "Your holiday home isn't just a retreat — it's a living, breathing investment."
         },
-        { "type": "beat", "photo": "veranda-vines", "kicker": "01", "headline": "Somewhere to arrive", "body": "Yours whenever you want it." },
-        { "type": "beat", "photo": "villas-aerial-water", "kicker": "02", "headline": "Somewhere that works", "body": "Rented and managed when you're away." },
-        { "type": "cta", "photo": "thatch-villa-drive", "headline": "Let's talk numbers." }
+        {
+          "type": "beat",
+          "photo": "veranda-vines",
+          "kicker": "01",
+          "headline": "Somewhere to arrive",
+          "body": "Yours whenever you want it."
+        },
+        {
+          "type": "beat",
+          "photo": "villas-aerial-water",
+          "kicker": "02",
+          "headline": "Somewhere that works",
+          "body": "Rented and managed when you're away."
+        },
+        {
+          "type": "cta",
+          "photo": "thatch-villa-drive",
+          "headline": "Let's talk numbers."
+        }
       ]
     }
   ]

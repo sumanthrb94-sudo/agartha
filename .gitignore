@@ -4,3 +4,4 @@ node_modules
 __pycache__/
 scripts/screenshots/
 assets/originals/
+_guides/
