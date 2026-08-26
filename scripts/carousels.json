@@ -1,0 +1,114 @@
+{
+  "_note": "Content spec for build-carousels.mjs. Every line here is either lifted from the live site or is plain description — no invented figures. Photos are filenames in assets/site/.",
+
+  "carousels": [
+    {
+      "slug": "why-agartha",
+      "title": "Why Agartha",
+      "slides": [
+        {
+          "type": "cover",
+          "photo": "thatch-villa-dusk",
+          "eyebrow": "25-Acre Bespoke Farmhouse Community Near Hyderabad",
+          "headline": "Welcome to Agartha"
+        },
+        {
+          "type": "statement",
+          "headline": "Not just a farmhouse project.",
+          "body": "A way of life — 25 acres, with 3 given to a resort and clubhouse."
+        },
+        {
+          "type": "beat",
+          "photo": "thatch-villa-shell",
+          "kicker": "01",
+          "headline": "Built from natural materials",
+          "body": "Bamboo, mud and lime."
+        },
+        {
+          "type": "beat",
+          "photo": "terraced-gardens",
+          "kicker": "02",
+          "headline": "Edible landscaped backyards",
+          "body": "Your own food forest — fruit, vegetables, herbs."
+        },
+        {
+          "type": "beat",
+          "photo": "pergola-detail",
+          "kicker": "03",
+          "headline": "Premium resort & clubhouse",
+          "body": "Three of the twenty-five acres, kept for stillness."
+        },
+        {
+          "type": "beat",
+          "photo": "site-aerial-farm",
+          "kicker": "04",
+          "headline": "Strategic location",
+          "body": "Narsapur, adjacent to the upcoming Regional Ring Road."
+        },
+        { "type": "cta", "photo": "earthen-home", "headline": "Come and walk it." }
+      ]
+    },
+
+    {
+      "slug": "how-its-built",
+      "title": "How it's built",
+      "slides": [
+        {
+          "type": "cover",
+          "photo": "masons-brickwork",
+          "eyebrow": "Roots of Earth",
+          "headline": "Built by hand, from the earth up"
+        },
+        {
+          "type": "beat",
+          "photo": "mud-brick-handover",
+          "kicker": "01",
+          "headline": "Earth blocks, laid by hand",
+          "body": "The ground the house stands on becomes the house."
+        },
+        {
+          "type": "beat",
+          "photo": "bamboo-dome-frame",
+          "kicker": "02",
+          "headline": "Bamboo, bent and lashed",
+          "body": "No steel frame. A grid shell, tied by hand."
+        },
+        {
+          "type": "beat",
+          "photo": "dome-workers",
+          "kicker": "03",
+          "headline": "Thatch, layered roof by roof",
+          "body": "Laid in courses, the way it has always been laid."
+        },
+        {
+          "type": "statement",
+          "headline": "Then it becomes a home.",
+          "body": "Cool in the heat. Quiet in the rain. Made of the place it stands in."
+        },
+        { "type": "beat", "photo": "interior-terracotta", "headline": "Inside", "body": "Earth plaster, shaped and burnished by hand." },
+        { "type": "cta", "photo": "thatch-villa-day", "headline": "See it being built." }
+      ]
+    },
+
+    {
+      "slug": "holiday-homes",
+      "title": "Holiday Homes",
+      "slides": [
+        {
+          "type": "cover",
+          "photo": "villa-arrival",
+          "eyebrow": "Holiday Homes at Agartha",
+          "headline": "Own a Holiday.\nEarn a Future.\nLive in Peace."
+        },
+        {
+          "type": "statement",
+          "headline": "A retreat that pays you back.",
+          "body": "Your holiday home isn't just a retreat — it's a living, breathing investment."
+        },
+        { "type": "beat", "photo": "veranda-vines", "kicker": "01", "headline": "Somewhere to arrive", "body": "Yours whenever you want it." },
+        { "type": "beat", "photo": "villas-aerial-water", "kicker": "02", "headline": "Somewhere that works", "body": "Rented and managed when you're away." },
+        { "type": "cta", "photo": "thatch-villa-drive", "headline": "Let's talk numbers." }
+      ]
+    }
+  ]
+}
