@@ -5,3 +5,4 @@ __pycache__/
 scripts/screenshots/
 assets/originals/
 _guides/
+dist/
