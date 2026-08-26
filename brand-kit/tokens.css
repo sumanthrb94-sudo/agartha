@@ -1,0 +1,14 @@
+:root {
+  /* Official brand colours */
+  --agartha-olive: #4F4A21;
+  --agartha-sage: #CECBB4;
+
+  /* Approved neutrals */
+  --agartha-deep-olive: #403C1B;
+  --agartha-cream: #F1EFE6;
+  --agartha-off-white: #FDFCF6;
+  --agartha-moss: #8A8768;
+  --agartha-clay: #8A8455;
+
+  --agartha-font: "Poppins", sans-serif;
+}
