@@ -165,9 +165,10 @@ Craft in progress · `bamboo-dome-frame` `dome-thatching` `dome-workers`
 `entrance-canopy`
 Interiors · `interior-terracotta` `interior-mudwall`
 Renders · `earthen-home` `villa-arrival` `courtyard-villas` `pergola-detail`
+Plan · `master-plan` — the client's 37-plot layout drawing
 
 **`assets/web/`** — the original site library: aerials, pools, clubhouse,
-pathways, the 25-acre master plan.
+pathways.
 
 Each master ships with `-480` and `-900` variants. **Use the master for print
 and full-bleed; use `-900` for social.** A 1080×1080 post needs ~1080px — the

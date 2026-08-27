@@ -44,12 +44,13 @@ QUALITY = {"base": 80, "900": 78, "480": 72}
 #   142b26_6d940483...      raster yoga icon   ) all three are superseded by the
 #   142b26_8d442931...      raster pool icon   ) sharper vector set in
 #   142b26_98457ab9...      raster dining icon ) assets/icons.svg
+#   142b26_8ddd02a7...      the old 36-plot master plan, replaced by the
+#                           client's 37-plot revision — see scripts/build-plan.py
 WEB_ASSETS = [
     "142b26_5f7c47258d394edcbf818b25e3b12965~mv2.webp",  # earthen home, oval windows
     "142b26_86e04d7ce83d497997bdac2c29efe900~mv2.webp",  # AGARTHA entrance gate
     "142b26_87ac7f7d92a145b9aa2740c4a6898410~mv2.webp",  # games pavilion
     "142b26_89a3906d085c4518a1ce49864ebda77a~mv2.webp",  # resort aerial
-    "142b26_8ddd02a733d04a139fdd19e058e72d94~mv2.webp",  # master plan
     "142b26_a329de8538c44092bb941ee925dbcd7c~mv2.webp",  # clubhouse + spiral gardens
     "142b26_a79caac8357141ef89993d2115817696~mv2.webp",  # play area + canoe canal
     "142b26_a8649ae42bca482cbbafe84794fe8a6e~mv2.webp",  # pavilion villa

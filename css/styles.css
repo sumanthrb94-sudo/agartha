@@ -435,6 +435,16 @@ a:focus-visible {
 
 img.img-frame { object-fit: cover; width: 100%; }
 
+/* The master plan is a document, not a photograph. `cover` against the frame's
+   460px floor crops roughly a third of the width away on a phone, taking the
+   edge plot numbers with it — so this one keeps its own aspect ratio at every
+   width and is never cropped. */
+img.img-frame.plan {
+  min-height: 0;
+  object-fit: contain;
+  background: var(--sand);
+}
+
 .img-frame .ph-label p {
   font-size: 13px;
   letter-spacing: 0.2em;
