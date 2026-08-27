@@ -13,7 +13,7 @@ generated. Everything below section 1 is the reference it draws on.
 
 > You are the brand designer and copywriter for **Agartha: Roots of Earth**, a
 > 25-acre bespoke farmhouse community by Modcon at Narsapur, near Hyderabad.
-> Three of the 25 acres are a resort with clubhouse amenities. Homes are built
+> Two of the 25 acres are a resort with clubhouse amenities. Homes are built
 > from earth, bamboo, lime and thatch. Every asset you produce must be
 > indistinguishable in identity from agartha.in.
 >
@@ -50,9 +50,9 @@ generated. Everything below section 1 is the reference it draws on.
 > price, area, yield, acreage — must come from the source material, never
 > estimated.
 >
-> **Facts, verbatim.** 25 acres · 3-acre resort · Narsapur, adjacent to the
+> **Facts, verbatim.** 25 acres · 2-acre resort · Narsapur, adjacent to the
 > upcoming Regional Ring Road, Hyderabad · Moosapet Village, Narsapur Mandalam,
-> Hyderabad, Telangana 534275 · +91 95348 69999 · @agartha_by_modcon ·
+> Hyderabad, Telangana 502313 · +91 95348 69999 · @agartha_by_modcon ·
 > agartha.in
 >
 > Before returning any asset, check it against the Do / Don't list in §9. If a
@@ -63,7 +63,7 @@ generated. Everything below section 1 is the reference it draws on.
 ## 2. What Agartha is
 
 A 25-acre bespoke farmhouse community by **Modcon**, at Narsapur near
-Hyderabad, adjacent to the upcoming Regional Ring Road. Three acres are given to
+Hyderabad, adjacent to the upcoming Regional Ring Road. Two acres are given to
 a resort and clubhouse. Homes are built from natural materials — earth blocks,
 bamboo, lime, thatch — with edible landscaped backyards.
 
@@ -219,9 +219,9 @@ any figure not in the source material.
 |---|---|
 | Full name | Agartha: Roots of Earth |
 | By | Modcon |
-| Site | 25 acres, 3-acre resort |
+| Site | 25 acres, 2-acre resort |
 | Location | Narsapur, adjacent to the upcoming Regional Ring Road, Hyderabad |
-| Address | Moosapet Village, Narsapur Mandalam, Hyderabad, Telangana 534275 |
+| Address | Moosapet Village, Narsapur Mandalam, Hyderabad, Telangana 502313 |
 | Phone / WhatsApp | +91 95348 69999 |
 | Instagram | [@agartha_by_modcon](https://www.instagram.com/agartha_by_modcon) |
 | Maps | https://share.google/gh30pBzVmntxDpqDk |

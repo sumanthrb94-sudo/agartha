@@ -5,6 +5,14 @@
 // artwork in assets/brand. Nothing here is drawn by hand, so re-running after a
 // copy change regenerates the whole set identically.
 //
+// The full pipeline is two steps — render 2x masters, then reduce them to
+// Instagram's native width. Pass --out, or the 2x renders land on top of the
+// 1080px deliverables:
+//
+//   node scripts/build-carousels.mjs --out carousels/master
+//   python3 scripts/downsample-carousels.py
+//   bash scripts/pack-carousels.sh
+//
 //   node scripts/build-carousels.mjs [--out carousels] [--size 1080x1350]
 
 import { chromium } from "playwright";
@@ -141,7 +149,17 @@ function slideHTML(s, i, total) {
   await new Promise((r) => server.listen(0, "127.0.0.1", r));
   ORIGIN = `http://127.0.0.1:${server.address().port}`;
   const css = cssFor();
-  fs.rmSync(OUT, { recursive: true, force: true });
+  // Clear stale slides only. Wiping OUT wholesale also takes the sidecars that
+  // live beside them — caption.txt, POST.md, README.md — and the master/ tree
+  // when OUT is carousels/ itself. Renumbering a carousel shorter still needs
+  // the old tail gone, so delete the JPEGs and leave everything else alone.
+  for (const c of spec.carousels) {
+    const dir = path.join(OUT, c.slug);
+    if (!fs.existsSync(dir)) continue;
+    for (const f of fs.readdirSync(dir)) {
+      if (/^\d+\.jpg$/.test(f)) fs.rmSync(path.join(dir, f));
+    }
+  }
   const browser = await chromium.launch({ executablePath: CHROME });
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: SCALE });
   let n = 0;

@@ -10,7 +10,7 @@ caption.
 
 | # | File | On the slide | Alt text |
 |---|---|---|---|
-| 1 | `01.jpg` | Cover — "25 acres. Three of them, a resort." | Thatched villa at dusk among trees at Agartha, Narsapur |
+| 1 | `01.jpg` | Cover — "25 acres. Two of them, a resort." | Thatched villa at dusk among trees at Agartha, Narsapur |
 | 2 | `02.jpg` | "Not just a farmhouse project." | Olive title card |
 | 3 | `03.jpg` | 01 · Built from natural materials | Thatched villa under construction, bamboo and earth walls exposed |
 | 4 | `04.jpg` | 02 · Edible landscaped backyards | Terraced planted gardens stepping down the site |
