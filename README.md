@@ -48,12 +48,25 @@ python3 -m http.server 8080
 Every image is self-hosted — heroes, the master plan, the gallery, the cards,
 the footer panorama. Nothing is hotlinked, so nothing breaks if the original
 Wix site goes away. Each one ships at up to three widths and pages pick
-between them with `srcset`. Icons are a single inline vector sprite
-(`assets/icons.svg`).
+between them with `srcset`.
 
 `scripts/build-images.py` regenerates the whole set from the raw asset drop and
 holds the source-to-name mapping; see `assets/README.md` for the layout, the
-naming convention, and what was deliberately left out.
+naming convention, and what was deliberately left out. The master plan is
+client-supplied CMYK print artwork on a different quality ladder, so it has its
+own one-off: `scripts/build-plan.py`.
+
+## Icons
+
+One inline vector sprite, `assets/icons.svg`, drawn from
+[Lucide](https://lucide.dev) (ISC — `assets/icons.LICENSE`) and re-weighted to
+stroke 1.6 to sit with Poppins Light. Pages reference symbols by id
+(`<use href="assets/icons.svg#home">`).
+
+`scripts/build-icons.py` holds the id-to-Lucide mapping and rebuilds the sprite;
+edit the mapping there rather than the generated file. Adding an icon means
+adding a line to `ICONS` and re-running it. The Instagram glyph stays
+hand-drawn — Lucide dropped brand marks, so there is nothing to map it to.
 
 ## Backend (leads + admin)
 

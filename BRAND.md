@@ -153,6 +153,22 @@ glow, re-typeset the wordmark, box it, or lay it over a busy area of a photo.
 
 ---
 
+## 5b. Icons — `assets/icons.svg`
+
+[Lucide](https://lucide.dev), ISC licensed, re-weighted to **stroke 1.6** on a
+24×24 box with round caps so it sits with Poppins Light rather than shouting
+over it. One sprite, referenced by symbol id.
+
+Use these and only these. Do not mix in a second icon family, do not use filled
+or duotone glyphs, and do not draw a one-off — if a symbol is missing, add it to
+the mapping in `scripts/build-icons.py` and rebuild, so the whole set stays one
+family at one weight. Icons take `currentColor`: olive on light, sage on dark.
+
+The Instagram mark is the exception — Lucide carries no brand marks, so that one
+glyph is hand-drawn and must not be replaced with a lookalike.
+
+---
+
 ## 6. Photography — `assets/site/` and `assets/web/`
 
 Real photography and real renders of **this** project. Never substitute stock.
