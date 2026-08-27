@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /analytics
+
+Sitemap: https://agartha-zeta.vercel.app/sitemap.xml

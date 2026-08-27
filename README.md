@@ -70,13 +70,36 @@ directly from the browser — no servers to run:
   Auth. Signed-in admins whose email is in the `agartha_admins` allowlist
   can view, filter, search, status-track (new → contacted → visit scheduled
   → closed / spam), annotate, delete, and CSV-export leads.
+- **Analytics Console** — `/analytics` (analytics.html), linked from the admin
+  top bar. Same login and allowlist as the lead manager. Four tabs:
+  *Overview* and *Visitors* (pageviews, unique visitors, sessions, time on
+  page, bounce, top pages, referrers, devices, browsers), *Leads &
+  Conversion* (visitor→lead funnel and rate, leads by form / page / status),
+  and a live *SEO Audit* that fetches each page in the browser and scores ~14
+  on-page ranking factors plus robots.txt / sitemap.xml. Charts are
+  self-contained inline SVG — no third-party analytics, no external chart libs.
+- **Visitor tracking** — `js/analytics.js` (loaded on every public page) logs
+  cookieless, anonymous pageview + engagement events to the `agartha_events`
+  table via the same insert-only publishable key. It honours Do-Not-Track /
+  Global Privacy Control, skips bots and the admin pages, keeps only a random
+  first-party id in `localStorage` (no cookies, no PII), and never blocks the
+  page. Only allowlisted admins can read the data back, in the console.
 - **Adding an admin**: insert their email into `agartha_admins` (Supabase
   dashboard → Table Editor), then have them use "Create the admin account"
   on `/admin`. Sign-ups from emails not in the allowlist can log in but see
-  no data.
+  no data. The same account also unlocks `/analytics`.
 
-Tables and policies live in Supabase migrations `agartha_leads_backend` and
-`agartha_admin_delete_policy`.
+Tables and policies live in Supabase migrations `agartha_leads_backend`,
+`agartha_admin_delete_policy` and `agartha_analytics_events` (the
+`agartha_events` table: anon insert-only, admin read).
+
+## SEO
+
+`sitemap.xml` and `robots.txt` sit at the repo root (Vercel serves them at the
+domain root). Each public page carries a canonical URL, Open Graph + Twitter
+card tags, and an `Organization` JSON-LD block. The Analytics Console's SEO
+Audit tab re-checks all of this live and flags regressions — run it after any
+content change. Update `sitemap.xml` when you add or remove a page.
 
 ## Checks
 
@@ -84,9 +107,10 @@ Three scripts, no build step. Run them from the repo root; each exits non-zero
 on a real problem.
 
 ```bash
-python scripts/check-assets.py   # every image resolves, nothing hotlinked, nothing dead
-python scripts/check-backend.py  # Supabase reachable, schema matches, RLS still insert-only
-python scripts/verify-site.py    # loads every page in Chromium at 5 widths
+python scripts/check-assets.py     # every image resolves, nothing hotlinked, nothing dead
+python scripts/check-backend.py    # leads: Supabase reachable, schema matches, RLS insert-only
+python scripts/check-analytics.py  # events: schema matches, tracker can write, reads still blocked
+python scripts/verify-site.py      # loads every page in Chromium at 5 widths
 ```
 
 `verify-site.py` needs `pip install playwright && playwright install chromium`.
