@@ -55,13 +55,17 @@ for (const d of PHONES) {
       for (let y = 0; y < document.body.scrollHeight; y += 250) {
         window.scrollTo(0, y); await new Promise(r => setTimeout(r, 110));
       }
-      window.scrollTo(0, 0);
+      // Deliberately stay at the bottom. Returning to the top makes Chromium
+      // deprioritise the last lazy images, which then never report complete
+      // and get flagged as broken — they are not.
     });
-    // Wait on the actual condition, not a guess. Scrolling back to the top
-    // deprioritises the last lazy image, so a fixed sleep kept reporting the
-    // footer panorama as broken when it loads fine.
+    // Wait on the condition itself, not a guess at how long it takes — and say
+    // so if it genuinely times out, rather than swallowing that and reporting
+    // healthy images as broken.
+    let stalled = false;
     await p.waitForFunction(() => [...document.images].every(i => i.complete),
-      null, { timeout: 15000 }).catch(() => {});
+      null, { timeout: 15000 }).catch(() => { stalled = true; });
+    if (stalled) console.log(`      (images still loading after 15s on ${pg})`);
     await p.waitForTimeout(400);
 
     const issues = await p.evaluate(() => {
