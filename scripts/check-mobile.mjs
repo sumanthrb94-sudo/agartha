@@ -57,7 +57,9 @@ for (const d of PHONES) {
       }
       window.scrollTo(0, 0);
     });
-    await p.waitForTimeout(1500);
+    // lazy images below the fold need a real settle; checking sooner reports
+    // decoded-but-not-yet images as broken
+    await p.waitForTimeout(2500);
 
     const issues = await p.evaluate(() => {
       const out = [];
@@ -75,11 +77,17 @@ for (const d of PHONES) {
       for (const img of document.images)
         if (img.naturalWidth === 0 && img.getAttribute("src")) out.push(`image no pixels: ${img.src.split("/").pop()}`);
       // tap targets: links/buttons that are visible and too small to hit
+      // Only judge what a user can actually reach. The mobile menu is parked
+      // at translateX(100%) rather than display:none, so its links are laid
+      // out but off-screen — measuring them there reported 17px for links that
+      // are 50px once the menu opens.
       for (const el of document.querySelectorAll("a, button")) {
         const r = el.getBoundingClientRect();
         if (r.width === 0 || r.height === 0) continue;
-        if (getComputedStyle(el).display === "none") continue;
-        if (r.height < 30 && el.offsetParent !== null && el.textContent.trim())
+        if (getComputedStyle(el).display === "none" || el.offsetParent === null) continue;
+        if (r.left >= de.clientWidth || r.right <= 0) continue;   // parked off-screen
+        if (!el.textContent.trim()) continue;
+        if (r.height < 44)
           out.push(`tap target ${Math.round(r.width)}x${Math.round(r.height)}: "${el.textContent.trim().slice(0,28)}"`);
       }
       return out;

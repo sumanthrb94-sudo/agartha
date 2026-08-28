@@ -1098,7 +1098,9 @@ table.data tfoot td {
 
   .main-nav.open { transform: translateX(0); }
 
-  .main-nav a { color: var(--sand) !important; font-size: 18px; }
+  /* 6px of padding left these overlay links 42px tall — 2px under the 44px
+     touch floor, on the one menu a phone user has to hit. */
+  .main-nav a { color: var(--sand) !important; font-size: 18px; padding: 10px 0; }
 
   /* The 8px gutter is for the horizontal desktop nav; in the stacked
      overlay it pushed the pill 4px right of the links centre line. */
@@ -1142,4 +1144,23 @@ table.data tfoot td {
   .marquee-track { animation: none; }
   .offer-card:hover .offer-bg { transform: none; }
   .scroll-hint .line { animation: none; }
+}
+
+/* ---------- Touch targets ----------
+   Inline links in the footer and contact lists were 17px tall — fine for a
+   mouse, fiddly for a thumb, and one of them is the phone number. Raised to
+   the 44px floor only on a coarse pointer, so the desktop footer keeps its
+   compact rhythm. */
+@media (pointer: coarse) {
+  .site-footer li a,
+  .address-card .map-link,
+  .social-link,
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* The links now carry the spacing the margin used to provide. */
+  .site-footer li { margin-bottom: 0; }
 }
