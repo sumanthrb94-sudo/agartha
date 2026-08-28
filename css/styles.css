@@ -1154,6 +1154,9 @@ table.data tfoot td {
 @media (pointer: coarse) {
   .site-footer li a,
   .address-card .map-link,
+  /* the contact page repeats the phone number inside an .amenity card, where
+     it is the same bare inline link the footer had */
+  .amenity p a,
   .social-link,
   .map-link {
     display: inline-flex;

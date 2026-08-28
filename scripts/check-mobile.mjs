@@ -57,9 +57,12 @@ for (const d of PHONES) {
       }
       window.scrollTo(0, 0);
     });
-    // lazy images below the fold need a real settle; checking sooner reports
-    // decoded-but-not-yet images as broken
-    await p.waitForTimeout(2500);
+    // Wait on the actual condition, not a guess. Scrolling back to the top
+    // deprioritises the last lazy image, so a fixed sleep kept reporting the
+    // footer panorama as broken when it loads fine.
+    await p.waitForFunction(() => [...document.images].every(i => i.complete),
+      null, { timeout: 15000 }).catch(() => {});
+    await p.waitForTimeout(400);
 
     const issues = await p.evaluate(() => {
       const out = [];
