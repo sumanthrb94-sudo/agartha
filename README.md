@@ -125,6 +125,7 @@ python scripts/check-backend.py    # leads: Supabase reachable, schema matches, 
 python scripts/check-analytics.py  # events: schema matches, tracker can write, reads still blocked
 python scripts/verify-site.py      # loads every page in Chromium at 5 widths
 node scripts/check-tone.mjs index.html   # tonal rhythm: % of the page per colour
+node scripts/check-mobile.mjs            # 6 pages on 5 phone viewports
 ```
 
 `verify-site.py` needs `pip install playwright && playwright install chromium`.
