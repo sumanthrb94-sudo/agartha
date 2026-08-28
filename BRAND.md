@@ -18,11 +18,14 @@ generated. Everything below section 1 is the reference it draws on.
 > indistinguishable in identity from agartha.in.
 >
 > **Colour — use only these.** Olive `#4F4A21` and sage `#CECBB4` are the
-> designer's two official brand colours. Deep olive `#403C1B`, cream `#F1EFE6`
-> and off-white `#FDFCF6` are the approved supporting neutrals. Never introduce
-> a colour outside this set — no pure black, no pure white, no accent hue, no
-> gradient that isn't the scrim in §3. Dark layouts are olive or deep olive with
-> sage or cream text. Light layouts are cream or off-white with olive text.
+> designer's two official brand colours. White `#FFFFFF`, paper `#F6F5F0` and
+> deep olive `#403C1B` are the approved supporting neutrals. Never introduce a
+> colour outside this set — no pure black, no accent hue, no gradient that
+> isn't the scrim in §3. Dark layouts are olive or deep olive with sage or
+> paper text. **Light layouts lead with white**: it is the trust colour and
+> should be the largest share of any light composition, with paper as the
+> quieter field beneath it. Sage is an accent — icon chips, a rule, one band —
+> never a whole field, which flattens everything sitting on it.
 >
 > **Type.** Poppins throughout — Light 300, Regular 400, Medium 500, SemiBold
 > 600. Headlines Medium, generous size, tight line-height (1.1–1.2), letter
@@ -87,11 +90,15 @@ supporting tones, not brand colours.
 
 | Token | Hex | Use |
 |---|---|---|
+| White | `#FFFFFF` | Surfaces — cards, panels, the wide light bands |
+| Paper | `#F6F5F0` | Page field beneath the white surfaces |
 | Deep olive | `#403C1B` | Footer, table headers, deepest panels |
-| Cream | `#F1EFE6` | Page background |
-| Off-white | `#FDFCF6` | Cards on cream |
 | Moss | `#8A8768` | Muted rules, icon fills — large text only |
 | Clay | `#8A8455` | Eyebrows, captions — large text only |
+
+A white card on a white band needs an edge the shadow alone will not give it:
+one olive hairline at 7%, `0 0 0 1px rgba(79, 74, 33, 0.07)`. Faint enough not
+to read as a border.
 
 **Photo scrim.** Any text over a photograph sits on this, never bare:
 
@@ -103,12 +110,14 @@ linear-gradient(180deg, rgba(58,55,26,0.64) 0%, rgba(72,67,32,0.36) 45%, rgba(48
 
 | Combination | Ratio | Verdict |
 |---|---|---|
-| Off-white on olive | 8.75 | AAA — safest dark layout |
-| Cream on olive | 7.81 | AAA |
+| White on deep olive | 11.17 | AAA — safest dark layout |
+| Paper on deep olive | 10.23 | AAA |
+| Olive on white | 9.00 | AAA |
+| Olive on paper | 8.24 | AAA |
 | Sage on deep olive | 6.82 | AA body |
 | Olive on sage | 5.50 | AA body |
-| Cream on clay | 3.31 | **Large text only** |
-| Cream on moss | 3.17 | **Large text only** |
+| Clay on white | 3.81 | **Large text only** |
+| Moss on white | 3.65 | **Large text only** |
 
 Moss and clay fail for body copy. Use them at 24px+ or for non-text elements.
 
@@ -247,14 +256,15 @@ any figure not in the source material.
 
 ## 9. Do / Don't
 
-**Do** — olive and sage as the frame · Poppins only · the supplied logo files ·
-real project photography · the scrim under any text on a photo · sentences that
-describe rather than sell · numbers traced to source.
+**Do** — white as the dominant light · olive and sage as the frame · Poppins
+only · the supplied logo files · real project photography · the scrim under any
+text on a photo · sentences that describe rather than sell · numbers traced to
+source.
 
-**Don't** — introduce a colour outside §3 · pure black or pure white · a second
-typeface · retype or recolour the logo · stock or AI-generated imagery ·
-filters, vignettes or borders on photos · text on a bright sky without the scrim
-· exclamation marks or hype · invented prices, yields or areas.
+**Don't** — introduce a colour outside §3 · pure black · sage as a full-section
+field · a second typeface · retype or recolour the logo · stock or AI-generated
+imagery · filters, vignettes or borders on photos · text on a bright sky without
+the scrim · exclamation marks or hype · invented prices, yields or areas.
 
 ---
 

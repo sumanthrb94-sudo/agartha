@@ -14,10 +14,14 @@
   --gold: #cecbb4;
   --sand: #cecbb4;
   --sand-deep: #bfbca3;
-  --cream: #f1efe6;
+  /* The light end of the ramp carries the trust. Paper is the page field and
+     white is every surface that sits on it; both were a stop darker before,
+     which made the whole site read beige. Paper at L* 96.5 keeps a ΔL* of 3.5
+     against a white card — enough of an edge without a border doing the work. */
+  --cream: #f6f5f0;
   --ink: #4f4a21;
   --ink-soft: #77734f;
-  --white: #fdfcf6;
+  --white: #ffffff;
 
   --font-display: "Poppins", "Segoe UI", sans-serif;
   --font-body: "Poppins", "Segoe UI", sans-serif;
@@ -27,6 +31,10 @@
   --radius: 18px;
   --shadow: 0 18px 50px rgba(22, 40, 31, 0.12);
   --shadow-hover: 0 28px 64px rgba(22, 40, 31, 0.2);
+  /* A white card on a white band needs an edge the shadow alone cannot give it.
+     One olive hairline at 7% — visible enough to define the card, too faint to
+     read as a border. */
+  --ring: 0 0 0 1px rgba(79, 74, 33, 0.07);
   --transition: 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
 
@@ -84,7 +92,8 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height
 .center { text-align: center; }
 .center .section-sub { margin-inline: auto; }
 
-section { padding: clamp(72px, 9vw, 128px) 0; }
+/* White only reads as calm if there is enough of it between things. */
+section { padding: clamp(88px, 10vw, 152px) 0; }
 
 /* ---------- Buttons ---------- */
 
@@ -363,7 +372,7 @@ a:focus-visible {
   background: var(--white);
   border-radius: var(--radius);
   padding: 38px 30px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--ring), var(--shadow);
   border-top: 4px solid var(--moss);
   /* An equal-height row sizes every card to the wordiest one; centring means the
      slack sits either side of short copy instead of stranding it at the top. */
@@ -373,7 +382,7 @@ a:focus-visible {
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out), border-top-color 0.3s;
 }
 
-.feature-card:hover { transform: translateY(-8px); border-top-color: var(--clay); box-shadow: var(--shadow-hover); }
+.feature-card:hover { transform: translateY(-8px); border-top-color: var(--clay); box-shadow: var(--ring), var(--shadow-hover); }
 
 /* Photo variant: the image flex-grows, so that same slack becomes more
    photograph rather than empty card. */
@@ -454,7 +463,11 @@ img.img-frame.plan {
 
 /* ---------- Amenities ---------- */
 
-.amenities { background: var(--sand); }
+/* Was a full sage field. Sage over a whole section is a mid-tone that flattens
+   everything sitting on it; as a white band alternating with the paper page it
+   gives the same rhythm without the weight. Sage stays as the accent on
+   .location, the marquee rule and the icon chips. */
+.amenities { background: var(--white); }
 
 /* Flex rather than grid: seven cards over a four-up row leaves an orphan slot,
    and only flex can centre that short last row instead of left-aligning it. */
@@ -473,11 +486,11 @@ img.img-frame.plan {
   display: flex;
   align-items: center;
   gap: 18px;
-  box-shadow: 0 10px 30px rgba(22, 40, 31, 0.07);
+  box-shadow: var(--ring), 0 10px 30px rgba(22, 40, 31, 0.06);
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
 }
 
-.amenity:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.amenity:hover { transform: translateY(-4px); box-shadow: var(--ring), var(--shadow); }
 
 .amenity .icon {
   flex: 0 0 52px;
@@ -656,7 +669,7 @@ img.img-frame.plan {
   background: linear-gradient(180deg, rgba(28, 26, 11, 0) 0%, rgba(28, 26, 11, 0.72) 34%, rgba(28, 26, 11, 0.93) 100%);
 }
 
-.offer-card h3 { font-size: 22px; color: #fdfcf6; text-shadow: 0 1px 12px rgba(20, 19, 8, 0.5); }
+.offer-card h3 { font-size: 22px; color: var(--white); text-shadow: 0 1px 12px rgba(20, 19, 8, 0.5); }
 .offer-card p { color: rgba(253, 252, 246, 0.88); font-size: 15px; }
 
 .offer-card .link {
@@ -830,7 +843,7 @@ table.data tfoot td {
   min-width: 0; /* grid items default to min-width:auto and refuse to shrink */
   background: var(--white);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--ring), var(--shadow);
   padding: 42px 34px;
   display: flex;
   flex-direction: column;
@@ -838,7 +851,7 @@ table.data tfoot td {
   border-top: 5px solid var(--moss);
 }
 
-.tier:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+.tier:hover { transform: translateY(-8px); box-shadow: var(--ring), var(--shadow-hover); }
 
 .tier.featured { border-top-color: var(--gold); background: var(--forest-deep); color: var(--sand); }
 .tier.featured h3, .tier.featured .price { color: var(--sand); }

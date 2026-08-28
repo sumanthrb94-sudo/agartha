@@ -124,6 +124,7 @@ python scripts/check-assets.py     # every image resolves, nothing hotlinked, no
 python scripts/check-backend.py    # leads: Supabase reachable, schema matches, RLS insert-only
 python scripts/check-analytics.py  # events: schema matches, tracker can write, reads still blocked
 python scripts/verify-site.py      # loads every page in Chromium at 5 widths
+node scripts/check-tone.mjs index.html   # tonal rhythm: % of the page per colour
 ```
 
 `verify-site.py` needs `pip install playwright && playwright install chromium`.
