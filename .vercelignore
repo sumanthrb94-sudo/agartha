@@ -1,0 +1,12 @@
+# Only the website belongs on the website. Everything here is source or
+# deliverables that were being served from the web root — 15MB of it, plus the
+# CI config, all publicly fetchable.
+.github/
+scripts/
+carousels/
+brand-kit/
+dist/
+BRAND.md
+README.md
+assets/README.md
+assets/asset_manifest.csv
