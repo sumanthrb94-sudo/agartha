@@ -6,7 +6,22 @@ here and it appears; leave them out and the hero renders exactly as it does now.
     estate-hero.webm    ← preferred, served first
     estate-hero.mp4     ← fallback for Safari and older browsers
 
-## Making them from the Drive footage
+## Making them
+
+One command, from the camera original:
+
+```bash
+pip install imageio-ffmpeg          # only if ffmpeg is not already installed
+python3 scripts/build-hero-video.py H08A5473.MOV --start 00:00:12 --duration 8
+```
+
+It strips the audio, scales to 1920, encodes both formats, and fails loudly if
+either lands over the 4MB budget rather than letting a heavy file through. The
+pipeline has been run end to end against a synthetic source: both outputs came
+back with zero audio streams, and the page played the WebM muted and looping
+behind the headline.
+
+## Doing it by hand
 
 The source clips (`H08A5473.MOV` 226MB, `H08A7965.MOV` 93MB) are camera
 originals. Never put those on the web — transcode first. Target 6–10 seconds,
