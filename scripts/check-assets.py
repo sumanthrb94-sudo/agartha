@@ -27,6 +27,11 @@ SRCSET = re.compile(r"""srcset\s*=\s*["']([^"']+)["']""", re.I)
 EXTERNAL = re.compile(
     r"""(?:src|srcset|url)\s*[=(]\s*["']?\s*(https?://[^"')\s]+\.(?:webp|png|jpe?g|gif|svg))""",
     re.I)
+# ...but they still *use* the file, so the same absolute URLs have to count as a
+# reference or the OG image reads as dead weight. Only the path after the host
+# matters; whichever domain the site is on, it resolves to the same repo file.
+META_REF = re.compile(
+    r"""content\s*=\s*["']https?://[^"'/]+/([^"'\s]+\.(?:webp|png|jpe?g|gif|svg))["']""", re.I)
 
 # Shipped on purpose even though no page links them.
 INTENTIONAL = {
@@ -69,6 +74,7 @@ def main():
             external.append((rel, url))
 
         candidates = set(REF.findall(text))
+        candidates.update(META_REF.findall(text))
         for block in SRCSET.findall(text):
             for part in block.split(","):
                 candidates.add(part.strip().split()[0] if part.strip() else "")
