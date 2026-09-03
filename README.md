@@ -110,9 +110,49 @@ Tables and policies live in Supabase migrations `agartha_leads_backend`,
 
 `sitemap.xml` and `robots.txt` sit at the repo root (Vercel serves them at the
 domain root). Each public page carries a canonical URL, Open Graph + Twitter
-card tags, and an `Organization` JSON-LD block. The Analytics Console's SEO
+card tags, and a `RealEstateAgent` JSON-LD block (a LocalBusiness subtype — address, phone and award, ready for `geo` once coordinates arrive). The Analytics Console's SEO
 Audit tab re-checks all of this live and flags regressions — run it after any
 content change. Update `sitemap.xml` when you add or remove a page.
+
+## Going live
+
+Ordered by dependency — the domain gates everything below it.
+
+**1. Point agartha.in at Vercel.** Every absolute URL on the site currently says
+`agartha-zeta.vercel.app`: 43 of them across canonicals, og:url, twitter:image,
+the JSON-LD, sitemap.xml and robots.txt. Until that changes, the canonical tags
+are telling Google the vercel.app address is the real one, so the two compete.
+Add the domain in Vercel, then run a find-and-replace across those 43 and push.
+
+**2. Google Search Console.** Verify the real domain, submit
+`https://agartha.in/sitemap.xml`. Do it after step 1 — Search Console is
+per-domain, and verifying vercel.app first means doing it twice and losing the
+indexing history. Verification is a meta tag in each page's head.
+
+**3. Google Business Profile.** For a 25-acre site people physically visit this
+drives more enquiries than search ranking will. A Maps listing already exists
+(the footer links to it); claiming it and adding photos, hours and the phone
+number is the highest-return hour available.
+
+**4. Conversion tracking, before any ad spend.** The lead form writes to
+Supabase and `js/analytics.js` records a `form_submit` event, but neither is
+visible to Google or Meta. Without a conversion event their algorithms cannot
+optimise, so ads pay for clicks blind. Needs a GA4 property or the Ads tag
+firing on successful submit, and a Meta Pixel for the Instagram side.
+
+**Still outstanding for want of information:**
+
+- Real geo coordinates. The JSON-LD is `RealEstateAgent` with a full postal
+  address but no `geo` block, because inventing a lat/long puts a map pin in the
+  wrong field. The long Google Maps URL containing `@17.xxxx,78.xxxx` supplies it.
+- A food-forest photograph. `BRAND.md` §6 flags it: nothing in the library shows
+  edible planting, despite it being a headline proposition.
+- The hero video files — see `assets/video/README.md`.
+
+**Known limitation.** The lead forms carry a honeypot, which stops drive-by
+bots. It does not stop anything posting straight at the Supabase REST endpoint,
+since the publishable key is public by design. If spam appears, the fix is a
+captcha (Turnstile or hCaptcha) or an edge function in front of the insert.
 
 ## Checks
 
