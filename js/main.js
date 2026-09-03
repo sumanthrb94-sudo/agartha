@@ -36,6 +36,34 @@
 
   // Lead forms: submit to the backend (Supabase REST, insert-only public key).
   var backend = window.AGARTHA_BACKEND || null;
+
+  /* A lead is a conversion only once the row is actually written. Reporting on
+     the submit event instead — which is what this used to do, from
+     analytics.js — counts failed posts and every bot the honeypot swallowed.
+     That inflated number is exactly what an ad platform would be told to bid
+     against, so it has to be the confirmed one.
+
+     Nothing is loaded here and the CSP is not widened: each call is a no-op
+     until a tag is actually installed on the page. Install one and conversions
+     start flowing with no further change to this file. */
+  function reportConversion(formType) {
+    try {
+      if (window.AgarthaAnalytics) {
+        window.AgarthaAnalytics.track("form_submit", { form_type: formType });
+      }
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "generate_lead", { form_type: formType });
+      }
+      if (window.dataLayer && typeof window.dataLayer.push === "function") {
+        window.dataLayer.push({ event: "agartha_lead", form_type: formType });
+      }
+      if (typeof window.fbq === "function") {
+        window.fbq("track", "Lead", { content_name: formType });
+      }
+    } catch (err) {
+      /* Reporting must never be the reason someone does not see a thank-you. */
+    }
+  }
   document.querySelectorAll("form[data-lead]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -91,6 +119,7 @@
         .then(function (res) {
           if (!res.ok) throw new Error("HTTP " + res.status);
           say("Thank you! Our team will reach out to you shortly.", true);
+          reportConversion(payload.form_type);
           form.reset();
         })
         .catch(function () {

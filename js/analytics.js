@@ -167,13 +167,12 @@
   });
   window.addEventListener("pagehide", sendEngagement);
 
-  // ----- Conversion intent: lead form submissions -----
-  document.addEventListener("submit", function (e) {
-    var form = e.target;
-    if (form && form.matches && form.matches("form[data-lead]")) {
-      post("form_submit", { meta: { form_type: form.getAttribute("data-lead") || "contact" } });
-    }
-  }, true);
+  /* Lead conversions are reported by main.js, not from here.
+     This file used to listen for the submit event, which fires before anything
+     has been written — so a failed post and every bot the honeypot swallowed
+     both counted as leads, and the console's conversion rate was measuring
+     attempts rather than enquiries. main.js now calls the hook below once the
+     row comes back written. */
 
   // Small public hook for manual events (e.g. a tracked CTA click).
   window.AgarthaAnalytics = {

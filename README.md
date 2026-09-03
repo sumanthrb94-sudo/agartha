@@ -134,11 +134,21 @@ drives more enquiries than search ranking will. A Maps listing already exists
 (the footer links to it); claiming it and adding photos, hours and the phone
 number is the highest-return hour available.
 
-**4. Conversion tracking, before any ad spend.** The lead form writes to
-Supabase and `js/analytics.js` records a `form_submit` event, but neither is
-visible to Google or Meta. Without a conversion event their algorithms cannot
-optimise, so ads pay for clicks blind. Needs a GA4 property or the Ads tag
-firing on successful submit, and a Meta Pixel for the Instagram side.
+**4. Conversion tracking, before any ad spend.** Without a conversion event an
+ad platform optimises for clicks rather than enquiries, so the spend buys
+traffic blind. The wiring is in place and waiting for a tag: `reportConversion`
+in `js/main.js` fires once the lead row comes back written, and calls `gtag`,
+`dataLayer.push` and `fbq` if any of them exist. None is loaded by the site, so
+each call is a no-op until you install one — paste in the GA4 / Google Ads tag
+or the Meta Pixel and conversions start flowing with no change to the JS.
+
+Two things to know when you install one. The tag's host has to be added to
+`script-src` and `connect-src` in the `vercel.json` CSP — it is Report-Only
+today, so a missing entry shows up as a console report rather than a block, but
+it will bite whenever the policy is enforced. And the event deliberately fires
+on the written row, not on the submit: firing on submit counts failed posts and
+every bot the honeypot swallowed, which is a number no bidding algorithm should
+be handed.
 
 **Still outstanding for want of information:**
 
