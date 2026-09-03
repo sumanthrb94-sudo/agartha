@@ -461,6 +461,95 @@ img.img-frame.plan {
   color: var(--sand);
 }
 
+/* ---------- Hero video ----------
+   The photo hero is the floor, not the fallback of last resort: the video
+   layers over it and only becomes visible once it can actually play, so a
+   missing file, a slow connection or a refused autoplay all leave the hero
+   looking exactly as it does without video. */
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-out);
+  pointer-events: none;
+}
+
+.hero-video.ready { opacity: 1; }
+
+/* The photo hero paints its own scrim in the background shorthand. The video
+   would cover that, so this one rides above the video — and only then, or a
+   photo-only hero would be scrimmed twice and go muddy. */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--scrim);
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-out);
+  pointer-events: none;
+}
+
+.hero-video.ready ~ .hero-scrim { opacity: 1; }
+
+/* Content sits above both layers. */
+.hero > .container { position: relative; z-index: 2; }
+
+/* ---------- Recognition ----------
+   A credential earns its place early, but it is a fact, not a boast: one line
+   of it, on paper, sized like a caption rather than a headline. */
+
+.award-band {
+  background: var(--white);
+  border-top: 1px solid rgba(79, 74, 33, 0.08);
+  border-bottom: 1px solid rgba(79, 74, 33, 0.08);
+  padding: 34px 0;
+}
+
+.award {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.award-mark {
+  flex: 0 0 52px;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--sand);
+  color: var(--forest);
+  display: grid;
+  place-items: center;
+}
+
+.award-mark svg { width: 26px; height: 26px; }
+
+.award-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.award-by {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
+@media (max-width: 620px) {
+  .award { flex-direction: column; text-align: center; gap: 14px; }
+}
+
 /* ---------- Amenities ---------- */
 
 /* Was a full sage field. Sage over a whole section is a mid-tone that flattens

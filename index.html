@@ -29,6 +29,7 @@
     "logo": "https://agartha-zeta.vercel.app/assets/brand/wordmark-sage.png",
     "description": "A 25-acre bespoke farmhouse community and eco resort near Hyderabad, by Narsapur forest.",
     "telephone": "+91-95348-69999",
+    "award": "Outlook Business Spotlight Entity Award 2024, presented by Business Mint",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Moosapet Village, Narsapur Mandal",
@@ -66,6 +67,15 @@
 
   <!-- ================= Hero ================= -->
   <section class="hero hero-photo hero-home">
+    <!-- Silent by construction: muted is what lets a browser autoplay at all,
+         and the footage carries no sound worth hearing. The photo hero stays
+         underneath as the background image, so if the file is missing, slow,
+         or refused this renders exactly as it did before. -->
+    <video class="hero-video" id="heroVideo" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1">
+      <source src="assets/video/estate-hero.webm" type="video/webm" />
+      <source src="assets/video/estate-hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-scrim" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-content">
         <p class="hero-kicker">25-Acre Bespoke Farmhouse Community Near Hyderabad</p>
@@ -109,6 +119,19 @@
         <span>Farm to Table</span><span class="sep">✦</span>
         <span>Yoga &amp; Wellness</span><span class="sep">✦</span>
         <span>By Narsapur Forest</span><span class="sep">✦</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Recognition ================= -->
+  <div class="award-band reveal">
+    <div class="container">
+      <div class="award">
+        <div class="award-mark"><svg aria-hidden="true"><use href="assets/icons.svg#verified"></use></svg></div>
+        <div>
+          <p class="award-title">Outlook Business Spotlight Entity Award 2024</p>
+          <p class="award-by">Presented by Business Mint for the Agartha project, under the leadership of Chandu Reddy and Manikanta Sridhar Malladi.</p>
+        </div>
       </div>
     </div>
   </div>

@@ -402,3 +402,41 @@
     startMotion();
   }
 })();
+
+/* ---------- Hero video ----------
+   Opt-in rather than opt-out: the video is only fetched and revealed when the
+   visitor's own settings say it is welcome. Anything else leaves the photo
+   hero alone, which is the design either way.
+
+   preload="none" in the markup means nothing is downloaded until this decides
+   to; on a metered Indian mobile connection an unwanted hero video is the most
+   expensive mistake a page like this can make. */
+(function () {
+  "use strict";
+  var video = document.getElementById("heroVideo");
+  if (!video) return;
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var conn = navigator.connection || {};
+  var thrifty = conn.saveData === true || /2g/.test(conn.effectiveType || "");
+  if (reduced || thrifty) return;
+
+  // Only show it once it can genuinely play through a loop's worth; a video
+  // that pops in half-buffered looks worse than no video.
+  video.addEventListener("canplay", function () {
+    var started = video.play();
+    if (started && started.catch) {
+      // Autoplay refused (some browsers still decline even when muted) —
+      // leave the photo hero showing rather than a frozen first frame.
+      started.catch(function () {});
+    }
+    video.classList.add("ready");
+  }, { once: true });
+
+  video.addEventListener("error", function () {
+    video.classList.remove("ready");
+  });
+
+  video.preload = "auto";
+  video.load();
+})();

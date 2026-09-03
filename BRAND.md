@@ -53,6 +53,11 @@ generated. Everything below section 1 is the reference it draws on.
 > price, area, yield, acreage — must come from the source material, never
 > estimated.
 >
+> **Recognition.** Outlook Business Spotlight Entity Award 2024, presented by
+> Business Mint for the Agartha project. Name it exactly that, with the year and
+> the presenting publication — never as "award-winning" on its own, which is the
+> unverifiable form. Founders: Chandu Reddy and Manikanta Sridhar Malladi.
+>
 > **Facts, verbatim.** 25 acres · 2-acre resort · Narsapur, adjacent to the
 > upcoming Regional Ring Road, Hyderabad · Moosapet Village, Narsapur Mandalam,
 > Hyderabad, Telangana 502313 · +91 95348 69999 · @agartha_by_modcon ·
@@ -247,6 +252,8 @@ any figure not in the source material.
 | Site | 25 acres, 2-acre resort |
 | Location | Narsapur, adjacent to the upcoming Regional Ring Road, Hyderabad |
 | Address | Moosapet Village, Narsapur Mandalam, Hyderabad, Telangana 502313 |
+| Award | Outlook Business Spotlight Entity Award 2024, by Business Mint |
+| Founders | Chandu Reddy · Manikanta Sridhar Malladi |
 | Phone / WhatsApp | +91 95348 69999 |
 | Instagram | [@agartha_by_modcon](https://www.instagram.com/agartha_by_modcon) |
 | Maps | https://share.google/gh30pBzVmntxDpqDk |
