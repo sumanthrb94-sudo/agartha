@@ -166,7 +166,17 @@ python scripts/check-analytics.py  # events: schema matches, tracker can write, 
 python scripts/verify-site.py      # loads every page in Chromium at 5 widths
 node scripts/check-tone.mjs index.html   # tonal rhythm: % of the page per colour
 node scripts/check-mobile.mjs            # 6 pages on 5 phone viewports
+node scripts/check-spacing.mjs           # desktop vertical rhythm and dead space
 ```
+
+`check-spacing.mjs` looks for the two ways vertical rhythm goes wrong: runs of
+flat single-colour pixels longer than two stacked section paddings, and
+side-by-side columns whose heights differ by more than 260px — a short column
+next to a tall one is dead space the pixel scan cannot tell apart from ordinary
+padding. Pass a width to test a wider desk (`node scripts/check-spacing.mjs 1920`).
+It needs `npm install playwright pngjs @fontsource/poppins`: the pages pull
+Poppins from Google Fonts, and measuring heights against a fallback face
+measures the wrong typography, so the font request is answered locally.
 
 `verify-site.py` needs `pip install playwright && playwright install chromium`.
 It reports console errors, failed requests, broken images and horizontal

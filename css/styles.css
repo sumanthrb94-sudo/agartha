@@ -92,8 +92,13 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height
 .center { text-align: center; }
 .center .section-sub { margin-inline: auto; }
 
-/* White only reads as calm if there is enough of it between things. */
-section { padding: clamp(88px, 10vw, 152px) 0; }
+/* White only reads as calm if there is enough of it between things — but every
+   boundary pays this twice, once from each side. At 10vw that came to 288px of
+   nothing between one section and the next on a 1440 desk, which stops reading
+   as calm and starts reading as a page that has run out of things to say.
+   7.5vw leaves 216px there: still generous, no void. `scripts/check-spacing.mjs`
+   is what measures it. */
+section { padding: clamp(88px, 7.5vw, 128px) 0; }
 
 /* ---------- Buttons ---------- */
 
