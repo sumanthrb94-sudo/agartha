@@ -398,25 +398,6 @@
         });
       });
 
-      // Footer panorama drifts as it passes (desktop).
-      var band = document.querySelector(".photo-band img");
-      if (band && ctx.conditions.desktop) {
-        gsap.fromTo(
-          band,
-          { yPercent: -8, scale: 1.12 },
-          {
-            yPercent: 8,
-            scale: 1.12,
-            ease: "none",
-            scrollTrigger: {
-              trigger: band,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      }
 
       // --- Stat count-ups ---
       document.querySelectorAll("[data-count]").forEach(function (el) {

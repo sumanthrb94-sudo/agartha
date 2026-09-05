@@ -1122,8 +1122,6 @@ table.data tfoot td {
   margin-bottom: 20px;
 }
 
-.photo-band { padding: 0; line-height: 0; overflow: hidden; }
-.photo-band img { width: 100%; display: block; }
 
 /* ---------- Gallery ---------- */
 
@@ -1153,16 +1151,6 @@ table.data tfoot td {
   transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
 }
 .gallery-grid img.img-frame:hover { transform: scale(1.02); box-shadow: var(--shadow-hover); }
-
-/* Bento variant: mixed cell spans for an editorial grid (home page) */
-.gallery-grid.bento {
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 190px;
-}
-.gallery-grid.bento .img-frame { min-height: 0; height: 100%; }
-/* Eight cells tile a clean 4x3 rectangle: 2x2 feature + one wide + six singles */
-.gallery-grid.bento .img-frame:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-.gallery-grid.bento .img-frame:nth-child(4) { grid-column: span 2; }
 
 /* ---------- Marquee ---------- */
 
@@ -1310,9 +1298,6 @@ table.data tfoot td {
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .split { grid-template-columns: 1fr; gap: 40px; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .gallery-grid.bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-  .gallery-grid.bento .img-frame:nth-child(n) { grid-column: auto; grid-row: auto; }
-  .gallery-grid.bento .img-frame:nth-child(1) { grid-column: span 2; }
 }
 
 /* Collapse to the overlay menu below 1240px. Note the constraint is the
@@ -1371,8 +1356,6 @@ table.data tfoot td {
 @media (max-width: 560px) {
   .grid-4 { grid-template-columns: 1fr; }
   body { font-size: 16px; }
-  .gallery-grid.bento { grid-template-columns: 1fr; }
-  .gallery-grid.bento .img-frame:nth-child(1) { grid-column: auto; }
 }
 
 /* ---------- Reduced motion ---------- */

@@ -9,13 +9,13 @@ wired up later.
 
 | File | Page |
 | --- | --- |
-| `index.html` | Home — hero, Why Agartha, master plan, resort amenities, earthen homes, how it's built, glimpses, location, contact |
+| `index.html` | Home — hero, Why Agartha, earthen homes, location, contact |
 | `investment.html` | Investment plots — opportunity, master plan, 3-year ROI projection, who it's for, consultation form |
 | `membership.html` | Membership tiers — Standard / Premium / Founder perks and pricing |
 | `holiday-homes.html` | Holiday homes — 1 & 2 BHK price breakdowns, rental program, permaculture principles |
 | `resort.html` | The Resort — the shared two acres: amenities, and how they're built by hand |
 | `gallery.html` | Gallery — 60 images in three groups (the resort, homes & gardens, the build on site) with a full-size lightbox |
-| `contact.html` | Contact info, message form, schedule-a-visit form, map |
+| `contact.html` | Contact info, message form, schedule-a-visit form, location and map |
 
 Shared assets: `css/styles.css` (design system + all components) and
 `js/main.js` (sticky header, mobile nav, scroll-reveal, demo form handling).
