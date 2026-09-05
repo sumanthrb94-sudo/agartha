@@ -47,7 +47,7 @@ const FONT_CSS = WEIGHTS.map(w => `@font-face{font-family:Poppins;font-style:nor
 const WIDTH = Number(process.argv[2]) || 1440;
 const HEIGHT = 1000;
 const BASE = 'http://localhost:8099';
-const PAGES = ['index', 'investment', 'membership', 'holiday-homes', 'gallery', 'contact'];
+const PAGES = ['index', 'investment', 'membership', 'holiday-homes', 'resort', 'gallery', 'contact'];
 
 // A gap only reads as a mistake once it clears the largest deliberate one.
 // Section padding tops out near 152px, so two stacked paddings — the honest

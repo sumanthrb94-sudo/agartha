@@ -25,7 +25,7 @@ from playwright.sync_api import sync_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHOTS = os.path.join(ROOT, "scripts", "screenshots")
 
-PAGES = ["index.html", "investment.html", "membership.html",
+PAGES = ["index.html", "investment.html", "membership.html", "resort.html",
          "holiday-homes.html", "gallery.html", "contact.html", "admin.html"]
 WIDTHS = [("desktop", 1440, 900), ("laptop", 1100, 800),
           ("tablet", 820, 1000), ("mobile", 390, 844), ("narrow", 320, 700)]

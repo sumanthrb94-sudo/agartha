@@ -35,7 +35,7 @@ const PHONES = [
   { name: "galaxy-fold",w: 320, h: 653, dpr: 2 },
   { name: "ipad-mini",  w: 768, h: 1024, dpr: 2 },
 ];
-const PAGES = ["index.html","investment.html","membership.html",
+const PAGES = ["index.html","investment.html","membership.html","resort.html",
                "holiday-homes.html","gallery.html","contact.html"];
 
 const browser = await chromium.launch({

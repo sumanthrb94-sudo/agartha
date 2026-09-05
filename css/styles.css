@@ -173,7 +173,15 @@ a:focus-visible {
   .brand-word-img { height: 14px; }
 }
 
-.main-nav { display: flex; align-items: center; gap: 24px; }
+/* Seven links plus the phone pill measure 823px of text and a 193px pill
+   against the 959px left beside the wordmark, so the gutter is what has to
+   give: 24px overflowed and 18px left 2px of slack, which one font fallback
+   would eat. 14px leaves ~30px. white-space is the safety net:
+   .main-nav is flex-wrap: nowrap with shrinkable text children, so an
+   over-wide nav does not overflow visibly — "Holiday Homes" quietly wraps to
+   two lines and the fixed header grows, which looks like a design choice and
+   nothing asserts against it. nowrap makes that failure loud instead. */
+.main-nav { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
 
 .main-nav a {
   font-size: 13.5px;
@@ -266,6 +274,7 @@ a:focus-visible {
 .hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.webp"); }
 .hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2.webp"); }
 .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2.webp"); }
+.hero-resort { background-image: var(--scrim), url("../assets/web/142b26_d9f37ad4d1d74e65a62892327167ed6b~mv2.webp"); }
 
 @media (max-width: 900px) {
   .hero-home { background-image: var(--scrim), url("../assets/web/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2-900.webp"); }
@@ -274,6 +283,7 @@ a:focus-visible {
   .hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2-900.webp"); }
   .hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2-900.webp"); }
   .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2-900.webp"); }
+  .hero-resort { background-image: var(--scrim), url("../assets/web/142b26_d9f37ad4d1d74e65a62892327167ed6b~mv2-900.webp"); }
 }
 
 /* A phone hero crops a 16:9 photo hard: `cover` on a 390x844 portrait box
@@ -287,6 +297,7 @@ a:focus-visible {
   .hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.webp"); }
   .hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2.webp"); }
   .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2.webp"); }
+  .hero-resort { background-image: var(--scrim), url("../assets/web/142b26_d9f37ad4d1d74e65a62892327167ed6b~mv2.webp"); }
 }
 
 .hero-content { max-width: 780px; }
@@ -372,6 +383,91 @@ a:focus-visible {
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+/* ---------- Swipe rows (phones) ----------
+   Opt in per grid, never on .card-grid globally. Below 700px a tagged grid
+   stops stacking and becomes one horizontally snapped row. Every card stays in
+   the DOM — nothing is hidden, so the text, the alt attributes and the reading
+   order are identical to the desktop page.
+
+   The full bleed uses -24px/+24px, never vw. .container is calc(100% - 48px)
+   at these widths, so this lands the scroller exactly on the viewport edge;
+   100vw would include the classic scrollbar and trip the document-overflow
+   assertion in scripts/check-mobile.mjs. An overflow-x: auto box is a scroll
+   container, so its overflowing children never reach
+   documentElement.scrollWidth — the same mechanism .table-wrap has relied on
+   since the holiday-homes price tables shipped.
+
+   700px sits above every phone in the check-mobile matrix (412 is the widest)
+   and below the iPad mini at 768, which keeps its grid. */
+@media (max-width: 700px) {
+  .swipe-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;  /* a swipe past the end must not go back */
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 24px;     /* snap to the gutter, not the screen edge */
+    margin-inline: -24px;
+    padding-inline: 24px;
+    padding-block: 4px 18px;         /* room for the cards' shadow */
+    gap: 14px;
+  }
+
+  /* flex: 0 0 auto plus an explicit width — cards must not shrink to share the
+     row. 78% leaves the next one visibly peeking, and that peek is the only
+     swipe affordance that costs no markup. */
+  .swipe-row > * {
+    flex: 0 0 auto;
+    width: 78%;
+    max-width: 78%;
+    min-width: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;        /* one card per flick, not a slide across four */
+  }
+
+  /* Amenity tiles are a photo and a label, not prose: narrower reads better and
+     shows more of the next one. Overrides the max-width: 100% further down. */
+  .amenity-grid.swipe-row > .amenity.has-photo { width: 62%; max-width: 62%; }
+
+  /* A bare .img-frame carries a min-height floor; in a row it wants a ratio. */
+  .swipe-row > img.img-frame { min-height: 0; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  /* The row itself takes focus where its children cannot, so it needs a ring
+     that reads as "this scrolls". */
+  .swipe-row:focus-visible {
+    outline: 2px solid var(--forest);
+    outline-offset: 4px;
+    border-radius: var(--radius);
+  }
+
+  .swipe-hint {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-top: -4px;
+  }
+}
+
+/* Hide the bar only on a touch screen, where it is an overlay that appears
+   during the scroll anyway. Between 561 and 700px without a coarse pointer the
+   bar is the honest affordance, so it stays. */
+@media (max-width: 700px) and (pointer: coarse) {
+  .swipe-row { scrollbar-width: none; }
+  .swipe-row::-webkit-scrollbar { display: none; }
+}
+
+/* Mandatory snap is involuntary movement. Relax it to proximity rather than
+   removing it: the row still works, it just stops grabbing. */
+@media (prefers-reduced-motion: reduce) {
+  .swipe-row { scroll-snap-type: x proximity; }
+}
+
+/* Above the breakpoint .swipe-row is inert and the grid rules own the layout,
+   so the hint must not show. */
+.swipe-hint { display: none; }
 
 .feature-card {
   background: var(--white);
@@ -1213,8 +1309,10 @@ table.data tfoot td {
   .gallery-grid.bento .img-frame:nth-child(1) { grid-column: span 2; }
 }
 
-/* The full nav row (7 items + wordmark + phone pill) needs ~1100px of
-   container — collapse to the overlay menu below 1240px so it never wraps. */
+/* Collapse to the overlay menu below 1240px. Note the constraint is the
+   container, not the viewport: .container is min(1160px, 100% - 48px), so the
+   nav gets the same 959px beside the wordmark at 1241px as it does at 1920px.
+   Raising this breakpoint would not buy the row a single pixel. */
 @media (max-width: 1240px) {
   .nav-toggle { display: block; }
 

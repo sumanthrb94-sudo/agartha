@@ -13,6 +13,7 @@ wired up later.
 | `investment.html` | Investment plots — opportunity, master plan, 3-year ROI projection, who it's for, consultation form |
 | `membership.html` | Membership tiers — Standard / Premium / Founder perks and pricing |
 | `holiday-homes.html` | Holiday homes — 1 & 2 BHK price breakdowns, rental program, permaculture principles |
+| `resort.html` | The Resort — the shared two acres: amenities, and how they're built by hand |
 | `gallery.html` | Gallery — 60 images in three groups (the resort, homes & gardens, the build on site) with a full-size lightbox |
 | `contact.html` | Contact info, message form, schedule-a-visit form, map |
 
@@ -184,7 +185,7 @@ python scripts/check-backend.py    # leads: Supabase reachable, schema matches, 
 python scripts/check-analytics.py  # events: schema matches, tracker can write, reads still blocked
 python scripts/verify-site.py      # loads every page in Chromium at 5 widths
 node scripts/check-tone.mjs index.html   # tonal rhythm: % of the page per colour
-node scripts/check-mobile.mjs            # 6 pages on 5 phone viewports
+node scripts/check-mobile.mjs            # 7 pages on 5 phone viewports
 node scripts/check-spacing.mjs           # desktop vertical rhythm and dead space
 node scripts/check-leads.mjs             # every contact route, and whether it reaches /admin
 ```
