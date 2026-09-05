@@ -202,18 +202,41 @@
     </div>
   </section>
 
-  <!-- Map -->
-  <section style="padding-top: 0;">
-    <div class="container reveal">
-      <iframe class="map-embed" title="Agartha location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Moosapet%20Village%2C%20Narsapur%20Mandal%2C%20Telangana&output=embed"></iframe>
+  <!-- Where it is. This section used to be a bare map iframe with no heading
+       and not a word of copy; the home page carried the context and the map
+       both, and duplicated the map here. The context lives here now, where
+       someone looking for directions actually is. -->
+  <section class="location">
+    <div class="container">
+      <div class="split">
+        <div class="reveal">
+          <span class="eyebrow">Our Location</span>
+          <h2 class="section-title">Finding Agartha</h2>
+          <ul class="checklist location-points">
+            <li>Just minutes from Hyderabad</li>
+            <li>Easy connectivity via Regional Ring Road</li>
+            <li>Peaceful natural surroundings</li>
+          </ul>
+        </div>
+        <div class="reveal">
+          <img class="img-frame" style="min-height: 0; aspect-ratio: 4 / 3;" loading="lazy" decoding="async"
+            alt="View from under a thatch eave across the Agartha site — young trees planted in rows, earth lanes, and open farmland to the horizon"
+            src="assets/site/farm-view-from-eave-900.webp"
+            srcset="assets/site/farm-view-from-eave-480.webp 480w, assets/site/farm-view-from-eave-900.webp 900w, assets/site/farm-view-from-eave.webp 1040w"
+            sizes="(max-width: 1020px) 100vw, 50vw" />
+        </div>
+      </div>
+      <div class="reveal" style="margin-top: 30px;">
+        <iframe class="map-embed" title="Agartha location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Moosapet%20Village%2C%20Narsapur%20Mandal%2C%20Telangana&output=embed"></iframe>
+      </div>
     </div>
   </section>
 
   <!-- Offers -->
   <section class="offers">
     <div class="container">
-      <div class="card-grid grid-4" style="margin-top: 0;">
+      <div class="card-grid grid-4 swipe-row" style="margin-top: 0;">
         <a class="offer-card reveal" href="investment.html">
           <img class="offer-bg" src="assets/site/earthen-home-900.webp" srcset="assets/site/earthen-home-480.webp 480w, assets/site/earthen-home-900.webp 900w" sizes="(max-width: 560px) 100vw, (max-width: 1020px) 50vw, 25vw" alt="" loading="lazy"  decoding="async"/>
           <div class="offer-body">
@@ -238,7 +261,7 @@
           <span class="link">Explore →</span>
           </div>
         </a>
-        <a class="offer-card reveal" href="contact.html">
+        <a class="offer-card reveal" href="resort.html">
           <img class="offer-bg" src="assets/site/entrance-canopy-900.webp" srcset="assets/site/entrance-canopy-480.webp 480w, assets/site/entrance-canopy-900.webp 900w" sizes="(max-width: 560px) 100vw, (max-width: 1020px) 50vw, 25vw" alt="" loading="lazy"  decoding="async"/>
           <div class="offer-body">
             <h3>Book Venue</h3>

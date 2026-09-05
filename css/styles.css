@@ -426,9 +426,15 @@ a:focus-visible {
     scroll-snap-stop: always;        /* one card per flick, not a slide across four */
   }
 
-  /* Amenity tiles are a photo and a label, not prose: narrower reads better and
-     shows more of the next one. Overrides the max-width: 100% further down. */
-  .amenity-grid.swipe-row > .amenity.has-photo { width: 62%; max-width: 62%; }
+  /* .amenity-grid is declared further down the file with flex-wrap: wrap and
+     its own gap, and at equal specificity source order wins — so a tagged
+     amenity row wrapped into stacked rows instead of scrolling. Two classes
+     beat one; restate what the row needs rather than moving this block, which
+     would change how it resolves against .card-grid too.
+     Tiles are a photo and a label, not prose, so they run narrower than the
+     78% default and show more of the next one. */
+  .amenity-grid.swipe-row { flex-wrap: nowrap; justify-content: flex-start; gap: 14px; margin-top: 40px; }
+  .amenity-grid.swipe-row > .amenity.has-photo { flex: 0 0 auto; width: 62%; max-width: 62%; }
 
   /* A bare .img-frame carries a min-height floor; in a row it wants a ratio. */
   .swipe-row > img.img-frame { min-height: 0; aspect-ratio: 4 / 3; object-fit: cover; }
