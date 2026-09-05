@@ -64,6 +64,52 @@
       /* Reporting must never be the reason someone does not see a thank-you. */
     }
   }
+  /* The cheapest way to make contact is one tap — the WhatsApp button or the
+     phone number, both on every page. Until now that tap left no trace: the
+     visitor moved to another app and the enquiry landed on somebody's phone
+     with no idea which page sent it. Meanwhile the only routes that did reach
+     /admin were four forms on three pages, each costing three fields and a
+     submit. The fast route was invisible and the visible route was slow.
+
+     So the tap is recorded too, as a lead with no name — which is honestly
+     what it is: an intent, and the page it came from. keepalive is the whole
+     trick: the click is handing the page over to another app, and an ordinary
+     fetch would be cancelled the moment that happens. */
+  var intentSent = {};
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="tel:"], a[href*="wa.me"]');
+    if (!a || !backend) return;
+    var whatsapp = a.getAttribute("href").indexOf("wa.me") !== -1;
+    var kind = whatsapp ? "whatsapp" : "call";
+    // One row per intent per page view. Tapping twice is the same enquiry,
+    // and a lead list full of duplicates is a lead list nobody reads.
+    if (intentSent[kind]) return;
+    intentSent[kind] = true;
+
+    fetch(backend.url + "/rest/v1/agartha_leads", {
+      method: "POST",
+      keepalive: true,
+      headers: {
+        "Content-Type": "application/json",
+        apikey: backend.key,
+        Authorization: "Bearer " + backend.key,
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        form_type: kind,
+        source_page: location.pathname,
+        first_name: "",
+        // source_page already carries where it happened and the admin shows it,
+        // so this says what to expect rather than repeating the location.
+        message: whatsapp
+          ? "Tapped through to WhatsApp — expect an inbound message."
+          : "Tapped the phone number — expect a call.",
+      }),
+    }).catch(function () { /* the visitor is already in another app */ });
+
+    reportConversion(kind);
+  }, true);
+
   document.querySelectorAll("form[data-lead]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();

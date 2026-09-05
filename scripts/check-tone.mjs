@@ -7,6 +7,11 @@
 //
 // Needs playwright and a Chromium at CHROME_PATH (or the pinned path below).
 
+import http from "node:http";
+import fs from "node:fs";
+import path from "node:path";
+import { chromium } from "playwright";
+
 const ROOT = "/home/user/agartha";
 const PAGE = process.argv[2] || "index.html";
 const MIME = { ".html":"text/html", ".css":"text/css", ".js":"text/javascript",

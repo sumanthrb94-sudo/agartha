@@ -79,6 +79,15 @@ directly from the browser — no servers to run:
   *publishable* key, safe to commit: row-level security only lets it INSERT.
   It cannot read, change, or delete anything. A hidden honeypot field
   silently swallows bot submissions.
+- **One-tap intent** — a tap on the WhatsApp button or on any `tel:` link also
+  writes a row, as `form_type` `whatsapp` or `call`, with no name and the page
+  it came from. Those are the fastest routes on the site and they exist on
+  every page, but they hand the visitor to another app, so without this the
+  enquiry arrived with no idea what prompted it. The POST uses
+  `keepalive: true` — the click is navigating away, and an ordinary fetch
+  would be cancelled. One row per intent per page view, so repeated taps do
+  not flood the list. `scripts/check-leads.mjs` asserts every route still
+  reaches the table.
 - **Admin panel** — `/admin` (admin.html): email/password login via Supabase
   Auth. Signed-in admins whose email is in the `agartha_admins` allowlist
   can view, filter, search, status-track (new → contacted → visit scheduled
@@ -177,7 +186,15 @@ python scripts/verify-site.py      # loads every page in Chromium at 5 widths
 node scripts/check-tone.mjs index.html   # tonal rhythm: % of the page per colour
 node scripts/check-mobile.mjs            # 6 pages on 5 phone viewports
 node scripts/check-spacing.mjs           # desktop vertical rhythm and dead space
+node scripts/check-leads.mjs             # every contact route, and whether it reaches /admin
 ```
+
+`check-leads.mjs` walks every public page at desktop and phone width, finds
+every contact route — `tel:` links, WhatsApp links and lead forms — exercises
+each one, and reports whether a row reaches `agartha_leads` and how many
+interactions it cost. Every Supabase write is intercepted, so running it never
+touches the real table. It exits non-zero if any route is silent. It needs
+`npm install playwright`.
 
 `check-spacing.mjs` looks for the two ways vertical rhythm goes wrong: runs of
 flat single-colour pixels longer than two stacked section paddings, and
