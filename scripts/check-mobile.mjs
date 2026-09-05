@@ -55,6 +55,16 @@ for (const d of PHONES) {
       for (let y = 0; y < document.body.scrollHeight; y += 250) {
         window.scrollTo(0, y); await new Promise(r => setTimeout(r, 110));
       }
+      // A .swipe-row is a horizontal scroller, so its later cards never come
+      // near the viewport on a vertical pass and their lazy images never load.
+      // That is correct behaviour — bytes nobody asked for — but it looks
+      // exactly like a broken image from here, so drive each row to its end.
+      // Doing it this way also means every run exercises the swipe rows.
+      for (const row of document.querySelectorAll(".swipe-row")) {
+        for (let x = 0; x <= row.scrollWidth; x += 250) {
+          row.scrollLeft = x; await new Promise(r => setTimeout(r, 110));
+        }
+      }
       // Deliberately stay at the bottom. Returning to the top makes Chromium
       // deprioritise the last lazy images, which then never report complete
       // and get flagged as broken — they are not.
