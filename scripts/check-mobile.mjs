@@ -59,15 +59,24 @@ for (const d of PHONES) {
       // near the viewport on a vertical pass and their lazy images never load.
       // That is correct behaviour — bytes nobody asked for — but it looks
       // exactly like a broken image from here, so drive each row to its end.
-      // Doing it this way also means every run exercises the swipe rows.
+      //
+      // The row has to be on screen while that happens. Lazy loading fetches
+      // what is near the viewport, and the vertical pass above finishes at the
+      // bottom of the page; scrolling a container that sits thousands of pixels
+      // higher does nothing at all, which is how the first attempt at this
+      // silently changed nothing.
       for (const row of document.querySelectorAll(".swipe-row")) {
+        row.scrollIntoView({ block: "center" });
+        await new Promise(r => setTimeout(r, 150));
         for (let x = 0; x <= row.scrollWidth; x += 250) {
           row.scrollLeft = x; await new Promise(r => setTimeout(r, 110));
         }
       }
-      // Deliberately stay at the bottom. Returning to the top makes Chromium
-      // deprioritise the last lazy images, which then never report complete
-      // and get flagged as broken — they are not.
+      // End at the bottom. Returning to the top makes Chromium deprioritise the
+      // last lazy images, which then never report complete and get flagged as
+      // broken — they are not.
+      window.scrollTo(0, document.body.scrollHeight);
+      await new Promise(r => setTimeout(r, 300));
     });
     // Wait on the condition itself, not a guess at how long it takes — and say
     // so if it genuinely times out, rather than swallowing that and reporting
