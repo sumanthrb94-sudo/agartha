@@ -110,7 +110,103 @@
     reportConversion(kind);
   }, true);
 
-  document.querySelectorAll("form[data-lead]").forEach(function (form) {
+  /* ----- Booking overlay -----
+     Built here rather than pasted into eight HTML files, and built before the
+     form binding below so its form is picked up like any other.
+
+     Every trigger keeps its href to contact.html: without JS the link still
+     works and lands on the page where this same form lives, so nothing is lost
+     if this never runs. */
+  var modal = null;
+  var lastFocus = null;
+
+  function buildModal() {
+    var el = document.createElement("div");
+    el.className = "modal";
+    el.id = "visitModal";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-modal", "true");
+    el.setAttribute("aria-labelledby", "visitModalTitle");
+    el.innerHTML =
+      '<div class="modal-panel">' +
+        '<button class="modal-close" type="button" aria-label="Close">&#10005;</button>' +
+        '<div class="modal-figure">' +
+          '<img src="assets/site/villa-entrance-pergola-900.webp" ' +
+            'srcset="assets/site/villa-entrance-pergola-480.webp 480w, assets/site/villa-entrance-pergola-900.webp 900w" ' +
+            'sizes="(max-width: 820px) 100vw, 420px" alt="" loading="lazy" decoding="async" />' +
+        '</div>' +
+        '<div class="modal-body">' +
+          '<span class="eyebrow">See Agartha In Person</span>' +
+          '<h2 id="visitModalTitle">Schedule A Visit</h2>' +
+          '<p class="section-sub">Tell us when suits you and our team will confirm.</p>' +
+          '<form class="form-card" data-lead="visit" style="box-shadow: none; padding: 0; background: none;">' +
+            '<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />' +
+            '<div class="form-grid">' +
+              '<div class="field full"><label for="m-first-name">First name</label>' +
+                '<input id="m-first-name" type="text" name="firstName" required /></div>' +
+              '<div class="field full"><label for="m-phone">Phone</label>' +
+                '<input id="m-phone" type="tel" name="phone" required /></div>' +
+              '<div class="field full"><label for="m-date">Preferred date</label>' +
+                '<input id="m-date" type="date" name="date" required /></div>' +
+              '<div class="full">' +
+                '<button type="submit" class="btn btn-primary">Schedule A Visit</button>' +
+                '<p class="form-note" style="display:none; margin-top: 14px; color: var(--moss);"></p>' +
+              '</div>' +
+            '</div>' +
+          '</form>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(el);
+
+    bindLeadForm(el.querySelector("form[data-lead]"));
+    el.querySelector(".modal-close").addEventListener("click", closeModal);
+    el.addEventListener("click", function (e) { if (e.target === el) closeModal(); });
+    return el;
+  }
+
+  function openModal() {
+    if (!modal) modal = buildModal();
+    lastFocus = document.activeElement;
+    modal.classList.add("open");
+    document.body.classList.add("modal-open");
+    var first = modal.querySelector("input:not(.hp)");
+    if (first) first.focus({ preventScroll: true });
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("open");
+    document.body.classList.remove("modal-open");
+    if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (!modal || !modal.classList.contains("open")) return;
+    if (e.key === "Escape") return closeModal();
+    if (e.key !== "Tab") return;
+    // Keep Tab inside the panel; a dialog you can tab out of behind is worse
+    // than no dialog, because focus lands on things the scrim is covering.
+    var f = modal.querySelectorAll('button, [href], input:not(.hp), select, textarea');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // Any link that exists to book a visit opens the panel instead of navigating.
+  // Modified clicks (new tab, middle button) are left alone.
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest("a[data-visit]");
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    openModal();
+  });
+
+  /* Named, because the booking overlay is built on first open — long after
+     this runs — and its form has to be wired the same way. Binding only
+     what exists at load would let the overlay fall through to a native
+     submit, which navigates the page away and loses the lead. */
+  function bindLeadForm(form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var note = form.querySelector(".form-note");
@@ -178,7 +274,9 @@
           if (button) button.disabled = false;
         });
     });
-  });
+  }
+
+  document.querySelectorAll("form[data-lead]").forEach(bindLeadForm);
 
   // ----- Gallery lightbox (no library needed) -----
 

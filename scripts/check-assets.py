@@ -85,7 +85,13 @@ def main():
                 continue
             if not ref.lower().endswith(IMAGE_EXT):
                 continue
-            target = os.path.normpath(os.path.join(os.path.dirname(path), ref))
+            # CSS urls resolve against the stylesheet, per spec. Paths inside
+            # JS do not: they end up in markup injected into a document at the
+            # repo root, so that is what they resolve against. Treating them
+            # like the CSS case reported the booking overlay's photograph as
+            # broken when the browser loads it perfectly well.
+            base = ROOT if rel.endswith(".js") else os.path.dirname(path)
+            target = os.path.normpath(os.path.join(base, ref))
             key = os.path.relpath(target, ROOT).replace("\\", "/")
             referenced.add(key)
             if not os.path.exists(target):

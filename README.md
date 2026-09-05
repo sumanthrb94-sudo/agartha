@@ -15,7 +15,7 @@ wired up later.
 | `holiday-homes.html` | Holiday homes — 1 & 2 BHK price breakdowns, rental program, permaculture principles |
 | `resort.html` | The Resort — the shared two acres: amenities, and how they're built by hand |
 | `gallery.html` | Gallery — 60 images in three groups (the resort, homes & gardens, the build on site) with a full-size lightbox |
-| `contact.html` | Contact info, message form, schedule-a-visit form, location and map |
+| `contact.html` | Contact info, message form, visit invitation, location and map |
 
 Shared assets: `css/styles.css` (design system + all components) and
 `js/main.js` (sticky header, mobile nav, scroll-reveal, demo form handling).
@@ -80,6 +80,14 @@ directly from the browser — no servers to run:
   *publishable* key, safe to commit: row-level security only lets it INSERT.
   It cannot read, change, or delete anything. A hidden honeypot field
   silently swallows bot submissions.
+- **Booking overlay** — every "Book a Visit" button on every page opens a
+  panel with the visit form in it rather than navigating to `/contact` and
+  making the visitor scroll past the message form to find it. The markup is
+  injected by `js/main.js`, so it exists on all eight pages without being
+  pasted into any of them, and each trigger keeps its `href` — without JS the
+  links still go to the contact page. The form posts as `form_type` `visit`
+  and carries the page it was opened from, so the admin can see which page
+  sold the visit.
 - **One-tap intent** — a tap on the WhatsApp button or on any `tel:` link also
   writes a row, as `form_type` `whatsapp` or `call`, with no name and the page
   it came from. Those are the fastest routes on the site and they exist on

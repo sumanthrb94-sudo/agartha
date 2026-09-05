@@ -166,39 +166,25 @@
     </div>
   </section>
 
-  <!-- Schedule a visit -->
+  <!-- Two full forms stacked one after the other made this page a wall of
+       fields, and the second was the one most people came for. It lives in the
+       booking overlay now, one tap from here and from every other page. What
+       stays is the photograph and the invitation. -->
   <section class="amenities">
     <div class="container" style="max-width: 760px;">
       <div class="center reveal">
         <span class="eyebrow">See Agartha In Person</span>
         <h2 class="section-title">Schedule A Visit</h2>
+        <p class="section-sub">Come and walk the twenty-five acres. Pick a date and our team will confirm.</p>
       </div>
       <img class="img-frame reveal" style="min-height: 0; margin-top: 32px;" loading="lazy" decoding="async"
         alt="Stone-walled entrance court under a timber pergola, with clay pots along the wall"
         src="assets/site/villa-entrance-pergola-900.webp"
         srcset="assets/site/villa-entrance-pergola-480.webp 480w, assets/site/villa-entrance-pergola-900.webp 900w, assets/site/villa-entrance-pergola.webp 1280w"
         sizes="(max-width: 820px) 100vw, 760px" />
-      <form class="form-card reveal" data-lead="visit" style="margin-top: 28px;">
-        <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <div class="form-grid">
-          <div class="field">
-            <label for="v-first-name">First name</label>
-            <input id="v-first-name" type="text" name="firstName" required />
-          </div>
-          <div class="field">
-            <label for="v-phone">Phone</label>
-            <input id="v-phone" type="tel" name="phone" required />
-          </div>
-          <div class="field full">
-            <label for="v-date">Preferred date</label>
-            <input id="v-date" type="date" name="date" required />
-          </div>
-          <div class="full">
-            <button type="submit" class="btn btn-primary">Schedule A Visit</button>
-            <p class="form-note" style="display:none; margin-top: 14px; color: var(--moss);"></p>
-          </div>
-        </div>
-      </form>
+      <p class="center reveal" style="margin-top: 30px;">
+        <a href="contact.html" data-visit class="btn btn-primary">Schedule A Visit</a>
+      </p>
     </div>
   </section>
 
@@ -276,7 +262,7 @@
   <a class="wa-float" href="https://wa.me/919534869999?text=Hi%20Agartha%2C%20I%27d%20like%20to%20know%20more%20about%20the%20farmhouse%20community" target="_blank" rel="noopener" aria-label="Chat with Agartha on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.6-6.1c-.3-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4 0-.5.1-.7l.4-.5c.1-.2.2-.3.3-.5 0-.2 0-.4-.1-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.2 2.1-.7 3.4a10 10 0 0 0 4.4 4.7c1.6.9 2.6 1 3.5.8.6-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2-.1-.2-.3-.2-.6-.3Z"/></svg></a>
   <div class="mobile-cta" role="navigation" aria-label="Quick actions">
     <a href="tel:+919534869999" class="btn btn-outline">Call Now</a>
-    <a href="contact.html" class="btn btn-primary">Book a Visit</a>
+    <a href="contact.html" class="btn btn-primary" data-visit>Book a Visit</a>
   </div>
 
   <footer class="site-footer">

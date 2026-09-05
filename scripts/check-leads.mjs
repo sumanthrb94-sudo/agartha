@@ -138,7 +138,41 @@ for (const vp of VIEWPORTS) {
       if (tel) results.push(tel);
     }
 
-    for (const f of await page.$$('form[data-lead]')) {
+    // The booking overlay is the primary route now — every "Book a Visit"
+    // button on every page opens it instead of navigating. It is built on
+    // first open, so it has to be opened before it can be tested.
+    // Pick a visible trigger: .mobile-cta carries one too and is display:none
+    // on desktop, and clicking a hidden node tests nothing.
+    const trigger = await page.evaluate(() => {
+      const hit = [...document.querySelectorAll('a[data-visit]')].find(a => {
+        const r = a.getBoundingClientRect();
+        if (!r.width || !r.height) return false;
+        if (a.checkVisibility && !a.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true })) return false;
+        return r.right > 0 && r.left < window.innerWidth;
+      });
+      if (hit) hit.setAttribute('data-audit-visit', '1');
+      return !!hit;
+    });
+    if (trigger) {
+      const before = captured.leads.length;
+      await page.click('a[data-audit-visit]');
+      await page.waitForTimeout(500);
+      const opened = await page.evaluate(() =>
+        !!document.querySelector('#visitModal.open'));
+      if (opened) {
+        await page.fill('#m-first-name', 'Test');
+        await page.fill('#m-phone', '9999999999');
+        await page.fill('#m-date', '2026-12-01');
+        await page.click('#visitModal button[type="submit"]');
+        await page.waitForTimeout(700);
+      }
+      results.push({ label: 'Booking overlay (1 tap + 3 fields)',
+                     lead: opened && captured.leads.length > before });
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(300);
+    }
+
+    for (const f of await page.$$('form[data-lead]:not(#visitModal form)')) {
       const type = await f.getAttribute('data-lead');
       const before = captured.leads.length;
       await f.evaluate(form => {
