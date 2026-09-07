@@ -74,7 +74,7 @@ The backend is Supabase (project `modcon-progress`, Mumbai region), used
 directly from the browser — no servers to run:
 
 - **Lead capture** — every form (`data-lead` attribute: contact / visit /
-  investment / membership) POSTs to the `agartha_leads` table via Supabase
+  membership) POSTs to the `agartha_leads` table via Supabase
   REST (`js/main.js`, config in `js/config.js`). The key in `config.js` is a
   *publishable* key, safe to commit: row-level security only lets it INSERT.
   It cannot read, change, or delete anything. A hidden honeypot field
