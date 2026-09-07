@@ -44,7 +44,6 @@ INTENTIONAL = {
     # -900 files only. The 480 variants fall out of the uniform build.
     "assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2-480.webp": "hero variant",
     "assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2-480.webp": "hero variant",
-    "assets/web/142b26_e952e8d04d6546b5866e374206744e87~mv2-480.webp": "hero variant",
 }
 
 

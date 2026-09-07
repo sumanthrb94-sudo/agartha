@@ -20,7 +20,7 @@
 import { chromium } from 'playwright';
 
 const BASE = 'http://localhost:8099';
-const PAGES = ['index', 'investment', 'membership', 'holiday-homes', 'resort', 'gallery', 'contact'];
+const PAGES = ['index', 'membership', 'holiday-homes', 'resort', 'gallery', 'contact'];
 const VIEWPORTS = [
   { name: 'desktop', width: 1440, height: 900, mobile: false },
   { name: 'phone', width: 390, height: 844, mobile: true },

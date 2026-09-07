@@ -173,15 +173,15 @@ a:focus-visible {
   .brand-word-img { height: 14px; }
 }
 
-/* Seven links plus the phone pill measure 823px of text and a 193px pill
-   against the 959px left beside the wordmark, so the gutter is what has to
-   give: 24px overflowed and 18px left 2px of slack, which one font fallback
-   would eat. 14px leaves ~30px. white-space is the safety net:
-   .main-nav is flex-wrap: nowrap with shrinkable text children, so an
-   over-wide nav does not overflow visibly — "Holiday Homes" quietly wraps to
-   two lines and the fixed header grows, which looks like a design choice and
-   nothing asserts against it. nowrap makes that failure loud instead. */
-.main-nav { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
+/* The row has 959px beside the wordmark, and .container is min(1160px, 100% -
+   48px) — so that figure is the same at 1241px as at 1920px, and raising the
+   collapse breakpoint would not buy it a pixel. Six links plus the phone pill
+   fit comfortably at 22px; when Investments was still here that had to drop to
+   14px. white-space is the safety net either way: .main-nav is flex-wrap:
+   nowrap with shrinkable text children, so an over-wide nav does not overflow
+   visibly — "Holiday Homes" quietly wraps to two lines and the fixed header
+   grows, which looks deliberate and which nothing asserts against. */
+.main-nav { display: flex; align-items: center; gap: 22px; white-space: nowrap; }
 
 .main-nav a {
   font-size: 13.5px;
@@ -270,7 +270,6 @@ a:focus-visible {
 
 .hero-home { background-image: var(--scrim), url("../assets/web/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2.webp"); }
 .hero-gallery { background-image: var(--scrim), url("../assets/web/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2.webp"); }
-.hero-investment { background-image: var(--scrim), url("../assets/web/142b26_e952e8d04d6546b5866e374206744e87~mv2.webp"); }
 .hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.webp"); }
 .hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2.webp"); }
 .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2.webp"); }
@@ -279,7 +278,6 @@ a:focus-visible {
 @media (max-width: 900px) {
   .hero-home { background-image: var(--scrim), url("../assets/web/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2-900.webp"); }
   .hero-gallery { background-image: var(--scrim), url("../assets/web/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2-900.webp"); }
-  .hero-investment { background-image: var(--scrim), url("../assets/web/142b26_e952e8d04d6546b5866e374206744e87~mv2-900.webp"); }
   .hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2-900.webp"); }
   .hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2-900.webp"); }
   .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2-900.webp"); }
@@ -293,7 +291,6 @@ a:focus-visible {
 @media (max-width: 900px) and (min-resolution: 1.5dppx) {
   .hero-home { background-image: var(--scrim), url("../assets/web/142b26_acda3bc9aaa84bfc976803cdcbdce73f~mv2.webp"); }
   .hero-gallery { background-image: var(--scrim), url("../assets/web/142b26_07ba6ec4ef4e49d680a53ab9a3362f25~mv2.webp"); }
-  .hero-investment { background-image: var(--scrim), url("../assets/web/142b26_e952e8d04d6546b5866e374206744e87~mv2.webp"); }
   .hero-membership { background-image: var(--scrim), url("../assets/web/142b26_13ce857bed164143a7d79ce6cef3668e~mv2.webp"); }
   .hero-holiday { background-image: var(--scrim), url("../assets/web/142b26_5a1d622ef5d5437aa5da964188a3266e~mv2.webp"); }
   .hero-contact { background-image: var(--scrim), url("../assets/web/142b26_86e04d7ce83d497997bdac2c29efe900~mv2.webp"); }

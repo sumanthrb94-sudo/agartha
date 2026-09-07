@@ -25,7 +25,7 @@ from playwright.sync_api import sync_playwright
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHOTS = os.path.join(ROOT, "scripts", "screenshots")
 
-PAGES = ["index.html", "investment.html", "membership.html", "resort.html",
+PAGES = ["index.html", "membership.html", "resort.html",
          "holiday-homes.html", "gallery.html", "contact.html", "admin.html"]
 WIDTHS = [("desktop", 1440, 900), ("laptop", 1100, 800),
           ("tablet", 820, 1000), ("mobile", 390, 844), ("narrow", 320, 700)]
@@ -152,7 +152,7 @@ def main():
         # Forms: every lead form must have its fields, honeypot and a submit.
         ctx = browser.new_context(viewport={"width": 1440, "height": 900})
         page = ctx.new_page()
-        for name in ["contact.html", "investment.html", "membership.html"]:
+        for name in ["contact.html", "membership.html"]:
             page.goto(f"{base}/{name}", wait_until="domcontentloaded")
             forms = page.locator("form[data-lead]")
             if forms.count() == 0:
