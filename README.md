@@ -129,7 +129,17 @@ Tables and policies live in Supabase migrations `agartha_leads_backend`,
 domain root). Each public page carries a canonical URL, Open Graph + Twitter
 card tags, and a `RealEstateAgent` JSON-LD block (a LocalBusiness subtype — address, phone and award, ready for `geo` once coordinates arrive). The Analytics Console's SEO
 Audit tab re-checks all of this live and flags regressions — run it after any
-content change. Update `sitemap.xml` when you add or remove a page.
+content change.
+
+`sitemap.xml` is generated, not hand-edited — `scripts/build-sitemap.py` takes
+each page's `lastmod` from its last commit and the domain from the home page's
+canonical, so the two ways a sitemap goes wrong both stop being possible: a
+page added or removed without the XML following (it exits non-zero on a public
+page missing from its list), and a `lastmod` that quietly keeps claiming a date
+the page has moved past, which tells Google a rewritten page is unchanged.
+Run it after adding a page, and `--check` in passing to see whether it is
+current. Priority and changefreq stay declared in the script — they are
+editorial, not derivable.
 
 ## Going live
 
@@ -141,10 +151,24 @@ the JSON-LD, sitemap.xml and robots.txt. Until that changes, the canonical tags
 are telling Google the vercel.app address is the real one, so the two compete.
 Add the domain in Vercel, then run a find-and-replace across those 43 and push.
 
-**2. Google Search Console.** Verify the real domain, submit
-`https://agartha.in/sitemap.xml`. Do it after step 1 — Search Console is
-per-domain, and verifying vercel.app first means doing it twice and losing the
-indexing history. Verification is a meta tag in each page's head.
+**2. Google Search Console.** Verify the domain, submit its
+`sitemap.xml`. Ideally after step 1 — Search Console properties are
+per-domain, so a property on the vercel.app address does not carry over to
+agartha.in and its indexing history starts again there.
+
+Verification is a meta tag in the head, installed by
+`scripts/set-verification.py`: paste it the whole `<meta>` tag Search Console
+offers (or just the token), push, and press Verify once Vercel has redeployed.
+`--show` reports what is installed, `--remove` takes it out, and re-running
+with a new token replaces the old one instead of stacking a second tag — so
+re-verifying on the new domain is the same one command.
+
+One constraint worth knowing before you start: on a `*.vercel.app` subdomain
+the **Domain property** option is unavailable, because verifying it means
+adding a DNS TXT record to `vercel.app`, which is not ours to edit. Claim a
+**URL prefix** property instead. Once agartha.in is pointed at Vercel, that
+restriction lifts and a Domain property becomes the better one — it covers
+every subdomain and both protocols at once.
 
 **3. Google Business Profile.** For a 25-acre site people physically visit this
 drives more enquiries than search ranking will. A Maps listing already exists
@@ -187,6 +211,7 @@ Three scripts, no build step. Run them from the repo root; each exits non-zero
 on a real problem.
 
 ```bash
+python scripts/build-sitemap.py --check  # sitemap still matches the pages that ship
 python scripts/check-assets.py     # every image resolves, nothing hotlinked, nothing dead
 python scripts/check-backend.py    # leads: Supabase reachable, schema matches, RLS insert-only
 python scripts/check-analytics.py  # events: schema matches, tracker can write, reads still blocked
