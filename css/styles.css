@@ -808,6 +808,17 @@ img.img-frame.plan {
 .stat .value { font-family: var(--font-display); font-size: 26px; color: var(--gold); }
 .stat .label { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; margin-top: 8px; opacity: 0.8; }
 
+/* The headline figure is a package — plot plus the house on it — and read
+   beside "Plot Sizes" it otherwise looks like a land price, which is the
+   arithmetic visitors were being invited to get wrong. */
+.stat-note {
+  margin-top: 14px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.stat-note em { font-style: normal; color: var(--ink); font-weight: 500; }
+
 /* ---------- Location ---------- */
 
 .location { background: var(--sand); }
