@@ -14,25 +14,34 @@ anything that is wrong.
 
 **1. What exactly am I buying — the land, the house, or both?**
 Both, priced separately. The plot is sold by the square yard and the earth home
-is built on it at a per-square-foot rate. You can see both lines in the
-breakdown on the Holiday Homes page.
+is built on it at a per-square-foot rate. The home is designed and built to
+order — there is no fixed model to pick from, so the size and the layout are
+yours to set. You can see both lines in the breakdown on the Holiday Homes
+page.
 
 **2. What does it cost?**
 Two rates, and every price on the site is built from them:
 land at **₹8,500 per sq yard**, the earthen home at **₹2,500 per sq ft**.
 
-The **₹78 lakhs** you see on the home page is a *starting package* — a plot
-with a home on it, not land alone. It is the smallest plot we sell (726 sq yds)
-with an entry home built on it.
+The **₹78 lakhs** on the home page is a *starting package* — a plot with a home
+on it, not land alone:
 
-Two worked examples from the Holiday Homes page:
-- **1 BHK** — 847 sq yds + 500 sft → ₹71,99,500 + ₹12,50,000 = **₹84,49,500**
-- **2 BHK** — 847 sq yds + 800 sft → ₹71,99,500 + ₹20,00,000 = **₹91,99,500**
-> **NEEDS YOUR ANSWER:** confirm the entry home size. 726 sq yds × ₹8,500 is
-> ₹61,71,000, so ₹78 lakhs implies a home of about **650 sft**
-> (₹16,25,000), giving ₹77,96,000. If the entry home is 500 sft instead, the
-> package is ₹74,21,000 and the home page should say "from ₹74 lakhs".
-> Tell me the entry home size and every page will agree.
+| | | |
+| --- | --- | --- |
+| Land | 726 sq yds × ₹8,500 | ₹61,71,000 |
+| Home | 650 sq ft × ₹2,500 | ₹16,25,000 |
+| **Starting package** | | **₹77,96,000** |
+
+726 sq yds is the smallest plot we sell and 650 sq ft is where the home pricing
+starts — not a plan you have to take. Because every home is built to order,
+build larger and the second line simply grows at the same ₹2,500 per sq ft.
+
+Two larger configurations, priced out in full on the Holiday Homes page:
+
+| | Land | Home | Total |
+| --- | --- | --- | --- |
+| 1 BHK | 847 sq yds → ₹71,99,500 | 500 sq ft → ₹12,50,000 | **₹84,49,500** |
+| 2 BHK | 847 sq yds → ₹71,99,500 | 800 sq ft → ₹20,00,000 | **₹91,99,500** |
 
 **3. What plot sizes are available?**
 726 to 4,840 sq yds — roughly 0.15 acre up to a full acre.
