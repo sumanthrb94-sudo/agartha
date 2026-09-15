@@ -1222,6 +1222,22 @@ table.data tfoot td {
   margin-bottom: 20px;
 }
 
+/* A price card carrying a breakdown table needs ~300px of content width for
+   "726 × 8,500 = 61,71,000" to stay on one line — the arithmetic has to read as
+   one expression to be checkable at a glance. Three of them only fit above
+   1020px. Between the mobile collapse at 820px and there, a 3-up card is
+   240–270px and the table scrolls inside the card, so stack them instead.
+   Scoped to .tier-grid: membership's tiers carry no table and are fine 3-up. */
+@media (min-width: 821px) and (max-width: 1019px) {
+  .tier-grid { grid-template-columns: 1fr; }
+}
+@media (min-width: 1020px) {
+  .tier-grid > .tier { padding: 34px 22px; }
+  .tier-grid > .tier table.data th,
+  .tier-grid > .tier table.data td { padding: 14px 16px; font-size: 13.5px; }
+  .tier-grid > .tier table.data td + td { white-space: nowrap; }
+}
+
 
 /* ---------- Gallery ---------- */
 
