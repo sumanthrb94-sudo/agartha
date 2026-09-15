@@ -24,24 +24,19 @@ Two rates, and every price on the site is built from them:
 land at **₹8,500 per sq yard**, the earthen home at **₹2,500 per sq ft**.
 
 The **₹78 lakhs** on the home page is a *starting package* — a plot with a home
-on it, not land alone:
+on it, not land alone. It is the smallest plot we sell (726 sq yds) with a
+1 BHK on it, and it is the first row of the table below.
 
-| | | |
-| --- | --- | --- |
-| Land | 726 sq yds × ₹8,500 | ₹61,71,000 |
-| Home | 650 sq ft × ₹2,500 | ₹16,25,000 |
-| **Starting package** | | **₹77,96,000** |
-
-726 sq yds is the smallest plot we sell and 650 sq ft is where the home pricing
-starts — not a plan you have to take. Because every home is built to order,
-build larger and the second line simply grows at the same ₹2,500 per sq ft.
-
-Two larger configurations, priced out in full on the Holiday Homes page:
+We build two layouts. Both are priced out in full on the Holiday Homes page,
+at their starting sizes:
 
 | | Land | Home | Total |
 | --- | --- | --- | --- |
-| 1 BHK | 847 sq yds → ₹71,99,500 | 500 sq ft → ₹12,50,000 | **₹84,49,500** |
+| 1 BHK | 726 sq yds → ₹61,71,000 | 650 sq ft → ₹16,25,000 | **₹77,96,000** |
 | 2 BHK | 847 sq yds → ₹71,99,500 | 800 sq ft → ₹20,00,000 | **₹91,99,500** |
+
+Those are starting points, not fixed plans — take more land or build a larger
+home and each line grows at its own rate.
 
 **3. What plot sizes are available?**
 726 to 4,840 sq yds — roughly 0.15 acre up to a full acre.
