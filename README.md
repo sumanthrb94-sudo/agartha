@@ -107,13 +107,28 @@ directly from the browser — no servers to run:
   Conversion* (visitor→lead funnel and rate, leads by form / page / status),
   and a live *SEO Audit* that fetches each page in the browser and scores ~14
   on-page ranking factors plus robots.txt / sitemap.xml. Charts are
-  self-contained inline SVG — no third-party analytics, no external chart libs.
+  self-contained inline SVG — no external chart libs, and the console's own
+  numbers come from first-party data, not from Clarity.
 - **Visitor tracking** — `js/analytics.js` (loaded on every public page) logs
   cookieless, anonymous pageview + engagement events to the `agartha_events`
   table via the same insert-only publishable key. It honours Do-Not-Track /
   Global Privacy Control, skips bots and the admin pages, keeps only a random
   first-party id in `localStorage` (no cookies, no PII), and never blocks the
   page. Only allowlisted admins can read the data back, in the console.
+- **Session analytics (Microsoft Clarity)** — heatmaps and session replay,
+  installed by `scripts/set-clarity.py <project-id>` (`--show` reports what is
+  installed, `--remove` takes it out, and re-running with a new id replaces the
+  block rather than stacking a second tag). It goes on the six public pages
+  plus `404.html`, and **deliberately not on `/admin` or `/analytics`**: those
+  render the lead table — real names, phone numbers, email addresses — and the
+  login form, so recording them would ship customer PII and an admin's typing
+  to a third party for no analytical gain. The three lead forms carry
+  `data-clarity-mask="true"` (contact, membership, and the visit form injected
+  by `js/main.js`), which masks their whole subtree regardless of the masking
+  mode set in the Clarity dashboard. Two things change the day it goes live:
+  the site starts setting Clarity's cookies (`_clck`, `_clsk`), so it is no
+  longer cookie-free, and Clarity does not honour Do-Not-Track — unlike
+  `js/analytics.js`, which does.
 - **Adding an admin**: insert their email into `agartha_admins` (Supabase
   dashboard → Table Editor), then have them use "Create the admin account"
   on `/admin`. Sign-ups from emails not in the allowlist can log in but see
@@ -186,7 +201,10 @@ or the Meta Pixel and conversions start flowing with no change to the JS.
 Two things to know when you install one. The tag's host has to be added to
 `script-src` and `connect-src` in the `vercel.json` CSP — it is Report-Only
 today, so a missing entry shows up as a console report rather than a block, but
-it will bite whenever the policy is enforced. And the event deliberately fires
+it will bite whenever the policy is enforced. Clarity's hosts
+(`https://www.clarity.ms`, `https://*.clarity.ms`, and `https://c.bing.com`
+for its Bing integration) are already listed; check the console for CSP
+reports after adding any further tag. And the event deliberately fires
 on the written row, not on the submit: firing on submit counts failed posts and
 every bot the honeypot swallowed, which is a number no bidding algorithm should
 be handed.

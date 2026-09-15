@@ -139,7 +139,7 @@
           '<span class="eyebrow">See Agartha In Person</span>' +
           '<h2 id="visitModalTitle">Schedule A Visit</h2>' +
           '<p class="section-sub">Tell us when suits you and our team will confirm.</p>' +
-          '<form class="form-card" data-lead="visit" style="box-shadow: none; padding: 0; background: none;">' +
+          '<form class="form-card" data-lead="visit" data-clarity-mask="true" style="box-shadow: none; padding: 0; background: none;">' +
             '<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />' +
             '<div class="form-grid">' +
               '<div class="field full"><label for="m-first-name">First name</label>' +
