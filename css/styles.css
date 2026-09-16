@@ -1222,9 +1222,6 @@ table.data tfoot td {
   margin-bottom: 20px;
 }
 
-}
-
-
 /* ---------- Gallery ---------- */
 
 .gallery-grid {
@@ -1451,11 +1448,13 @@ table.data tfoot td {
      otherwise stays two-up, overflowing a 320px screen. */
   .stat-row, .stat-row.cols-4 { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: 1fr; }
-  .gallery-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 560px) {
+  /* Gallery stays two-up on a phone. One column doubled the scroll for no
+     gain in legibility — the lightbox is where a photograph is actually read. */
+  .gallery-grid { gap: 12px; }
   .grid-4 { grid-template-columns: 1fr; }
   body { font-size: 16px; }
 }
