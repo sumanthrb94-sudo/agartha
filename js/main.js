@@ -206,6 +206,24 @@
      this runs — and its form has to be wired the same way. Binding only
      what exists at load would let the overlay fall through to a native
      submit, which navigates the page away and loses the lead. */
+  /* "We'll get back to you about the date" is a strange thing to say to
+     someone who has just told you the date. Read it back instead — it is the
+     cheapest possible proof that the form was actually received. */
+  function prettyDate(iso) {
+    if (!iso) return null;
+    var p = String(iso).split("-");
+    if (p.length !== 3) return null;
+    // Built from parts on purpose: new Date("2026-10-02") is parsed as UTC and
+    // lands on the day before for anyone west of Greenwich.
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    if (isNaN(d.getTime())) return null;
+    try {
+      return d.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" });
+    } catch (err) {
+      return null;
+    }
+  }
+
   function bindLeadForm(form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -222,7 +240,17 @@
         // below the fold: the visitor saw nothing happen and submitted again.
         // Two identical leads, seven minutes apart, is what that looks like in
         // the table.
-        if (ok) form.classList.add("is-sent");
+        if (ok) {
+          form.classList.add("is-sent");
+          // Built as a node, never innerHTML: the message above carries a name
+          // the visitor typed. Waiting is the worst part of booking a visit —
+          // give them a way to skip it.
+          var cta = document.createElement("a");
+          cta.className = "form-note-cta";
+          cta.href = "tel:+919534869999";
+          cta.textContent = "Rather speak now? Call +91 95348 69999";
+          note.appendChild(cta);
+        }
         try { note.scrollIntoView({ block: "nearest" }); }
         catch (err) { note.scrollIntoView(); }
       };
@@ -268,12 +296,19 @@
       })
         .then(function (res) {
           if (!res.ok) throw new Error("HTTP " + res.status);
-          say(
-            payload.form_type === "visit"
-              ? "Thank you — your visit request is in. Our team will call you to confirm the date."
-              : "Thank you! Our team will reach out to you shortly.",
-            true
-          );
+          var who = payload.first_name ? payload.first_name.trim().split(/\s+/)[0] : "";
+          var when = prettyDate(payload.preferred_date);
+          var msg;
+          if (payload.form_type === "visit") {
+            msg = (who ? "Thank you, " + who + " — " : "Thank you — ") +
+              (when
+                ? "we have you down for " + when + ". Our team will call to fix a time and send you directions."
+                : "your visit is booked. Our team will call to fix a time and send you directions.");
+          } else {
+            msg = (who ? "Thank you, " + who + "! " : "Thank you! ") +
+              "Our team will reach out to you shortly.";
+          }
+          say(msg, true);
           reportConversion(payload.form_type);
           form.reset();
         })

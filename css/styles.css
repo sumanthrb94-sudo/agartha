@@ -1148,6 +1148,19 @@ body.modal-open { overflow: hidden; }
 form.is-sent .field,
 form.is-sent button[type="submit"] { display: none; }
 
+.form-note-cta {
+  /* block, not inline-block: as an inline box it ran straight on from the end
+     of the message — "…send you directions.Rather speak now?" */
+  display: block;
+  width: fit-content;
+  margin-top: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--forest);
+  border-bottom: 1px solid currentColor;
+}
+.form-note-cta:hover { color: var(--clay); }
+
 /* Honeypot field: invisible to people, tempting to bots */
 .hp {
   position: absolute !important;
