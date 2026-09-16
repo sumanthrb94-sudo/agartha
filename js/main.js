@@ -150,7 +150,7 @@
                 '<input id="m-date" type="date" name="date" required /></div>' +
               '<div class="full">' +
                 '<button type="submit" class="btn btn-primary">Schedule A Visit</button>' +
-                '<p class="form-note" style="display:none; margin-top: 14px; color: var(--moss);"></p>' +
+                '<p class="form-note" role="status" aria-live="polite" style="display:none;"></p>' +
               '</div>' +
             '</div>' +
           '</form>' +
@@ -212,11 +212,19 @@
       var note = form.querySelector(".form-note");
       var button = form.querySelector('button[type="submit"]');
       var say = function (msg, ok) {
-        if (note) {
-          note.textContent = msg;
-          note.style.display = "block";
-          note.style.color = ok ? "var(--moss)" : "#a05252";
-        }
+        if (!note) return;
+        note.textContent = msg;
+        note.className = "form-note " + (ok ? "is-ok" : "is-error");
+        note.style.display = "block";
+        note.style.color = "";          // let the class own the colour
+        // The overlay's body is a scroll container and the note sits under the
+        // submit button, so at a zoomed-in viewport the confirmation rendered
+        // below the fold: the visitor saw nothing happen and submitted again.
+        // Two identical leads, seven minutes apart, is what that looks like in
+        // the table.
+        if (ok) form.classList.add("is-sent");
+        try { note.scrollIntoView({ block: "nearest" }); }
+        catch (err) { note.scrollIntoView(); }
       };
 
       // Honeypot: bots fill the hidden field — pretend success, send nothing.
@@ -260,7 +268,12 @@
       })
         .then(function (res) {
           if (!res.ok) throw new Error("HTTP " + res.status);
-          say("Thank you! Our team will reach out to you shortly.", true);
+          say(
+            payload.form_type === "visit"
+              ? "Thank you — your visit request is in. Our team will call you to confirm the date."
+              : "Thank you! Our team will reach out to you shortly.",
+            true
+          );
           reportConversion(payload.form_type);
           form.reset();
         })
